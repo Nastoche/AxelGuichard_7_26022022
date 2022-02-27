@@ -1,0 +1,34 @@
+.logo-signup {
+  background-color: $color-1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  box-shadow: 0 3px 50px #2529349d;
+  img {
+    width: 320px;
+    padding: 2rem 0;
+    @media screen and(max-width:768px) {
+      width: 200px;
+      padding: 1rem 0;
+    }
+  }
+}
+.round-svg {
+  width: 100%;
+  z-index: 1;
+  transform: translateY(-1px);
+  > .arrondis-theme {
+    z-index: 10;
+    transform: rotate(180deg);
+    width: 100%;
+    position: absolute;
+    left: 0;
+    > path {
+      fill: $color-1;
+    }
+  }
+}
