@@ -1,9 +1,69 @@
 .post-container {
+  position: relative;
+  max-width: 750px;
   width: 90%;
-  height: 300px;
-  background-color: lightgrey;
-  margin-bottom: 1.8rem;
+  background-color: #9fb1d1a2;
+  border: 1px solid $color-1;
+  border-radius: 15px;
+  hr {
+    width: 85%;
+    margin: auto;
+    border: 1px solid $color-1;
+  }
   &-top {
-    width: 100%;
+    margin: 0.5rem 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3rem;
+    &-name {
+      font-weight: bold;
+    }
+  }
+  &-message {
+    min-height: 55px;
+    height: fit-content;
+    text-align: left;
+    margin: 1rem 1rem;
+  }
+  &-end {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 1rem;
+    &__like {
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+    &__comment {
+      font-size: 1em;
+      color: $color-5;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+  }
+  &-comments {
+    margin-bottom: 1.8rem;
+    max-width: 700px;
+    width: 80%;
+    border-radius: 0 0 12px 12px;
+    border-bottom: 1px solid $color-1;
+    border-left: 1px solid $color-1;
+    border-right: 1px solid $color-1;
+    background-color: #9fb1d1a2;
+    &-comment {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 0.2rem 1rem;
+      .comment-name {
+        font-weight: bold;
+      }
+      .comment-content {
+        text-align: left;
+      }
+    }
   }
 }

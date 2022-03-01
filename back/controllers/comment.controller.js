@@ -52,9 +52,8 @@ exports.getAllComments = (req, res) => {
 };
 
 exports.createComment = (req, res, next) => {
-  const { message, post_id, author_id, author_firstname, author_lastname } =
-    req.body;
-  const sql = `INSERT INTO comments (id, post_id, author_id, author_firstname, author_lastname, message, created_at, updated_at, likes) VALUES (NULL, ${post_id}, ${author_id}, "${author_firstname}", "${author_lastname}", "${message}", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '0')`;
+  const { message, post_id, author_id } = req.body;
+  const sql = `INSERT INTO comments (post_id, author_id, message, created_at, updated_at, likes) VALUES (${post_id}, ${author_id}, "${message}", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '0')`;
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });

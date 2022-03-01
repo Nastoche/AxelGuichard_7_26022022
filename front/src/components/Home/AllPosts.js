@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
   const [postData, setPostData] = useState([]);
-  // const [userFirstName, setUserFirstName] = useState("");
-  // const [userLastName, setUserLastName] = useState("");
-  // const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,13 +33,46 @@ const AllPosts = () => {
     <>
       {postData.map((post, index) => {
         return (
-          <div className="post-container">
-            <div className="post-container-top">
-              <p key={index}>
-                {post.user_firstname} {post.user_lastname}
-              </p>
+          <>
+            <div className="post-container">
+              <div className="post-container-top">
+                <p
+                  key={post.user_firstname}
+                  className="post-container-top-name"
+                >
+                  {post.user_firstname} {post.user_lastname}
+                </p>
+                <p key={post.user_lastname}>
+                  , le {post.date_creation.slice(0, 10)}
+                </p>
+              </div>
+              <div className="post-container-message" key={index}>
+                {post.message}
+              </div>
+              <hr />
+              <div className="post-container-end">
+                <span className="post-container-end__like">J'aime</span>
+                <button className="post-container-end__comment">
+                  Commenter
+                </button>
+              </div>
             </div>
-          </div>
+            <div className="post-container-comments">
+              <div className="post-container-comments-comment">
+                <p className="comment-name">Axel Guichard</p>
+                <p className="comment-content">Salut les bogoss</p>
+              </div>
+              <div className="post-container-comments-comment">
+                <p className="comment-name">Axel Guichard</p>
+                <p className="comment-content">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Expedita perspiciatis doloribus odio nulla quasi ex dicta
+                  voluptate! Quidem et debitis ullam? Fuga reiciendis est a
+                  voluptatum quaerat ipsa numquam hic?
+                </p>
+              </div>
+            </div>
+          </>
         );
       })}
     </>
