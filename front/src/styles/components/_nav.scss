@@ -1,4 +1,5 @@
 nav {
+  position: relative;
   width: 100%;
   max-width: 1440px;
   min-width: 325px;
@@ -9,13 +10,23 @@ nav {
     justify-content: space-around;
 
     li {
+      .disconnect-input {
+        padding: 0;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: $color-5;
+        cursor: pointer;
+      }
       .active {
         // position: relative;
         &::after {
           transform: translate3d(0, 0, 0);
         }
       }
-      a {
+      a,
+      .disconnect-btn,
+      .disconnect-input {
         display: block;
         position: relative;
         overflow: hidden;

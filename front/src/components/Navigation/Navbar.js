@@ -1,8 +1,25 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import TopLogoForm from "../Log/TopLogoForm";
+import axios from "axios";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleDisconnect = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/auth/logout`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        localStorage.clear();
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="logo-signup">
@@ -26,6 +43,17 @@ const Navbar = () => {
               <NavLink end to="/profil">
                 Profil
               </NavLink>
+            </li>
+            <li>
+              <form action="" onSubmit={handleDisconnect}>
+                <span className="disconnect-btn">
+                  <input
+                    type="submit"
+                    value="Se déconnecter"
+                    className="disconnect-input"
+                  />
+                </span>
+              </form>
             </li>
           </ul>
         </nav>

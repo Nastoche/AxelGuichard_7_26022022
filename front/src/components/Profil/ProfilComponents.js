@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfilComponents = () => {
-  const userInfo = JSON.parse(localStorage.getItem("user_info")).user;
-  console.log(userInfo);
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("user_info")) {
+      navigate("/login");
+      return;
+    }
+    const userInfo = JSON.parse(localStorage.getItem("user_info")).user;
+    setUserFirstName(userInfo.user_firstname);
+    setUserLastName(userInfo.user_lastname);
+  });
+  // console.log(userInfo);
+
   return (
     <>
       <div className="container-bloc">
@@ -14,7 +28,7 @@ const ProfilComponents = () => {
           />
           <p className="user-infos-btn">Modifier ✏️</p>
           <h4 className="user-infos-name">
-            {userInfo.user_firstname} {userInfo.user_lastname}
+            {userFirstName} {userLastName}
           </h4>
           <hr />
           <p className="user-infos-desc">
