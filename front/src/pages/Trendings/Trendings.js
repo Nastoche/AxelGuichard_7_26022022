@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navigation/Navbar";
 
 const Trendings = () => {
+  document.title = `Groupomania - Populaires`;
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {

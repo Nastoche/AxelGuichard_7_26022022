@@ -14,7 +14,7 @@ const ProfilComponents = () => {
     const userInfo = JSON.parse(localStorage.getItem("user_info")).user;
     setUserFirstName(userInfo.user_firstname);
     setUserLastName(userInfo.user_lastname);
-  });
+  }, []);
   // console.log(userInfo);
 
   return (

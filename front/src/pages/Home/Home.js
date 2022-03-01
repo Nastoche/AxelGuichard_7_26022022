@@ -5,6 +5,7 @@ import UploadPost from "../../components/Home/UploadPost";
 import Navbar from "../../components/Navigation/Navbar";
 
 const Home = () => {
+  document.title = `Groupomania - Accueil`;
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {
@@ -16,12 +17,7 @@ const Home = () => {
       <Navbar />
       <div className="container-bloc">
         <UploadPost />
-        {useEffect(() => {
-          if (!localStorage.getItem("user_info")) {
-            navigate("/login");
-          }
-          <AllPosts />;
-        })}
+        <AllPosts />
       </div>
     </>
   );

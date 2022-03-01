@@ -37,8 +37,9 @@ exports.createPost = (req, res, next) => {
 
 exports.getAllPosts = (req, res, next) => {
   const sql =
-    // "SELECT * FROM posts p, users u WHERE u.active=1 AND p.active=1 AND p.user_id = u.user_id ORDER BY date_creation DESC;";
-    "SELECT * FROM posts ORDER BY date_creation DESC;";
+    "SELECT message, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id ORDER BY date_creation DESC;";
+  // "SELECT * FROM posts p, users u WHERE u.active=1 AND p.active=1 AND p.user_id = u.user_id ORDER BY date_creation DESC;";
+  // "SELECT * FROM posts ORDER BY date_creation DESC;";
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });

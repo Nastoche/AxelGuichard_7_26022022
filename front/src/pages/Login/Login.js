@@ -4,6 +4,7 @@ import SignUpSpan from "../../components/Log/SignUpSpan";
 import TopLogoForm from "../../components/Log/TopLogoForm";
 
 const Login = () => {
+  document.title = `Groupomania - Connexion`;
   return (
     <>
       <TopLogoForm />

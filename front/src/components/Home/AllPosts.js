@@ -1,8 +1,13 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
+  const [postData, setPostData] = useState([]);
+  // const [userFirstName, setUserFirstName] = useState("");
+  // const [userLastName, setUserLastName] = useState("");
+  // const [message, setMessage] = useState("");
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {
@@ -20,18 +25,27 @@ const AllPosts = () => {
     })
       .then((res) => {
         console.log(res.data);
-        //   res.data.forEach(post => {
-
-        // })
+        setPostData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
+
   return (
-    <div>
-      <div className="cc">{/* insérer ici les posts */}</div>
-    </div>
+    <>
+      {postData.map((post, index) => {
+        return (
+          <div className="post-container">
+            <div className="post-container-top">
+              <p key={index}>
+                {post.user_firstname} {post.user_lastname}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
 };
 
