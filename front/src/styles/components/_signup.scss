@@ -1,0 +1,14 @@
+.cgu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  #terms {
+    width: 20px !important;
+    margin-left: 10px;
+  }
+  .cgu-box:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

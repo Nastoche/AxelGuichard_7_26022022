@@ -19,13 +19,13 @@ exports.signup = async (req, res) => {
     const db = dbc.getDB();
     db.query(sql, user, (err, result) => {
       if (!result) {
-        res.status(200).json({ message: "Email déjà enregistré" });
+        res.status(200).json({ errors: "Email déjà enregistré" });
       } else {
         res.status(201).json({ message: "User created !" });
       }
     });
   } catch (err) {
-    res.status(200).json({ message: "Failed registration", err });
+    res.status(400).json({ errors: "Failed registration", err });
   }
 };
 

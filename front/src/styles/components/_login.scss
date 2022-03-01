@@ -1,5 +1,6 @@
 body {
   background-color: #5f7190d0;
+  text-align: center;
   .logo-signup {
     display: flex;
     justify-content: center;
@@ -8,7 +9,7 @@ body {
   }
   .container-bloc {
     width: 100%;
-    margin-top: 11rem;
+    margin-top: 12rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,11 +53,11 @@ body {
         }
       }
     }
-    .signup-end {
-      color: black;
-      &:hover {
-        text-decoration: underline;
-      }
+  }
+  .signup-end {
+    color: black;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
