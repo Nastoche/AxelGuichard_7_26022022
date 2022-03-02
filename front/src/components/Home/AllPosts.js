@@ -36,6 +36,11 @@ const AllPosts = () => {
           <>
             <div className="post-container">
               <div className="post-container-top">
+                <img
+                  className="post-users-img"
+                  src="./img/default-contact-img.png"
+                  alt=""
+                />
                 <p
                   key={post.user_firstname}
                   className="post-container-top-name"
@@ -51,7 +56,9 @@ const AllPosts = () => {
               </div>
               <hr />
               <div className="post-container-end">
-                <span className="post-container-end__like">J'aime</span>
+                <span className="post-container-end__like">
+                  {/* <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
+                </span>
                 <button className="post-container-end__comment">
                   Commenter
                 </button>
@@ -70,6 +77,13 @@ const AllPosts = () => {
                   voluptate! Quidem et debitis ullam? Fuga reiciendis est a
                   voluptatum quaerat ipsa numquam hic?
                 </p>
+              </div>
+              <div className="post-container-comments-users">
+                <img
+                  className="post-users-img"
+                  src="./img/default-contact-img.png"
+                  alt=""
+                />
               </div>
             </div>
           </>

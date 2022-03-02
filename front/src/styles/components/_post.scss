@@ -5,17 +5,19 @@
   background-color: #9fb1d1a2;
   border: 1px solid $color-1;
   border-radius: 15px;
+
   hr {
     width: 85%;
     margin: auto;
     border: 1px solid $color-1;
   }
   &-top {
-    margin: 0.5rem 1rem;
+    margin: 0.6rem 0.8rem;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     height: 3rem;
+
     &-name {
       font-weight: bold;
     }
@@ -65,5 +67,14 @@
         text-align: left;
       }
     }
+    &-users {
+      border-top: 1px solid $color-1;
+    }
   }
+}
+
+.post-users-img {
+  width: 45px;
+  border-radius: 50%;
+  margin-right: 0.8rem;
 }
