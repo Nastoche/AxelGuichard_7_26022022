@@ -37,7 +37,7 @@ exports.createPost = (req, res, next) => {
 
 exports.getAllPosts = (req, res, next) => {
   const sql =
-    "SELECT message, post_id, date_creation, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id ORDER BY date_creation DESC;";
+    "SELECT message, post_user_id, post_id, date_creation, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id ORDER BY date_creation DESC;";
   // "SELECT * FROM posts p, users u WHERE u.active=1 AND p.active=1 AND p.user_id = u.user_id ORDER BY date_creation DESC;";
   // "SELECT * FROM posts ORDER BY date_creation DESC;";
   db.query(sql, (err, result) => {
@@ -51,7 +51,7 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.getOnePost = (req, res, next) => {
   const { id: postId } = req.params;
-  const sqlGetOnePost = `SELECT * FROM posts p WHERE p.post_id = ${postId};`;
+  const sqlGetOnePost = `SELECT date_creation, likes, message, post_id, post_user_id, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id WHERE post_id = ${postId};`;
   db.query(sqlGetOnePost, (err, result) => {
     if (err) {
       res.status(404).json({ err });
@@ -97,16 +97,15 @@ exports.deleteOnePost = (req, res, next) => {
   const { jwt: token } = req.cookies;
   const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
   const { user_id } = decodedToken;
-  console.log(user_id);
+  // console.log(user_id);
 
   const { id: post_id } = req.params;
-  const sql = `DELETE FROM posts p WHERE p.post_id = ${post_id} AND p.post_user_id = ${user_id}`;
+  const sql = `DELETE FROM posts WHERE post_id = ${post_id} AND post_user_id = ${user_id}`;
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });
       throw err;
     }
-
     res.status(200).json(result);
   });
 };

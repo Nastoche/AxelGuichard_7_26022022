@@ -6,12 +6,14 @@ import Profil from "./pages/Profil/Profil";
 import Trendings from "./pages/Trendings/Trendings";
 import React from "react";
 import Cgu from "./pages/CGU/Cgu";
+import Post from "./pages/Home/Post";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profil" element={<Profil />} />

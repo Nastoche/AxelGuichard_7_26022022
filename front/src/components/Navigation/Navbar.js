@@ -5,6 +5,10 @@ import axios from "axios";
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const backHome = () => {
+    navigate("/");
+  };
+
   const handleDisconnect = () => {
     axios({
       method: "GET",
@@ -24,8 +28,9 @@ const Navbar = () => {
     <>
       <div className="logo-signup">
         <img
-          src="./img/logo/icon-left-font-monochrome-white.svg"
+          src="../img/logo/icon-left-font-monochrome-white.svg"
           alt="logo de groupomania"
+          onClick={backHome}
         />
         <nav>
           <ul>

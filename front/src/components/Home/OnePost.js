@@ -1,18 +1,16 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-// import Comment from "./Comment";
 
-const AllPosts = () => {
+const OnePost = () => {
   const [postData, setPostData] = useState([]);
   const [comment, setComment] = useState("");
-  const [postId, setPostId] = useState("");
   const [userId, setUserId] = useState("");
-  const date = Date.now();
+  const postId = useParams().id;
 
   const deletePost = () => {
     console.log(userId, postId);
@@ -64,14 +62,10 @@ const AllPosts = () => {
     const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
       .user_id;
     setUserId(checkUserId);
-
     axios({
       method: "GET",
-      url: `${process.env.REACT_APP_API_URL}api/post`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
       withCredentials: true,
-      data: {
-        user_id: checkUserId,
-      },
     })
       .then((res) => {
         console.log(res.data);
@@ -81,7 +75,6 @@ const AllPosts = () => {
         console.log(err);
       });
   }, []);
-
   return (
     <>
       {postData.map((post, index) => {
@@ -91,27 +84,20 @@ const AllPosts = () => {
               <div className="post-container-top">
                 <img
                   className="post-users-img"
-                  src="./img/default-contact-img.png"
+                  src="../img/default-contact-img.png"
                   alt=""
                 />
                 <p
-                  key={`${post.user_firstname}${date}`}
+                  key={post.user_firstname}
                   className="post-container-top-name"
                 >
                   {post.user_firstname} {post.user_lastname}
                 </p>
-                <p
-                  key={post.date_creation}
-                  className="post-container-top-date"
-                  onClick={() => navigate(`/post/${post.post_id}`)}
-                >
+                <p key={post.user_lastname}>
                   , le {post.date_creation.slice(0, 10)}
                 </p>
               </div>
-              <div
-                className="post-container-message"
-                key={`${post.user_firstname}${date}`}
-              >
+              <div className="post-container-message" key={index}>
                 {post.message}
               </div>
               <hr />
@@ -129,7 +115,6 @@ const AllPosts = () => {
                 <button
                   className="post-container-end__delete"
                   onClick={() => {
-                    setPostId(post.post_id);
                     deletePost();
                   }}
                 >
@@ -164,7 +149,6 @@ const AllPosts = () => {
                     placeholder="Écrivez un commentaire..."
                     className="input-comment"
                     onChange={(e) => {
-                      setPostId(post.post_id);
                       setComment(e.target.value);
                     }}
                   />
@@ -183,4 +167,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default OnePost;

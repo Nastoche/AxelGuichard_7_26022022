@@ -21,6 +21,13 @@
     &-name {
       font-weight: bold;
     }
+    &-date {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        color: $color-1;
+      }
+    }
   }
   &-message {
     min-height: 55px;
