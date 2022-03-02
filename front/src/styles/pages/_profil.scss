@@ -14,6 +14,8 @@
     flex-direction: column;
     // border: 1px solid $color-5;
     background-color: #9fb1d1c7;
+    border: 1px solid $color-1;
+    border-radius: 15px;
     &-img {
       position: relative;
       padding: 0;
@@ -44,6 +46,7 @@
     hr {
       margin: 1.5rem 0;
       width: 190px;
+      border-color: $color-1;
     }
     &-desc {
       text-align: center;

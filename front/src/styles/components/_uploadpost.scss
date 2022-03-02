@@ -1,27 +1,54 @@
 .upload-post {
-  background-color: green;
-  max-width: 90%;
-  width: 900px;
-  height: 200px;
-  .form {
-    background-color: grey;
-    height: 50%;
+  background-color: #9fb1d1cc;
+  max-width: 750px;
+  width: 90%;
+  height: 100px;
+  border: 1px solid $color-1;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0.8rem;
+  img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 0.8rem;
+  }
+  form {
+    width: 100%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    img {
-      width: 50px;
-      border-radius: 50%;
-    }
-    input {
-      width: 300px;
-      height: 45px;
-      padding: 0 8px;
-      border-radius: 15px;
-      border: 1px solid $color-2;
+    align-items: center;
+    justify-content: space-between;
+    .upload-post-input {
+      font-size: 1.1em;
+      width: 85%;
+      height: 2.4em;
       outline: none;
+      border: none;
+      background-color: #fff;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+    }
+    .upload-post-btn {
+      color: #fff;
+      background-color: $color-1;
+      width: 5rem;
+      height: 2.1rem;
+      border-radius: 15px;
+      font-size: 1em;
+      border: 1px solid transparent;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        border: 1px solid $color-5;
+        background-color: #c38f8b;
+        color: $color-5;
+      }
     }
   }
 }

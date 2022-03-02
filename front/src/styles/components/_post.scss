@@ -2,7 +2,7 @@
   position: relative;
   max-width: 750px;
   width: 90%;
-  background-color: #9fb1d1a2;
+  background-color: #9fb1d1cc;
   border: 1px solid $color-1;
   border-radius: 15px;
 
@@ -35,18 +35,41 @@
     align-items: center;
     margin-left: 1rem;
     &__like {
-      cursor: pointer;
-      margin-right: 1rem;
-      &-i {
-        font-size: 1.5em;
-      }
-    }
-    &__comment {
-      font-size: 1em;
+      margin: auto 1rem;
       color: $color-5;
       cursor: pointer;
       background-color: transparent;
       border: none;
+      font-size: 1.4em;
+      transition: 0.15s ease-in-out;
+      &:hover {
+        color: $color-1;
+      }
+    }
+    &__comment {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      margin-top: 2px;
+      color: $color-5;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      font-size: 1.2em;
+      transition: 0.15s ease-in-out;
+      &:hover {
+        color: $color-1;
+      }
+    }
+    &__delete {
+      margin: auto 1rem;
+      border: none;
+      background-color: transparent;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: 0.15s ease-in-out;
+      &:hover {
+        color: rgb(161, 10, 10);
+      }
     }
   }
   &-comments {
@@ -57,7 +80,7 @@
     border-bottom: 1px solid $color-1;
     border-left: 1px solid $color-1;
     border-right: 1px solid $color-1;
-    background-color: #9fb1d1a2;
+    background-color: #9fb1d1cc;
     &-comment {
       display: flex;
       align-items: flex-start;

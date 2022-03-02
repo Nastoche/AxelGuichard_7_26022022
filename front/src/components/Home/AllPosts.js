@@ -2,6 +2,8 @@ import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 // import Comment from "./Comment";
 
@@ -86,14 +88,18 @@ const AllPosts = () => {
               </div>
               <hr />
               <div className="post-container-end">
-                <span className="post-container-end__like">
+                <button className="post-container-end__like">
                   <FontAwesomeIcon
                     icon={faThumbsUp}
                     className="post-container-end__like-i"
                   />
-                </span>
+                </button>
                 <button className="post-container-end__comment">
-                  Commenter
+                  <FontAwesomeIcon icon={faMessage} />
+                </button>
+
+                <button className="post-container-end__delete">
+                  <FontAwesomeIcon icon={faTrashCan} />
                 </button>
               </div>
             </div>
