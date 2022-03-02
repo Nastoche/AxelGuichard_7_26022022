@@ -1,9 +1,37 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+// import Comment from "./Comment";
 
 const AllPosts = () => {
   const [postData, setPostData] = useState([]);
+  const [comment, setComment] = useState("");
+  const [postId, setPostId] = useState("");
+  const [userId, setUserId] = useState("");
+
+  const handlePostComment = (e) => {
+    e.preventDefault();
+    console.log(`commentaire sur le post ${postId}`);
+
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/comment/${postId}`,
+      withCredentials: true,
+      data: {
+        post_id: postId,
+        author_id: userId,
+        message: comment,
+      },
+    })
+      .then((res) => {
+        console.log("commentaire créé !");
+      })
+      .catch((err) => {
+        console.log(`Echec post commentaire : ${err}`);
+      });
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -11,13 +39,15 @@ const AllPosts = () => {
       navigate("/login");
       return;
     }
-    const userId = JSON.parse(localStorage.getItem("user_info")).user.user_id;
+    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
+      .user_id;
+    setUserId(checkUserId);
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/post`,
       withCredentials: true,
       data: {
-        user_id: userId,
+        user_id: checkUserId,
       },
     })
       .then((res) => {
@@ -57,13 +87,17 @@ const AllPosts = () => {
               <hr />
               <div className="post-container-end">
                 <span className="post-container-end__like">
-                  {/* <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
+                  <FontAwesomeIcon
+                    icon={faThumbsUp}
+                    className="post-container-end__like-i"
+                  />
                 </span>
                 <button className="post-container-end__comment">
                   Commenter
                 </button>
               </div>
             </div>
+            {/* <Comment /> */}
             <div className="post-container-comments">
               <div className="post-container-comments-comment">
                 <p className="comment-name">Axel Guichard</p>
@@ -84,6 +118,22 @@ const AllPosts = () => {
                   src="./img/default-contact-img.png"
                   alt=""
                 />
+                <form action="" onSubmit={handlePostComment}>
+                  <input
+                    type="text"
+                    placeholder="Écrivez un commentaire..."
+                    className="input-comment"
+                    onChange={(e) => {
+                      setPostId(post.post_id);
+                      setComment(e.target.value);
+                    }}
+                  />
+                  <input
+                    type="submit"
+                    value="Poster"
+                    className="publish-comment"
+                  />
+                </form>
               </div>
             </div>
           </>
