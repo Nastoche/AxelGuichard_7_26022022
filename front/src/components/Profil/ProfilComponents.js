@@ -47,37 +47,7 @@ const ProfilComponents = () => {
             quos esse doloribus provident dignissimos dolorem, est sequi
             blanditiis deserunt voluptatibus ab sed at? Labore, ipsa,
             asperiores, in optio adipisci illum unde perspiciatis excepturi
-            officiis autem nisi. Ab consequatur, voluptatibus nihil odit, optio
-            officiis porro alias, quibusdam eius aperiam quod nisi. Enim
-            voluptate expedita accusantium ducimus quibusdam sit nostrum.
-            Ratione at consequatur placeat eius enim autem labore sapiente quis
-            debitis aperiam harum quasi, beatae, impedit aspernatur ex
-            voluptatibus nulla numquam ducimus iste ipsam expedita? Qui tenetur
-            laboriosam placeat dolore deleniti eveniet nemo assumenda fuga, ea
-            quam a, sint magnam voluptate? Debitis vero commodi, non amet
-            excepturi ex sint eius magnam nobis iste aliquam delectus accusamus,
-            repudiandae corporis. Ea reprehenderit quidem dolorum, culpa
-            adipisci tempore, atque mollitia ipsum commodi autem obcaecati
-            dignissimos laboriosam? Suscipit, unde est delectus optio, quae
-            adipisci beatae nulla aliquid tempore alias veritatis necessitatibus
-            inventore? Ab, animi? Voluptate, nisi sapiente suscipit
-            necessitatibus, quia libero totam dolores quis quam optio corporis
-            sed nobis illum beatae fugiat. Maiores quos, quia laboriosam totam,
-            dolore, iste ipsam blanditiis dolores animi atque illum. Eaque id
-            impedit ipsam perferendis dolor nulla? At labore fuga tempore velit
-            rem? Veniam cupiditate quos voluptas laboriosam quae, maiores sit
-            natus, et molestias modi libero, quia eveniet obcaecati ab
-            doloremque incidunt iure provident facilis. Molestias sit nulla quis
-            maxime nisi reprehenderit iusto adipisci perspiciatis voluptatum vel
-            soluta voluptas eaque pariatur, nobis, ratione cum cupiditate neque
-            officia ullam. Illo sit vitae repudiandae maiores, ut iusto placeat
-            totam natus cumque, deserunt dolores corrupti nesciunt! Sed deserunt
-            porro, voluptatum accusamus facilis quas iste exercitationem sunt
-            cupiditate doloremque consectetur, labore totam, numquam cumque
-            consequuntur tempora quidem quis necessitatibus voluptatibus. Itaque
-            tempora voluptatum cupiditate ut, dolorum repudiandae tempore omnis!
-            Suscipit, natus quae distinctio est, sed provident nisi esse
-            accusamus atque aperiam, quis odit id quibusdam iusto cumque magni?
+            officiis autem nisi.
           </p>
         </div>
       </div>

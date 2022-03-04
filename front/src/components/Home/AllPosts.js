@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
+import "moment/locale/fr";
 // import Comment from "./Comment";
 
 const AllPosts = () => {
@@ -13,15 +15,16 @@ const AllPosts = () => {
   const [postId, setPostId] = useState("");
   const [userId, setUserId] = useState("");
   const date = Date.now();
+  moment.locale("fr");
 
-  const deletePost = () => {
-    console.log(userId, postId);
+  const deletePost = (post_id) => {
+    console.log(userId, post_id);
     axios({
       method: "DELETE",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post_id}`,
       withCredentials: true,
       data: {
-        post_id: postId,
+        post_id,
         // post_user_id: userId,
       },
     })
@@ -105,7 +108,8 @@ const AllPosts = () => {
                   className="post-container-top-date"
                   onClick={() => navigate(`/post/${post.post_id}`)}
                 >
-                  , le {post.date_creation.slice(0, 10)}
+                  , {moment(post.date_creation).startOf("second").fromNow()}
+                  {/* .slice(0, 10) */}
                 </p>
               </div>
               <div
@@ -129,8 +133,7 @@ const AllPosts = () => {
                 <button
                   className="post-container-end__delete"
                   onClick={() => {
-                    setPostId(post.post_id);
-                    deletePost();
+                    deletePost(post.post_id);
                   }}
                 >
                   <FontAwesomeIcon icon={faTrashCan} />
@@ -141,7 +144,7 @@ const AllPosts = () => {
             <div className="post-container-comments">
               <div className="post-container-comments-comment">
                 <p className="comment-name">Axel Guichard</p>
-                <p className="comment-content">Salut les bogoss</p>
+                <p className="comment-content">Salut salut</p>
               </div>
               <div className="post-container-comments-comment">
                 <p className="comment-name">Axel Guichard</p>
