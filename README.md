@@ -1,6 +1,3 @@
-# AxelGuichard_7_26022022
-Groupomania - Réseau social d'entreprise
-
 # P7 - Créez un réseau social d’entreprise
 
 ## Compétences évaluées
