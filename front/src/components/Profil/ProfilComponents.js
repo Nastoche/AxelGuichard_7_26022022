@@ -6,6 +6,7 @@ const ProfilComponents = () => {
   const [userLastName, setUserLastName] = useState("");
 
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {
       navigate("/login");

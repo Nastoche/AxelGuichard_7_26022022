@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import Comment from "./Comment";
 
 const OnePost = () => {
   const [postData, setPostData] = useState([]);
@@ -123,43 +124,7 @@ const OnePost = () => {
               </div>
             </div>
             {/* <Comment /> */}
-            <div className="post-container-comments">
-              <div className="post-container-comments-comment">
-                <p className="comment-name">Axel Guichard</p>
-                <p className="comment-content">Salut les bogoss</p>
-              </div>
-              <div className="post-container-comments-comment">
-                <p className="comment-name">Axel Guichard</p>
-                <p className="comment-content">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Expedita perspiciatis doloribus odio nulla quasi ex dicta
-                  voluptate! Quidem et debitis ullam? Fuga reiciendis est a
-                  voluptatum quaerat ipsa numquam hic?
-                </p>
-              </div>
-              <div className="post-container-comments-users">
-                <img
-                  className="post-users-img"
-                  src="./img/default-contact-img.png"
-                  alt=""
-                />
-                <form action="" onSubmit={handlePostComment}>
-                  <input
-                    type="text"
-                    placeholder="Écrivez un commentaire..."
-                    className="input-comment"
-                    onChange={(e) => {
-                      setComment(e.target.value);
-                    }}
-                  />
-                  <input
-                    type="submit"
-                    value="Poster"
-                    className="publish-comment"
-                  />
-                </form>
-              </div>
-            </div>
+            <Comment />
           </>
         );
       })}

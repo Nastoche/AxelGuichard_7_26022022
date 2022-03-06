@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AllPosts from "../../components/Home/AllPosts";
+import Comments from "../../components/Home/Comments";
+import Posts from "../../components/Home/Posts";
 import UploadPost from "../../components/Home/UploadPost";
 import Navbar from "../../components/Navigation/Navbar";
 
@@ -12,12 +13,14 @@ const Home = () => {
       navigate("/login");
     }
   });
+
   return (
     <>
       <Navbar />
       <div className="container-bloc">
         <UploadPost />
-        <AllPosts />
+        <Posts />
+        <Comments />
       </div>
     </>
   );

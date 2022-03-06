@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
@@ -12,7 +12,7 @@ import axios from "axios";
 function App() {
   axios.interceptors.response.use(
     function (response) {
-      console.log(response);
+      // console.log(response);
       // Any status code that lie within the range of 2xx cause this function to trigger
       // Do something with response data
       return response;
