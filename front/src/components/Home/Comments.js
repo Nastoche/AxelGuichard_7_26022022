@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
-import PostComment from "./PostComment";
 
 const Comments = ({ post, userId }) => {
   const [allComments, setAllComments] = useState([]);
@@ -22,7 +21,7 @@ const Comments = ({ post, userId }) => {
         setAllComments(res.data);
       })
       .catch((err) => {
-        console.log(err + " coucou !");
+        console.log(err);
       });
   };
 

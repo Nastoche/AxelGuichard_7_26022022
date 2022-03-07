@@ -4,6 +4,10 @@ import React, { useState } from "react";
 const PostComment = ({ post, userId }) => {
   const [comment, setComment] = useState("");
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   const handlePostComment = (e) => {
     e.preventDefault();
     console.log(`commentaire sur le post ${post.post_id}`);
@@ -24,6 +28,7 @@ const PostComment = ({ post, userId }) => {
       .catch((err) => {
         console.log(`Echec post commentaire : ${err}`);
       });
+    refreshPage();
   };
   return (
     <>

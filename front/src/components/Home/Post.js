@@ -12,7 +12,6 @@ import PostComment from "./PostComment";
 
 const Post = ({ post, fetchAll, userId }) => {
   const { post_id } = post;
-  const postTest = post;
   const navigate = useNavigate();
 
   const min = 10000;
@@ -96,14 +95,7 @@ const Post = ({ post, fetchAll, userId }) => {
         </div>
       </div>
       <div className="post-container-comments">
-        <Comments post={postTest} userId={userId} />
-        {/* <div className="post-container-comments-users">
-          <PostComment
-            post={post}
-            userId={userId}
-            fetchAllComments={fetchAllComments}
-          />
-        </div> */}
+        <Comments post={post} userId={userId} />
         <div className="post-container-comments-users">
           <PostComment post={post} userId={userId} />
         </div>
