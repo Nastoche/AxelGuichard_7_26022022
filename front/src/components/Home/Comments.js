@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
+import PostComment from "./PostComment";
 
 const Comments = ({ post, userId }) => {
   const [allComments, setAllComments] = useState([]);
@@ -17,7 +18,6 @@ const Comments = ({ post, userId }) => {
       },
     })
       .then((res) => {
-        // console.log(res.data);
         // fetchAllComments()
         setAllComments(res.data);
       })
@@ -30,18 +30,23 @@ const Comments = ({ post, userId }) => {
     if (post !== undefined) {
       const { post_id } = post;
       fetchAllComments(post_id);
-      console.log(post_id);
     }
   }, []);
 
   return allComments.map((comment) => {
     return (
-      <Comment
-        post={post}
-        commentaire={comment}
-        userId={userId}
-        // fetchAllComments={fetchAllComments}
-      />
+      <>
+        <div className="post-container-comments-comment">
+          <Comment singleComment={comment} />
+        </div>
+        {/* <div className="post-container-comments-users">
+          <PostComment
+            post={post}
+            userId={userId}
+            fetchAllComments={fetchAllComments}
+          />
+        </div> */}
+      </>
     );
   });
 };

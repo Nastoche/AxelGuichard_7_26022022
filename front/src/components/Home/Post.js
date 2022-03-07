@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
 import Comments from "./Comments";
+import PostComment from "./PostComment";
 
 const Post = ({ post, fetchAll, userId }) => {
   const { post_id } = post;
@@ -41,6 +42,7 @@ const Post = ({ post, fetchAll, userId }) => {
       });
     fetchAll();
   };
+
   return (
     <>
       <div className="post-container">
@@ -93,7 +95,19 @@ const Post = ({ post, fetchAll, userId }) => {
           </button>
         </div>
       </div>
-      <Comments post={postTest} userId={userId} />
+      <div className="post-container-comments">
+        <Comments post={postTest} userId={userId} />
+        {/* <div className="post-container-comments-users">
+          <PostComment
+            post={post}
+            userId={userId}
+            fetchAllComments={fetchAllComments}
+          />
+        </div> */}
+        <div className="post-container-comments-users">
+          <PostComment post={post} userId={userId} />
+        </div>
+      </div>
     </>
   );
 };

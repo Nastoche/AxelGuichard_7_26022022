@@ -81,7 +81,7 @@
     }
   }
   &-comments {
-    margin-bottom: 1.8rem;
+    // margin-bottom: 1.8rem;
     max-width: 700px;
     width: 80%;
     border-radius: 0 0 12px 12px;
@@ -89,6 +89,10 @@
     border-left: 1px solid $color-1;
     border-right: 1px solid $color-1;
     background-color: #9fb1d1cc;
+    &:nth-last-child(n + 1) {
+      margin-bottom: 1.8rem;
+    }
+
     &-comment {
       display: flex;
       align-items: flex-start;
