@@ -7,6 +7,7 @@ import Navbar from "../../components/Navigation/Navbar";
 import axios from "axios";
 
 const Home = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [userId, setUserId] = useState("");
 
@@ -44,6 +45,11 @@ const Home = () => {
     }
     const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
       .user_id;
+    const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
+
+    if (admin === 1) {
+      setIsAdmin(true);
+    }
     setUserId(checkUserId);
     fetchAllPosts();
   }, []);
@@ -57,6 +63,7 @@ const Home = () => {
           allPosts={allPosts}
           userId={userId}
           fetchAllPosts={fetchAllPosts}
+          isAdmin={isAdmin}
         />
         <Comments />
       </div>

@@ -1,8 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
-const PostComment = ({ post, userId }) => {
+const PostComment = ({ post, userId, setCommentInput }) => {
   const [comment, setComment] = useState("");
+  // const inputRef = useRef();
+  // setCommentInput(inputRef);
 
   const refreshPage = () => {
     window.location.reload(false);
@@ -39,6 +41,7 @@ const PostComment = ({ post, userId }) => {
       />
       <form action="" onSubmit={handlePostComment}>
         <input
+          // ref={inputRef}
           type="text"
           placeholder="Écrivez un commentaire..."
           className="input-comment"

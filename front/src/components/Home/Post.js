@@ -10,8 +10,9 @@ import "moment/locale/fr";
 import Comments from "./Comments";
 import PostComment from "./PostComment";
 
-const Post = ({ post, fetchAllPosts, userId }) => {
-  const [isUser, setIsUser] = useState(false);
+const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
+  const [isPostUser, setIsPostUser] = useState(false);
+  const [commentInput, setCommentInput] = useState(null);
   const { post_id } = post;
 
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Post = ({ post, fetchAllPosts, userId }) => {
   // };
 
   const handleDelete = () => {
-    console.log("user : " + userId + " " + "post : " + post_id);
+    // console.log("user : " + userId + " " + "post : " + post_id);
     axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_API_URL}api/post/${post_id}`,
@@ -46,8 +47,8 @@ const Post = ({ post, fetchAllPosts, userId }) => {
   };
 
   useEffect(() => {
-    if (post.post_user_id === userId) {
-      setIsUser(true);
+    if (post.post_user_id === userId || isAdmin) {
+      setIsPostUser(true);
     }
   }, []);
   return (
@@ -59,16 +60,18 @@ const Post = ({ post, fetchAllPosts, userId }) => {
             src="./img/default-contact-img.png"
             alt=""
           />
-          <p key={`${post.post_user_id}`} className="post-container-top-name">
-            {post.post_user_id} {post.user_lastname}
+          <p
+            key={`${post.post_user_id}${post.date_creation}`}
+            className="post-container-top-name"
+          >
+            {post.user_firstname} {post.user_lastname}
           </p>
           <p
-            key={`${post.date_creation}`}
+            key={`${post.post_user_id}`}
             className="post-container-top-date"
             onClick={() => navigate(`/post/${post.post_id}`)}
           >
             , {moment(post.date_creation).startOf("second").fromNow()}
-            {/* .slice(0, 10) */}
           </p>
         </div>
         <div className="post-container-message" key={`${post.post_user_id}`}>
@@ -82,11 +85,14 @@ const Post = ({ post, fetchAllPosts, userId }) => {
               className="post-container-end__like-i"
             />
           </button>
-          <button className="post-container-end__comment">
+          <button
+            className="post-container-end__comment"
+            // onClick={() => commentInput.focus()}
+          >
             <FontAwesomeIcon icon={faMessage} />
           </button>
 
-          {isUser && (
+          {isPostUser && (
             <button
               className="post-container-end__delete"
               onClick={() => {
@@ -101,7 +107,11 @@ const Post = ({ post, fetchAllPosts, userId }) => {
       <div className="post-container-comments">
         <Comments post={post} userId={userId} />
         <div className="post-container-comments-users">
-          <PostComment post={post} userId={userId} />
+          <PostComment
+            post={post}
+            userId={userId}
+            setCommentInput={setCommentInput}
+          />
         </div>
       </div>
     </>

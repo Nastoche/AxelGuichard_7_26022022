@@ -27,6 +27,7 @@ function App() {
       return Promise.reject(error);
     }
   );
+
   return (
     <BrowserRouter>
       <Routes>

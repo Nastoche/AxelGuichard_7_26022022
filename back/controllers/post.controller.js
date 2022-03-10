@@ -95,10 +95,15 @@ exports.updatePost = (req, res, next) => {
 exports.deleteOnePost = (req, res, next) => {
   const { jwt: token } = req.cookies;
   const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
-  const { user_id } = decodedToken;
+  const { user_id, admin } = decodedToken;
   const { id: post_id } = req.params;
 
-  const sql = `DELETE FROM posts WHERE post_id = ${post_id} AND post_user_id = ${user_id}`;
+  // const sql = `DELETE FROM posts  INNER JOIN user WHERE post_id = ${post_id} AND post_user_id = ${user_id} OR post_id = ${post_id} AND user.admin = ${admin};`;
+  // const sql = `DELETE * FROM posts WHERE post_id = ${post_id} AND post_user_id = ${user_id} OR post_id = ${post_id} AND ${admin} = 1;`;
+  const sql = `DELETE p FROM posts AS p
+  INNER JOIN users AS u
+  ON (u.user_id = p.post_user_id)
+  WHERE p.post_id = ${post_id} AND (${admin} = 1 OR u.user_id = ${user_id});`;
   db.query(sql, (err, result) => {
     if (err) {
       console.log("erreur");
