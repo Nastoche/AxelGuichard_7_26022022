@@ -96,15 +96,16 @@ exports.deleteOnePost = (req, res, next) => {
   const { jwt: token } = req.cookies;
   const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
   const { user_id } = decodedToken;
-  // console.log(user_id);
-
   const { id: post_id } = req.params;
+
   const sql = `DELETE FROM posts WHERE post_id = ${post_id} AND post_user_id = ${user_id}`;
   db.query(sql, (err, result) => {
     if (err) {
+      console.log("erreur");
       res.status(404).json({ err });
       throw err;
     }
+    console.log(result);
     res.status(200).json(result);
   });
 };

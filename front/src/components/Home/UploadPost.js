@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UploadPost = () => {
-  const [userId, setUserId] = useState("");
+const UploadPost = ({ fetchAllPosts, userId }) => {
   const [postMessage, setPostMessage] = useState("");
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
 
   const handleUploadPost = (e) => {
     e.preventDefault();
@@ -23,18 +26,9 @@ const UploadPost = () => {
       .catch((err) => {
         console.log(err);
       });
+    // fetchAllPosts();
+    refreshPage();
   };
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("user_info")) {
-      navigate("/login");
-      return;
-    }
-    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
-      .user_id;
-    setUserId(checkUserId);
-  }, []);
   return (
     <div className="upload-post">
       <img src="./img/default-contact-img.png" alt="" />

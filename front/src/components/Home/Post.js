@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,20 +10,22 @@ import "moment/locale/fr";
 import Comments from "./Comments";
 import PostComment from "./PostComment";
 
-const Post = ({ post, fetchAll, userId }) => {
+const Post = ({ post, fetchAllPosts, userId }) => {
+  const [isUser, setIsUser] = useState(false);
   const { post_id } = post;
+
   const navigate = useNavigate();
 
-  const min = 10000;
-  const max = 90000;
-  let randomNumber = Math.floor(Math.random() * min) + max;
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
 
   // const handleSubmit = () => {
   //   // ...
   // };
 
   const handleDelete = () => {
-    console.log(userId, post_id);
+    console.log("user : " + userId + " " + "post : " + post_id);
     axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_API_URL}api/post/${post_id}`,
@@ -39,9 +41,15 @@ const Post = ({ post, fetchAll, userId }) => {
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
       });
-    fetchAll();
+    // fetchAllPosts();
+    refreshPage();
   };
 
+  useEffect(() => {
+    if (post.post_user_id === userId) {
+      setIsUser(true);
+    }
+  }, []);
   return (
     <>
       <div className="post-container">
@@ -51,14 +59,11 @@ const Post = ({ post, fetchAll, userId }) => {
             src="./img/default-contact-img.png"
             alt=""
           />
-          <p
-            key={`${post.user_firstname}${randomNumber}`}
-            className="post-container-top-name"
-          >
-            {post.user_firstname} {post.user_lastname}
+          <p key={`${post.post_user_id}`} className="post-container-top-name">
+            {post.post_user_id} {post.user_lastname}
           </p>
           <p
-            key={`${post.date_creation}${randomNumber}`}
+            key={`${post.date_creation}`}
             className="post-container-top-date"
             onClick={() => navigate(`/post/${post.post_id}`)}
           >
@@ -66,10 +71,7 @@ const Post = ({ post, fetchAll, userId }) => {
             {/* .slice(0, 10) */}
           </p>
         </div>
-        <div
-          className="post-container-message"
-          key={`${post.user_firstname}${randomNumber}`}
-        >
+        <div className="post-container-message" key={`${post.post_user_id}`}>
           {post.message}
         </div>
         <hr />
@@ -84,14 +86,16 @@ const Post = ({ post, fetchAll, userId }) => {
             <FontAwesomeIcon icon={faMessage} />
           </button>
 
-          <button
-            className="post-container-end__delete"
-            onClick={() => {
-              handleDelete(post.post_id);
-            }}
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
+          {isUser && (
+            <button
+              className="post-container-end__delete"
+              onClick={() => {
+                handleDelete(post.post_id);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+          )}
         </div>
       </div>
       <div className="post-container-comments">
