@@ -21,10 +21,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     window.location.reload(false);
   };
 
-  // const handleSubmit = () => {
-  //   // ...
-  // };
-
   const handleDelete = () => {
     // console.log("user : " + userId + " " + "post : " + post_id);
     axios({

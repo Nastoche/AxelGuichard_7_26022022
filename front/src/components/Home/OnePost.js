@@ -5,13 +5,42 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import Comment from "./Comment";
+import CommentsFromOnePost from "../Post/CommentsFromOnePost";
+import PostCommentOnePost from "../Post/PostCommentOnePost";
+import moment from "moment";
+import "moment/locale/fr";
 
-const OnePost = () => {
-  const [postData, setPostData] = useState([]);
+const OnePost = ({ postData, isAdmin, userId }) => {
   const [comment, setComment] = useState("");
-  const [userId, setUserId] = useState("");
+  const [isPostUser, setIsPostUser] = useState(false);
   const postId = useParams().id;
+
+  const navigate = useNavigate();
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
+  const handleDelete = () => {
+    // console.log("user : " + userId + " " + "post : " + post_id);
+    axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+      withCredentials: true,
+      data: {
+        postId,
+        post_user_id: userId,
+      },
+    })
+      .then((res) => {
+        console.log("Post supprimé !");
+      })
+      .catch((err) => {
+        console.log(`Echec suppression de post : ${err}`);
+      });
+
+    navigate("/login");
+  };
 
   const deletePost = () => {
     console.log(userId, postId);
@@ -52,29 +81,13 @@ const OnePost = () => {
       .catch((err) => {
         console.log(`Echec post commentaire : ${err}`);
       });
+    refreshPage();
   };
 
-  const navigate = useNavigate();
   useEffect(() => {
-    if (!localStorage.getItem("user_info")) {
-      navigate("/login");
-      return;
+    if (postData.post_user_id === userId || isAdmin) {
+      setIsPostUser(true);
     }
-    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
-      .user_id;
-    setUserId(checkUserId);
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        console.log(res.data);
-        setPostData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, []);
   return (
     <>
@@ -95,7 +108,7 @@ const OnePost = () => {
                   {post.user_firstname} {post.user_lastname}
                 </p>
                 <p key={post.user_lastname}>
-                  , le {post.date_creation.slice(0, 10)}
+                  , {moment(post.date_creation).startOf("second").fromNow()}
                 </p>
               </div>
               <div className="post-container-message" key={index}>
@@ -113,18 +126,25 @@ const OnePost = () => {
                   <FontAwesomeIcon icon={faMessage} />
                 </button>
 
-                <button
-                  className="post-container-end__delete"
-                  onClick={() => {
-                    deletePost();
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrashCan} />
-                </button>
+                {isPostUser && (
+                  <button
+                    className="post-container-end__delete"
+                    onClick={() => {
+                      handleDelete(post.post_id);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} />
+                  </button>
+                )}
               </div>
             </div>
             {/* <Comment /> */}
-            <Comment />
+            <div className="post-container-comments">
+              <CommentsFromOnePost postId={postId} userId={userId} />
+              <div className="post-container-comments-users">
+                <PostCommentOnePost postId={postId} userId={userId} />
+              </div>
+            </div>
           </>
         );
       })}

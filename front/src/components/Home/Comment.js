@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Comment = ({ singleComment }) => {
+const Comment = ({ singleComment, postId, userId }) => {
+  console.log(singleComment);
+
   return (
     <>
       <p className="comment-name">
