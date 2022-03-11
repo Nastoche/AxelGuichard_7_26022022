@@ -100,9 +100,7 @@
     }
 
     &-comment {
-      margin: 0.5rem 0 0 1rem;
-      background-color: #b5c1d6cc;
-      width: fit-content;
+      background-color: rgba(142, 165, 207, 0.8);
       border-radius: 12px;
       display: flex;
       align-items: flex-start;
@@ -117,13 +115,22 @@
       .comment-content {
         text-align: left;
       }
+
+      @media screen and(max-width:768px) {
+        font-size: 0.9em;
+        margin: 0.5rem 0;
+      }
+      @media screen and(min-width:768px) {
+        margin: 0.5rem 0 0 1rem;
+        width: fit-content;
+      }
     }
     &-users {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.8rem;
+      padding: 0.8rem 0.8rem 0 0.8rem;
       // border-top: 1px solid $color-1;
       form {
         width: 100%;
@@ -145,6 +152,7 @@
           }
         }
         .publish-comment {
+          margin-left: 1rem;
           color: #fff;
           background-color: $color-1;
           width: 5rem;
@@ -161,6 +169,13 @@
           }
         }
       }
+    }
+    .comment-error {
+      margin-bottom: 1rem;
+      color: red;
+    }
+    .charCount {
+      font-size: 0.8em;
     }
   }
 }

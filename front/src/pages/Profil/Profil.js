@@ -8,21 +8,25 @@ const Profil = () => {
   const navigate = useNavigate();
 
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {
       navigate("/login");
       return;
     }
-
+    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
+      .user_id;
     const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
+
     if (admin === 1) {
       setIsAdmin(true);
     }
-  });
+    setUserId(checkUserId);
+  }, []);
   return (
     <>
-      <Navbar />
+      <Navbar id={userId} />
       <ProfilComponents isAdmin={isAdmin} />
     </>
   );

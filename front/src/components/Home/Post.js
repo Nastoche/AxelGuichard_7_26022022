@@ -14,6 +14,8 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [isPostUser, setIsPostUser] = useState(false);
   const { post_id, post_user_id } = post;
   const [allComments, setAllComments] = useState([]);
+  const [longCommentError, setLongCommentError] = useState("");
+  const [comment, setComment] = useState("");
 
   const navigate = useNavigate();
 
@@ -69,7 +71,12 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     } else {
       setIsPostUser(false);
     }
-  }, [post]);
+    if (comment.length >= 200) {
+      setLongCommentError("Votre commentaire est trop long.");
+    } else {
+      setLongCommentError("");
+    }
+  }, [post, comment]);
   return (
     <>
       <div className="post-container">
@@ -134,8 +141,14 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             post={post}
             userId={userId}
             fetchAllComments={fetchAllComments}
+            comment={comment}
+            setComment={setComment}
           />
         </div>
+        <p className="comment-error">{longCommentError}</p>
+        {comment.length > 0 && (
+          <p className="charCount">{comment.length}/200 caractères</p>
+        )}
       </div>
     </>
   );

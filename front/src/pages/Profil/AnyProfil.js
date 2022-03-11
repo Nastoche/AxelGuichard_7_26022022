@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/Navigation/Navbar";
 import ProfilComponents from "../../components/Profil/ProfilComponents";
 
@@ -11,10 +11,11 @@ const AnyProfil = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState("");
   const [isUserProfil, setIsUserProfil] = useState(false);
+  const [localUserId, setLocalUserId] = useState("");
 
-  const fetchProfilById = () => {
-    const localUserId = JSON.parse(localStorage.getItem("user_info")).user
-      .user_id;
+  const navigate = useNavigate();
+
+  const fetchProfilById = (id) => {
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/user/${id}`,
@@ -31,6 +32,8 @@ const AnyProfil = () => {
         }
         if (id == localUserId) {
           setIsUserProfil(true);
+        } else {
+          setIsUserProfil(false);
         }
       })
       .catch((err) => {
@@ -38,7 +41,15 @@ const AnyProfil = () => {
       });
   };
 
-  //   useEffect(() => {});
+  useEffect(() => {
+    if (!localStorage.getItem("user_info")) {
+      navigate("/login");
+      return;
+    }
+    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
+      .user_id;
+    setLocalUserId(checkUserId);
+  }, []);
 
   return (
     <>

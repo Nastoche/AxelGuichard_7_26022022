@@ -1,8 +1,15 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const PostComment = ({ post, userId, setCommentInput, fetchAllComments }) => {
-  const [comment, setComment] = useState("");
+const PostComment = ({
+  post,
+  userId,
+  setCommentInput,
+  fetchAllComments,
+  comment,
+  setComment,
+}) => {
+  const [isLong, setIsLong] = useState(true);
   // const inputRef = useRef();
   // setCommentInput(inputRef);
 
@@ -31,8 +38,15 @@ const PostComment = ({ post, userId, setCommentInput, fetchAllComments }) => {
       .catch((err) => {
         console.log(`Echec post commentaire : ${err}`);
       });
-    // refreshPage();
   };
+
+  useEffect(() => {
+    if (comment.length >= 200 || comment.length <= 0) {
+      setIsLong(false);
+    } else {
+      setIsLong(true);
+    }
+  }, [comment]);
   return (
     <>
       <img
@@ -42,7 +56,6 @@ const PostComment = ({ post, userId, setCommentInput, fetchAllComments }) => {
       />
       <form action="" onSubmit={handlePostComment}>
         <input
-          // ref={inputRef}
           type="text"
           placeholder="Écrivez un commentaire..."
           className="input-comment"
@@ -50,7 +63,10 @@ const PostComment = ({ post, userId, setCommentInput, fetchAllComments }) => {
             setComment(e.target.value);
           }}
         />
-        <input type="submit" value="Poster" className="publish-comment" />
+        {comment.length < 200 && comment.length > 0 && (
+          <input type="submit" value="Poster" className="publish-comment" />
+        )}
+        {!isLong && <button className="publish-comment">Poster</button>}
       </form>
     </>
   );

@@ -15,11 +15,6 @@ const Home = () => {
   const navigate = useNavigate();
 
   document.title = `Groupomania - Accueil`;
-  useEffect(() => {
-    if (!localStorage.getItem("user_info")) {
-      navigate("/login");
-    }
-  });
 
   const fetchAllPosts = () => {
     axios({

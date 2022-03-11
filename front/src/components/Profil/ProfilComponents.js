@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProfilComponents = ({
@@ -6,15 +6,16 @@ const ProfilComponents = ({
   userLastName,
   isAdmin,
   fetchProfilById,
+  id,
   isUserProfil,
 }) => {
   const handleDescription = () => {};
 
   const handleUploadPic = () => {};
 
-  useEffect(() => {
-    fetchProfilById();
-  }, []);
+  useLayoutEffect(() => {
+    fetchProfilById(id);
+  });
 
   return (
     <>
