@@ -21,13 +21,14 @@ const UploadPost = ({ fetchAllPosts, userId }) => {
       },
     })
       .then((res) => {
+        fetchAllPosts();
         console.log("post créé avec succès !");
       })
       .catch((err) => {
         console.log(err);
       });
     // fetchAllPosts();
-    refreshPage();
+    // refreshPage();
   };
   return (
     <div className="upload-post">

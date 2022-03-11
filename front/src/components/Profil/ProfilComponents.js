@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProfilComponents = () => {
-  const [userFirstName, setUserFirstName] = useState("");
-  const [userLastName, setUserLastName] = useState("");
-
-  const navigate = useNavigate();
-
+const ProfilComponents = ({
+  userFirstName,
+  userLastName,
+  isAdmin,
+  fetchProfilById,
+  isUserProfil,
+}) => {
   const handleDescription = () => {};
 
   const handleUploadPic = () => {};
 
   useEffect(() => {
-    if (!localStorage.getItem("user_info")) {
-      navigate("/login");
-      return;
-    }
-    const userInfo = JSON.parse(localStorage.getItem("user_info")).user;
-    setUserFirstName(userInfo.user_firstname);
-    setUserLastName(userInfo.user_lastname);
+    fetchProfilById();
   }, []);
-  // console.log(userInfo);
 
   return (
     <>
@@ -28,15 +22,21 @@ const ProfilComponents = () => {
         <div className="user-infos">
           <img
             className="user-infos-img"
-            src="./img/default-contact-img.png"
+            src="../img/default-contact-img.png"
             alt="profil"
           />
-          <button className="user-infos-btn" onClick={handleUploadPic}>
-            Modifier ✏️
-          </button>
+          {isUserProfil && (
+            <button className="user-infos-btn" onClick={handleUploadPic}>
+              Modifier ✏️
+            </button>
+          )}
+
           <h4 className="user-infos-name">
             {userFirstName} {userLastName}
           </h4>
+          {isAdmin && <p>Administrateur</p>}
+          {!isAdmin && <p>{`Employé(e)`}</p>}
+
           <hr />
           <p className="user-infos-desc">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam,
@@ -44,9 +44,11 @@ const ProfilComponents = () => {
             pariatur cum maxime rem molestiae laboriosam doloribus aperiam quod
             hic odio quasi voluptas nisi explicabo.
           </p>
-          <button className="user-infos-btn" onClick={handleDescription}>
-            Modifier ✏️
-          </button>
+          {isUserProfil && (
+            <button className="user-infos-btn" onClick={handleDescription}>
+              Modifier ✏️
+            </button>
+          )}
         </div>
       </div>
     </>

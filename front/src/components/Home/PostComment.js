@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-const PostComment = ({ post, userId, setCommentInput }) => {
+const PostComment = ({ post, userId, setCommentInput, fetchAllComments }) => {
   const [comment, setComment] = useState("");
   // const inputRef = useRef();
   // setCommentInput(inputRef);
@@ -26,11 +26,12 @@ const PostComment = ({ post, userId, setCommentInput }) => {
     })
       .then((res) => {
         console.log("commentaire créé !");
+        fetchAllComments(post.post_id);
       })
       .catch((err) => {
         console.log(`Echec post commentaire : ${err}`);
       });
-    refreshPage();
+    // refreshPage();
   };
   return (
     <>

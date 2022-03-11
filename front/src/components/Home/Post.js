@@ -13,16 +13,20 @@ import PostComment from "./PostComment";
 const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [isPostUser, setIsPostUser] = useState(false);
   const [commentInput, setCommentInput] = useState(null);
-  const { post_id } = post;
+  const { post_id, post_user_id } = post;
+  const [allComments, setAllComments] = useState([]);
 
   const navigate = useNavigate();
+
+  const handleProfilPage = () => {
+    navigate(`/profil/${post_user_id}`);
+  };
 
   const refreshPage = () => {
     window.location.reload(false);
   };
 
   const handleDelete = () => {
-    // console.log("user : " + userId + " " + "post : " + post_id);
     axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_API_URL}api/post/${post_id}`,
@@ -34,19 +38,41 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     })
       .then((res) => {
         console.log("Post supprimé !");
+        fetchAllPosts();
       })
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
       });
-    // fetchAllPosts();
-    refreshPage();
+    // refreshPage();
+  };
+
+  const fetchAllComments = (post_id) => {
+    console.log(post);
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/comment/${post_id}/allcomments`,
+      withCredentials: true,
+      params: {
+        id: post_id,
+        user_id: userId,
+      },
+    })
+      .then((res) => {
+        setAllComments(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
     if (post.post_user_id === userId || isAdmin) {
       setIsPostUser(true);
+    } else {
+      setIsPostUser(false);
     }
-  }, []);
+  }, [post]);
   return (
     <>
       <div className="post-container">
@@ -59,16 +85,18 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
           <p
             key={`${post.post_user_id}${post.date_creation}`}
             className="post-container-top-name"
+            onClick={handleProfilPage}
           >
             {post.user_firstname} {post.user_lastname},{" "}
-            <span
-              key={`${post.post_user_id}`}
-              className="post-container-top-date"
-              onClick={() => navigate(`/post/${post.post_id}`)}
-            >
-              {moment(post.date_creation).startOf("second").fromNow()}
-            </span>
           </p>
+          <span
+            key={`${post.post_user_id}`}
+            className="post-container-top-date"
+            onClick={() => navigate(`/post/${post.post_id}`)}
+          >
+            {" "}
+            {moment(post.date_creation).startOf("second").fromNow()}
+          </span>
         </div>
         <div className="post-container-message" key={`${post.post_user_id}`}>
           {post.message}
@@ -81,10 +109,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
               className="post-container-end__like-i"
             />
           </button>
-          <button
-            className="post-container-end__comment"
-            // onClick={() => commentInput.focus()}
-          >
+          <button className="post-container-end__comment">
             <FontAwesomeIcon icon={faMessage} />
           </button>
 
@@ -101,12 +126,18 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         </div>
       </div>
       <div className="post-container-comments">
-        <Comments post={post} userId={userId} />
+        <Comments
+          post={post}
+          userId={userId}
+          fetchAllComments={fetchAllComments}
+          allComments={allComments}
+        />
         <div className="post-container-comments-users">
           <PostComment
             post={post}
             userId={userId}
             setCommentInput={setCommentInput}
+            fetchAllComments={fetchAllComments}
           />
         </div>
       </div>
