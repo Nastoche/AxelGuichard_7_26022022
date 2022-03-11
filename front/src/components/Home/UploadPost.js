@@ -2,12 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UploadPost = ({ fetchAllPosts, userId }) => {
+const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   const [postMessage, setPostMessage] = useState("");
-
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
 
   const handleUploadPost = (e) => {
     e.preventDefault();
@@ -27,8 +23,6 @@ const UploadPost = ({ fetchAllPosts, userId }) => {
       .catch((err) => {
         console.log(err);
       });
-    // fetchAllPosts();
-    // refreshPage();
   };
   return (
     <div className="upload-post">
@@ -38,7 +32,7 @@ const UploadPost = ({ fetchAllPosts, userId }) => {
           type="text"
           name="uploadpost"
           className="upload-post-input"
-          placeholder="Quoi de neuf, Axel ?"
+          placeholder={`Quoi de neuf, ${userFirstName} ?`}
           onChange={(e) => setPostMessage(e.target.value)}
         />
         <br />

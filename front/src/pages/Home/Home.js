@@ -10,6 +10,7 @@ const Home = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [userId, setUserId] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,6 +47,9 @@ const Home = () => {
     const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
       .user_id;
     const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
+    setUserFirstName(
+      JSON.parse(localStorage.getItem("user_info")).user.user_firstname
+    );
 
     if (admin === 1) {
       setIsAdmin(true);
@@ -58,7 +62,11 @@ const Home = () => {
     <>
       <Navbar id={userId} />
       <div className="container-bloc">
-        <UploadPost fetchAllPosts={fetchAllPosts} userId={userId} />
+        <UploadPost
+          fetchAllPosts={fetchAllPosts}
+          userId={userId}
+          userFirstName={userFirstName}
+        />
         <Posts
           allPosts={allPosts}
           userId={userId}

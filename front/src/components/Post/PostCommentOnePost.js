@@ -1,14 +1,8 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-const PostCommentOnePost = ({ postId, userId, setCommentInput }) => {
+const PostCommentOnePost = ({ postId, userId, fetchCommentsFromOnePost }) => {
   const [comment, setComment] = useState("");
-  // const inputRef = useRef();
-  // setCommentInput(inputRef);
-
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
 
   const handlePostComment = (e) => {
     e.preventDefault();
@@ -26,11 +20,11 @@ const PostCommentOnePost = ({ postId, userId, setCommentInput }) => {
     })
       .then((res) => {
         console.log("commentaire créé !");
+        fetchCommentsFromOnePost(postId);
       })
       .catch((err) => {
         console.log(`Echec post commentaire : ${err}`);
       });
-    refreshPage();
   };
   return (
     <>
@@ -41,7 +35,6 @@ const PostCommentOnePost = ({ postId, userId, setCommentInput }) => {
       />
       <form action="" onSubmit={handlePostComment}>
         <input
-          // ref={inputRef}
           type="text"
           placeholder="Écrivez un commentaire..."
           className="input-comment"

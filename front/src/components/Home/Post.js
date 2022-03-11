@@ -12,7 +12,6 @@ import PostComment from "./PostComment";
 
 const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [isPostUser, setIsPostUser] = useState(false);
-  const [commentInput, setCommentInput] = useState(null);
   const { post_id, post_user_id } = post;
   const [allComments, setAllComments] = useState([]);
 
@@ -47,7 +46,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   };
 
   const fetchAllComments = (post_id) => {
-    console.log(post);
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/comment/${post_id}/allcomments`,
@@ -59,7 +57,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     })
       .then((res) => {
         setAllComments(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -136,7 +133,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
           <PostComment
             post={post}
             userId={userId}
-            setCommentInput={setCommentInput}
             fetchAllComments={fetchAllComments}
           />
         </div>

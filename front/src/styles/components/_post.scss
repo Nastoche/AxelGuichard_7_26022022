@@ -21,8 +21,13 @@
 
     &-name {
       font-weight: bold;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
     &-date {
+      margin-left: 0.5rem;
       cursor: pointer;
       font-weight: 100;
       &:hover {
@@ -95,6 +100,10 @@
     }
 
     &-comment {
+      margin: 0.5rem 0 0 1rem;
+      background-color: #b5c1d6cc;
+      width: fit-content;
+      border-radius: 12px;
       display: flex;
       align-items: flex-start;
       flex-direction: column;

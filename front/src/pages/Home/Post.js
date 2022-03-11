@@ -9,7 +9,7 @@ const Post = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState("");
-  const [postData, setPostData] = useState([]);
+  const [post, setPost] = useState([]);
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -24,7 +24,8 @@ const Post = () => {
       },
     })
       .then((res) => {
-        setPostData(res.data);
+        setPost(res.data[0]);
+        // console.log(res.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -44,13 +45,19 @@ const Post = () => {
       setIsAdmin(true);
     }
     setUserId(checkUserId);
-    fetchOnePost();
+    fetchOnePost(id);
+    console.log(post);
   }, []);
   return (
     <>
       <Navbar />
       <div className="container-bloc">
-        <OnePost postData={postData} isAdmin={isAdmin} userId={userId} />
+        <OnePost
+          post={post}
+          isAdmin={isAdmin}
+          userId={userId}
+          fetchOnePost={fetchOnePost}
+        />
       </div>
     </>
   );
