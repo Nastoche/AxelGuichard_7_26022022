@@ -60,14 +60,14 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             key={`${post.post_user_id}${post.date_creation}`}
             className="post-container-top-name"
           >
-            {post.user_firstname} {post.user_lastname}
-          </p>
-          <p
-            key={`${post.post_user_id}`}
-            className="post-container-top-date"
-            onClick={() => navigate(`/post/${post.post_id}`)}
-          >
-            , {moment(post.date_creation).startOf("second").fromNow()}
+            {post.user_firstname} {post.user_lastname},{" "}
+            <span
+              key={`${post.post_user_id}`}
+              className="post-container-top-date"
+              onClick={() => navigate(`/post/${post.post_id}`)}
+            >
+              {moment(post.date_creation).startOf("second").fromNow()}
+            </span>
           </p>
         </div>
         <div className="post-container-message" key={`${post.post_user_id}`}>

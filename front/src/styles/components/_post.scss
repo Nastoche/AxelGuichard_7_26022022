@@ -24,6 +24,7 @@
     }
     &-date {
       cursor: pointer;
+      font-weight: 100;
       &:hover {
         text-decoration: underline;
         color: $color-1;
@@ -100,6 +101,9 @@
       padding: 0.2rem 1rem;
       .comment-name {
         font-weight: bold;
+        .commentDate {
+          font-weight: 100;
+        }
       }
       .comment-content {
         text-align: left;

@@ -36,7 +36,7 @@ const PostCommentOnePost = ({ postId, userId, setCommentInput }) => {
     <>
       <img
         className="post-users-img"
-        src="./img/default-contact-img.png"
+        src="../img/default-contact-img.png"
         alt=""
       />
       <form action="" onSubmit={handlePostComment}>

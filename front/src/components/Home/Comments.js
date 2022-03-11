@@ -4,6 +4,7 @@ import Comment from "./Comment";
 
 const Comments = ({ post, userId }) => {
   const [allComments, setAllComments] = useState([]);
+  const [commentsDate, setCommentsDate] = useState("");
 
   const fetchAllComments = (post_id) => {
     // console.log(post);
@@ -19,6 +20,7 @@ const Comments = ({ post, userId }) => {
       .then((res) => {
         // fetchAllComments()
         setAllComments(res.data);
+        setCommentsDate(res.data[0].updated_at);
       })
       .catch((err) => {
         console.log(err);
@@ -36,7 +38,7 @@ const Comments = ({ post, userId }) => {
     return (
       <>
         <div className="post-container-comments-comment">
-          <Comment singleComment={comment} />
+          <Comment singleComment={comment} commentsDate={commentsDate} />
         </div>
         {/* <div className="post-container-comments-users">
           <PostComment
