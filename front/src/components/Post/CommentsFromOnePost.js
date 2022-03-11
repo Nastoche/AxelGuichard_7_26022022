@@ -25,6 +25,8 @@ const CommentsFromOnePost = ({ postId, userId }) => {
   }, []);
 
   return allComments.map((comment) => {
+    console.log(comment);
+    console.log(allComments);
     return (
       <>
         <div className="post-container-comments-comment">

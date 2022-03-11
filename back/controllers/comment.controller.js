@@ -41,7 +41,7 @@ exports.getOneComment = (req, res) => {
 
 exports.getAllComments = (req, res) => {
   const postId = req.params.id;
-  const sql = `SELECT message, created_at, updated_at, likes, user_firstname, user_lastname FROM comments INNER JOIN users ON comments.author_id WHERE comments.post_id = ${postId}`;
+  const sql = `SELECT message, created_at, updated_at, likes, user_firstname, user_lastname FROM comments INNER JOIN users ON comments.author_id=users.user_id WHERE comments.post_id = ${postId}`;
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });
