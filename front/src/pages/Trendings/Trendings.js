@@ -1,15 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Comments from "../../components/Home/Comments";
+import Posts from "../../components/Home/Posts";
+import UploadPost from "../../components/Home/UploadPost";
 import Navbar from "../../components/Navigation/Navbar";
+import axios from "axios";
 
-const Trendings = () => {
-  document.title = `Groupomania - Populaires`;
-  const navigate = useNavigate();
-
+const Home = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [userId, setUserId] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
+
+  const navigate = useNavigate();
+
+  document.title = `Groupomania - Accueil`;
+
+  const fetchAllPosts = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/post`,
+      withCredentials: true,
+      data: {
+        user_id: userId,
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        setAllPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("user_info")) {
@@ -27,15 +50,23 @@ const Trendings = () => {
       setIsAdmin(true);
     }
     setUserId(checkUserId);
+    fetchAllPosts();
   }, []);
+
   return (
     <>
       <Navbar localUserId={userId} />
       <div className="container-bloc">
-        <div>trendings</div>
+        <Posts
+          allPosts={allPosts}
+          userId={userId}
+          fetchAllPosts={fetchAllPosts}
+          isAdmin={isAdmin}
+        />
+        <Comments />
       </div>
     </>
   );
 };
 
-export default Trendings;
+export default Home;
