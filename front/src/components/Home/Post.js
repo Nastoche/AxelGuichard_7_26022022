@@ -23,8 +23,23 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     navigate(`/profil/${post_user_id}`);
   };
 
-  const refreshPage = () => {
-    window.location.reload(false);
+  const handleLike = () => {
+    axios({
+      method: "PATCH",
+      url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/likeunlike`,
+      withCredentials: true,
+      data: {
+        postId: post_id,
+        userId,
+      },
+    })
+      .then((res) => {
+        console.log(`Post ${post_id} liké !`);
+        // fetch all likes
+      })
+      .catch((err) => {
+        console.log(`Echec like post : ${err}`);
+      });
   };
 
   const handleDelete = () => {
@@ -107,7 +122,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         </div>
         <hr />
         <div className="post-container-end">
-          <button className="post-container-end__like">
+          <button onClick={handleLike} className="post-container-end__like">
             <FontAwesomeIcon
               icon={faThumbsUp}
               className="post-container-end__like-i"

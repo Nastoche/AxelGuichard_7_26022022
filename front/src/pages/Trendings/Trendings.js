@@ -30,7 +30,7 @@ const Trendings = () => {
   }, []);
   return (
     <>
-      <Navbar id={userId} />
+      <Navbar localUserId={userId} />
       <div className="container-bloc">
         <div>trendings</div>
       </div>
