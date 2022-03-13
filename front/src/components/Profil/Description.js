@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 
 const Description = ({
   isUserProfil,
@@ -19,12 +19,20 @@ const Description = ({
 
   const handleDescription = () => {
     setIsModifying(true);
-    setPublishBtnValue("Publier");
+    setPublishBtnValue("Annuler");
+    if (isModifying) {
+      if (publishBtnValue === "Annuler") {
+        setIsModifying(false);
+        setPublishBtnValue("Modifier ✏️");
+      }
+    }
   };
 
   const handleUpdateDescription = (e) => {
     e.preventDefault();
-    if (descriptionValue.length > 0) {
+    if (descriptionValue === description) {
+      return;
+    } else if (descriptionValue.length > 0) {
       axios({
         method: "PUT",
         url: `${process.env.REACT_APP_API_URL}api/user/${id}`,
@@ -49,6 +57,16 @@ const Description = ({
       return;
     }
   };
+
+  useEffect(() => {
+    if (isModifying) {
+      if (descriptionValue === description) {
+        setPublishBtnValue("Annuler");
+      } else {
+        setPublishBtnValue("Publier");
+      }
+    }
+  }, [descriptionValue]);
 
   return (
     <>
