@@ -18,6 +18,10 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
 
   const navigate = useNavigate();
 
+  const handleProfilPage = () => {
+    navigate(`/profil/${post.post_user_id}`);
+  };
+
   const fetchCommentsFromOnePost = (postId) => {
     axios({
       method: "GET",
@@ -74,7 +78,11 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
             src="../img/default-contact-img.png"
             alt=""
           />
-          <p key={post.user_firstname} className="post-container-top-name">
+          <p
+            key={post.user_firstname}
+            onClick={handleProfilPage}
+            className="post-container-top-name"
+          >
             {post.user_firstname} {post.user_lastname}
           </p>
           <p key={post.user_lastname}>
