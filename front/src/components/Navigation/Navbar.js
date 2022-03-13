@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Navbar = ({ id }) => {
+const Navbar = ({ localUserId }) => {
   const navigate = useNavigate();
 
   const backHome = () => {
@@ -45,7 +45,7 @@ const Navbar = ({ id }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink end to={`/profil/${id}`}>
+              <NavLink end to={`/profil/${localUserId}`}>
                 Profil
               </NavLink>
             </li>
