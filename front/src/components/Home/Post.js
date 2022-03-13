@@ -101,25 +101,28 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             src="./img/default-contact-img.png"
             alt=""
           />
-          <p
-            key={`${post.post_user_id}${post.date_creation}`}
-            className="post-container-top-name"
-            onClick={handleProfilPage}
-          >
-            {post.user_firstname} {post.user_lastname},{" "}
-          </p>
-          <span
-            key={`${post.post_user_id}`}
-            className="post-container-top-date"
-            onClick={() => navigate(`/post/${post.post_id}`)}
-          >
-            {" "}
-            {moment(post.date_creation).startOf("second").fromNow()}
-          </span>
+
+          <div className="post-container-top-infos">
+            <p
+              key={`${post.post_user_id}${post.date_creation}`}
+              className="post-container-top-name"
+              onClick={handleProfilPage}
+            >
+              {post.user_firstname} {post.user_lastname}
+            </p>
+            <span
+              key={`${post.post_user_id}`}
+              className="post-container-top-date"
+              onClick={() => navigate(`/post/${post.post_id}`)}
+            >
+              {moment(post.date_creation).startOf("second").fromNow()}
+            </span>
+          </div>
         </div>
         <div className="post-container-message" key={`${post.post_user_id}`}>
           {post.message}
         </div>
+        <div className="post-container-countlikes">12</div>
         <hr />
         <div className="post-container-end">
           <button onClick={handleLike} className="post-container-end__like">

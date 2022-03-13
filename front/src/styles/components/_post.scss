@@ -18,7 +18,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     height: 3rem;
-
+    &-infos {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
     &-name {
       font-weight: bold;
       &:hover {
@@ -27,7 +32,6 @@
       }
     }
     &-date {
-      margin-left: 0.5rem;
       cursor: pointer;
       font-weight: 100;
       &:hover {
@@ -35,12 +39,18 @@
         color: $color-1;
       }
     }
+    @media screen and(max-width:768px) {
+      flex-wrap: wrap;
+    }
   }
   &-message {
     min-height: 55px;
     height: fit-content;
     text-align: left;
     margin: 1rem 1rem;
+  }
+  &-countlikes {
+    color: red;
   }
   &-end {
     padding: 1rem;
@@ -118,7 +128,7 @@
 
       @media screen and(max-width:768px) {
         font-size: 0.9em;
-        margin: 0.5rem 0;
+        margin: 0.5rem;
       }
       @media screen and(min-width:768px) {
         margin: 0.5rem 0 0 1rem;

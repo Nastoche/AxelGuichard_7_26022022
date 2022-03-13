@@ -78,16 +78,18 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
             src="../img/default-contact-img.png"
             alt=""
           />
-          <p
-            key={post.user_firstname}
-            onClick={handleProfilPage}
-            className="post-container-top-name"
-          >
-            {post.user_firstname} {post.user_lastname}
-          </p>
-          <p key={post.user_lastname}>
-            , {moment(post.date_creation).startOf("second").fromNow()}
-          </p>
+          <div className="post-container-top-infos">
+            <p
+              key={post.user_firstname}
+              onClick={handleProfilPage}
+              className="post-container-top-name"
+            >
+              {post.user_firstname} {post.user_lastname}
+            </p>
+            <p key={post.user_lastname}>
+              {moment(post.date_creation).startOf("second").fromNow()}
+            </p>
+          </div>
         </div>
         <div className="post-container-message" key={post.user_id}>
           {post.message}
