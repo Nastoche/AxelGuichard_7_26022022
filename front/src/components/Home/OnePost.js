@@ -15,11 +15,50 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
   const [isPostUser, setIsPostUser] = useState(false);
   const [allComments, setAllComments] = useState([]);
   const postId = useParams().id;
+  const [countLikes, setCountLikes] = useState(null);
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post.post_user_id}`);
+  };
+
+  const handleLikeCount = () => {
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/likeunlike`,
+      withCredentials: true,
+      data: {
+        postId,
+      },
+    })
+      .then((res) => {
+        setCountLikes(res.data[0].total);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleLike = () => {
+    axios({
+      method: "PATCH",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/likeunlike`,
+      withCredentials: true,
+      data: {
+        postId,
+        userId,
+      },
+    })
+      .then((res) => {
+        // console.log(`Post ${postId} liké !`);
+
+        handleLikeCount();
+        // fetch all likes
+      })
+      .catch((err) => {
+        console.log(`Echec like post : ${err}`);
+      });
   };
 
   const fetchCommentsFromOnePost = (postId) => {
@@ -69,6 +108,10 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     }
     // console.log(post);
   }, [post]);
+
+  useEffect(() => {
+    handleLikeCount();
+  }, []);
   return (
     <>
       <div className="post-container">
@@ -94,10 +137,18 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         <div className="post-container-message" key={post.user_id}>
           {post.message}
         </div>
+        <div className="post-container-countlikes">
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className="post-container-countlikes-icon"
+          />
+          <span className="post-container-countlikes-count">{countLikes}</span>
+        </div>
         <hr />
         <div className="post-container-end">
           <button className="post-container-end__like">
             <FontAwesomeIcon
+              onClick={handleLike}
               icon={faThumbsUp}
               className="post-container-end__like-i"
             />

@@ -53,10 +53,8 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       },
     })
       .then((res) => {
-        console.log(`Post ${post_id} liké !`);
-
+        // console.log(`Post ${post_id} liké !`);
         handleLikeCount();
-        // fetch all likes
       })
       .catch((err) => {
         console.log(`Echec like post : ${err}`);
@@ -74,11 +72,11 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       },
     })
       .then((res) => {
-        console.log("Post supprimé !");
+        // console.log("Post supprimé !");
         fetchAllPosts();
       })
       .catch((err) => {
-        console.log(`Echec suppression de post : ${err}`);
+        // console.log(`Echec suppression de post : ${err}`);
       });
     // refreshPage();
   };

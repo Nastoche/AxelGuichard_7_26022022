@@ -25,7 +25,6 @@ const Post = () => {
     })
       .then((res) => {
         setPost(res.data[0]);
-        // console.log(res.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -46,7 +45,6 @@ const Post = () => {
     }
     setUserId(checkUserId);
     fetchOnePost(id);
-    console.log(post);
   }, []);
   return (
     <>
