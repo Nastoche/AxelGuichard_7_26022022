@@ -16,11 +16,30 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [allComments, setAllComments] = useState([]);
   const [longCommentError, setLongCommentError] = useState("");
   const [comment, setComment] = useState("");
+  const [countLikes, setCountLikes] = useState(null);
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post_user_id}`);
+  };
+
+  const handleLikeCount = () => {
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/likeunlike`,
+      withCredentials: true,
+      data: {
+        postId: post_id,
+      },
+    })
+      .then((res) => {
+        setCountLikes(res.data[0].total);
+        // console.log(res.data[0].total);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleLike = () => {
@@ -35,6 +54,8 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     })
       .then((res) => {
         console.log(`Post ${post_id} liké !`);
+
+        handleLikeCount();
         // fetch all likes
       })
       .catch((err) => {
@@ -92,6 +113,10 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       setLongCommentError("");
     }
   }, [post, comment]);
+
+  useEffect(() => {
+    handleLikeCount();
+  }, []);
   return (
     <>
       <div className="post-container">
@@ -122,7 +147,13 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         <div className="post-container-message" key={`${post.post_user_id}`}>
           {post.message}
         </div>
-        <div className="post-container-countlikes">12</div>
+        <div className="post-container-countlikes">
+          <FontAwesomeIcon
+            icon={faThumbsUp}
+            className="post-container-countlikes-icon"
+          />
+          <span className="post-container-countlikes-count">{countLikes}</span>
+        </div>
         <hr />
         <div className="post-container-end">
           <button onClick={handleLike} className="post-container-end__like">

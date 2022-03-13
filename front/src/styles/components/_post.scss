@@ -50,7 +50,20 @@
     margin: 1rem 1rem;
   }
   &-countlikes {
-    color: red;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    width: 100px;
+    &-icon {
+      font-size: 0.7em;
+      color: #fff;
+      background-color: #c37b76;
+      padding: 5px;
+      border-radius: 50%;
+    }
+    &-count {
+      margin-left: 0.4rem;
+    }
   }
   &-end {
     padding: 1rem;
