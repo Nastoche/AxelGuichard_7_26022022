@@ -49,6 +49,33 @@
       width: 190px;
       border-color: $color-1;
     }
+    form {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    &-textarea {
+      padding: 0.5rem 0 0 1rem;
+      width: 75%;
+      max-width: 75%;
+      min-width: 75%;
+      min-height: 300px;
+      max-height: 600px;
+      line-height: 1.8em;
+      font-size: 1em;
+      outline: none;
+      border: 1px solid $color-1;
+      border-radius: 15px;
+      resize: none;
+      @media screen and(max-width:768px) {
+        margin: 1rem 2rem;
+        width: 90%;
+        max-width: 90%;
+        min-width: 90%;
+      }
+    }
     &-desc {
       text-align: center;
       margin: 1rem 8rem;

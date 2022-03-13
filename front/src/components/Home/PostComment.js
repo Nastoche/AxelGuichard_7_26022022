@@ -1,43 +1,38 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const PostComment = ({
   post,
   userId,
-  setCommentInput,
   fetchAllComments,
   comment,
   setComment,
 }) => {
   const [isLong, setIsLong] = useState(true);
-  // const inputRef = useRef();
-  // setCommentInput(inputRef);
-
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
 
   const handlePostComment = (e) => {
     e.preventDefault();
-    console.log(`commentaire sur le post ${post.post_id}`);
+    if (isLong) {
+      console.log(`commentaire sur le post ${post.post_id}`);
 
-    axios({
-      method: "POST",
-      url: `${process.env.REACT_APP_API_URL}api/comment/${post.post_id}`,
-      withCredentials: true,
-      data: {
-        post_id: post.post_id,
-        author_id: userId,
-        message: comment,
-      },
-    })
-      .then((res) => {
-        console.log("commentaire créé !");
-        fetchAllComments(post.post_id);
+      axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}api/comment/${post.post_id}`,
+        withCredentials: true,
+        data: {
+          post_id: post.post_id,
+          author_id: userId,
+          message: comment,
+        },
       })
-      .catch((err) => {
-        console.log(`Echec post commentaire : ${err}`);
-      });
+        .then((res) => {
+          console.log("commentaire créé !");
+          fetchAllComments(post.post_id);
+        })
+        .catch((err) => {
+          console.log(`Echec post commentaire : ${err}`);
+        });
+    }
   };
 
   useEffect(() => {
@@ -63,10 +58,7 @@ const PostComment = ({
             setComment(e.target.value);
           }}
         />
-        {comment.length < 200 && comment.length > 0 && (
-          <input type="submit" value="Poster" className="publish-comment" />
-        )}
-        {!isLong && <button className="publish-comment">Poster</button>}
+        <input type="submit" value="Poster" className="publish-comment" />
       </form>
     </>
   );

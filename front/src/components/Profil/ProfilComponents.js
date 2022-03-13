@@ -1,5 +1,6 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Description from "./Description";
 
 const ProfilComponents = ({
   userFirstName,
@@ -8,9 +9,8 @@ const ProfilComponents = ({
   fetchProfilById,
   id,
   isUserProfil,
+  description,
 }) => {
-  const handleDescription = () => {};
-
   const handleUploadPic = () => {};
 
   useLayoutEffect(() => {
@@ -39,17 +39,14 @@ const ProfilComponents = ({
           {!isAdmin && <p>{`Employé(e)`}</p>}
 
           <hr />
-          <p className="user-infos-desc">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam,
-            optio error? Aspernatur, minus voluptate nulla ratione animi
-            pariatur cum maxime rem molestiae laboriosam doloribus aperiam quod
-            hic odio quasi voluptas nisi explicabo.
-          </p>
-          {isUserProfil && (
-            <button className="user-infos-btn" onClick={handleDescription}>
-              Modifier ✏️
-            </button>
-          )}
+          <Description
+            isUserProfil={isUserProfil}
+            description={description}
+            id={id}
+            userFirstName={userFirstName}
+            userLastName={userLastName}
+            fetchProfilById={fetchProfilById}
+          />
         </div>
       </div>
     </>

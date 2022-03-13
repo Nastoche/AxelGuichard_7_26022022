@@ -1,29 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   const [postMessage, setPostMessage] = useState("");
+  const [isLong, setIsLong] = useState(false);
 
   const handleUploadPost = (e) => {
     e.preventDefault();
-    axios({
-      method: "POST",
-      url: `${process.env.REACT_APP_API_URL}api/post`,
-      withCredentials: true,
-      data: {
-        post_user_id: userId,
-        message: postMessage,
-      },
-    })
-      .then((res) => {
-        fetchAllPosts();
-        console.log("post créé avec succès !");
+    if (isLong) {
+      axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}api/post`,
+        withCredentials: true,
+        data: {
+          post_user_id: userId,
+          message: postMessage,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          fetchAllPosts();
+          console.log("post créé avec succès !");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return;
+    }
   };
+
+  useEffect(() => {
+    if (postMessage.length > 0) {
+      setIsLong(true);
+    } else {
+      setIsLong(false);
+    }
+  }, [postMessage]);
+
   return (
     <div className="upload-post">
       <img src="./img/default-contact-img.png" alt="" />

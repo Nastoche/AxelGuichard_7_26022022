@@ -18,9 +18,9 @@ exports.getOneUser = (req, res, next) => {
 
 exports.updateOneUser = (req, res, next) => {
   if (req.file) {
-    const {id: user_id} = req.params
-    let {destination, filename} = req.file
-    destination = destination + filename
+    const { id: user_id } = req.params;
+    let { destination, filename } = req.file;
+    destination = destination + filename;
 
     const sqlInsertImage = `INSERT INTO images (post_id, user_id, image_url) VALUES (NULL, ${user_id}, "${destination}");`;
     db.query(sqlInsertImage, (err, result) => {
@@ -31,9 +31,9 @@ exports.updateOneUser = (req, res, next) => {
     });
   }
 
-  const { user_firstname, user_lastname } = req.body;
+  const { user_firstname, user_lastname, user_description } = req.body;
   const { id: userId } = req.params;
-  const sqlUpdateUser = `UPDATE users SET user_firstname = "${user_firstname}", user_lastname = "${user_lastname}" WHERE users.user_id = ${userId};`;
+  const sqlUpdateUser = `UPDATE users SET user_firstname = "${user_firstname}", user_lastname = "${user_lastname}", user_description= "${user_description}" WHERE users.user_id = ${userId};`;
   db.query(sqlUpdateUser, (err, result) => {
     if (err) {
       res.status(404).json({ err });

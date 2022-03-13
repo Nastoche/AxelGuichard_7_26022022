@@ -12,6 +12,7 @@ const AnyProfil = () => {
   const [userId, setUserId] = useState("");
   const [isUserProfil, setIsUserProfil] = useState(false);
   const [localUserId, setLocalUserId] = useState("");
+  const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const AnyProfil = () => {
       .then((res) => {
         setUserFirstName(res.data[0].user_firstname);
         setUserLastName(res.data[0].user_lastname);
+        setDescription(res.data[0].user_description);
         if (res.data[0].admin === 1) {
           setIsAdmin(true);
         }
@@ -62,6 +64,7 @@ const AnyProfil = () => {
         userId={userId}
         id={id}
         isUserProfil={isUserProfil}
+        description={description}
       />
     </>
   );
