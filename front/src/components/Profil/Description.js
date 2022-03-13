@@ -53,7 +53,7 @@ const Description = ({
   return (
     <>
       <form action="" onSubmit={handleUpdateDescription}>
-        {!isModifying && <p className="user-infos-desc">{`${description}`}</p>}
+        {!isModifying && <p className="user-infos-desc">{description}</p>}
         {isModifying && (
           <textarea
             rows="10"
@@ -64,10 +64,9 @@ const Description = ({
         )}
 
         {isUserProfil && (
-          <button
-            className="user-infos-btn"
-            onClick={handleDescription}
-          >{`${publishBtnValue}`}</button>
+          <button className="user-infos-btn" onClick={handleDescription}>
+            {publishBtnValue}
+          </button>
         )}
       </form>
     </>
