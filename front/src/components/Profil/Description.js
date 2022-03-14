@@ -13,10 +13,6 @@ const Description = ({
   const [descriptionValue, setDescriptionValue] = useState("");
   const [publishBtnValue, setPublishBtnValue] = useState("Modifier ✏️");
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
   const handleDescription = () => {
     setIsModifying(true);
     setPublishBtnValue("Annuler");
@@ -47,12 +43,9 @@ const Description = ({
         },
       })
         .then((res) => {
-          //   fetchProfilById(id);
-          // refreshPage();
           setIsModifying(false);
           setPublishBtnValue("Modifier ✏️");
           fetchProfilById(id);
-          // setDescriptionValue()
         })
         .catch((err) => {
           console.log(err);
