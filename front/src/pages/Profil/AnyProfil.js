@@ -56,7 +56,7 @@ const AnyProfil = () => {
 
   return (
     <>
-      <Navbar localUserId={localUserId} />
+      <Navbar localUserId={localUserId} isAdmin={isAdmin} />
       <ProfilComponents
         userFirstName={userFirstName}
         userLastName={userLastName}

@@ -1,8 +1,13 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faWrench } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ localUserId }) => {
+const Navbar = ({ localUserId, isAdmin }) => {
   const navigate = useNavigate();
 
   const backHome = () => {
@@ -34,35 +39,32 @@ const Navbar = ({ localUserId }) => {
         />
         <nav>
           <ul>
-            <li>
-              <NavLink end to="/">
-                Accueil
+            <li className="home">
+              <NavLink className="nav-links" end to="/">
+                <FontAwesomeIcon icon={faHome} />
               </NavLink>
             </li>
-            <li>
-              <NavLink end to="/trendings">
-                Populaires
+            {isAdmin && (
+              <li className="moderation">
+                <NavLink className="nav-links" end to="/moderation">
+                  <FontAwesomeIcon icon={faWrench} />
+                </NavLink>
+              </li>
+            )}
+
+            <li className="profil">
+              <NavLink className="nav-links" end to={`/profil/${localUserId}`}>
+                <FontAwesomeIcon icon={faUser} />
               </NavLink>
             </li>
-            <li>
-              <NavLink end to={`/profil/${localUserId}`}>
-                Profil
-              </NavLink>
-            </li>
-            <li>
-              <form action="" onSubmit={handleDisconnect}>
-                <span className="disconnect-btn">
-                  <input
-                    type="submit"
-                    value="Se déconnecter"
-                    className="disconnect-input"
-                  />
-                </span>
-              </form>
+            <li className="signout">
+              <span className="nav-links" onClick={handleDisconnect}>
+                <FontAwesomeIcon icon={faSignOut} />
+              </span>
             </li>
           </ul>
         </nav>
-        <div className="round-svg">
+        {/* <div className="round-svg">
           <svg
             className="arrondis-theme black-arrondis"
             version="1.1"
@@ -77,7 +79,7 @@ const Navbar = ({ localUserId }) => {
           >
             <path d="M1440,48H0V0c0,0,205,47,720,47s720-46.9,720-46.9V48z"></path>
           </svg>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -123,7 +123,6 @@ exports.likeUnlikePost = (req, res) => {
   db.query(sqlSelect, (err, result) => {
     if (err) {
       console.log(err);
-      console.log("SALUT !!!!!!", req.body);
       res.status(404).json({ err });
       throw err;
     }
@@ -170,6 +169,43 @@ exports.countLikes = (req, res) => {
   const { postId } = req.body;
   const sqlInsert = `SELECT COUNT(*) AS total FROM likes WHERE likes.post_id = ${postId}`;
   db.query(sqlInsert, (err, result) => {
+    if (err) {
+      res.status(404).json({ err });
+      throw err;
+    }
+    res.status(200).json(result);
+  });
+};
+
+exports.reportPost = (req, res) => {
+  const { postId, userId } = req.body;
+  const sqlSelect = `SELECT * FROM reports WHERE reports.user_id = ${userId} AND reports.post_id = ${postId}`;
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(404).json({ err });
+      throw err;
+    }
+
+    if (result.length === 0) {
+      const sqlInsert = `INSERT INTO reports (post_id, user_id) VALUES (${postId}, ${userId});`;
+      db.query(sqlInsert, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(404).json({ err });
+          throw err;
+        }
+        res.status(200).json(result);
+      });
+    } else {
+      return;
+    }
+  });
+};
+
+exports.getReportedPosts = (req, res, next) => {
+  const sql = "SELECT * FROM reports;";
+  db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });
       throw err;

@@ -120,6 +120,17 @@
         color: rgb(161, 10, 10);
       }
     }
+    &__report {
+      margin: auto 1rem;
+      border: none;
+      background-color: transparent;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: 0.15s ease-in-out;
+      &:hover {
+        color: rgb(161, 10, 10);
+      }
+    }
   }
   &-comments {
     // margin-bottom: 1.8rem;

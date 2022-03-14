@@ -3,6 +3,7 @@ import Post from "./Post";
 
 const Posts = ({ allPosts, userId, fetchAllPosts, isAdmin }) => {
   return allPosts.map((post) => {
+    console.log(post);
     return (
       <Post
         post={post}

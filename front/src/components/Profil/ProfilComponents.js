@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Description from "./Description";
+import ProfilePicture from "./ProfilePicture";
 
 const ProfilComponents = ({
   userFirstName,
@@ -11,8 +12,6 @@ const ProfilComponents = ({
   isUserProfil,
   description,
 }) => {
-  const handleUploadPic = () => {};
-
   useLayoutEffect(() => {
     fetchProfilById(id);
   });
@@ -21,16 +20,7 @@ const ProfilComponents = ({
     <>
       <div className="container-bloc">
         <div className="user-infos">
-          <img
-            className="user-infos-img"
-            src="../img/default-contact-img.png"
-            alt="profil"
-          />
-          {isUserProfil && (
-            <button className="user-infos-btn" onClick={handleUploadPic}>
-              Modifier ✏️
-            </button>
-          )}
+          <ProfilePicture isUserProfil={isUserProfil} />
 
           <h4 className="user-infos-name">
             {userFirstName} {userLastName}

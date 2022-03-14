@@ -3,11 +3,11 @@ import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import AnyProfil from "./pages/Profil/AnyProfil";
-import Trendings from "./pages/Trendings/Trendings";
 import React from "react";
 import Cgu from "./pages/CGU/Cgu";
 import Post from "./pages/Home/Post";
 import axios from "axios";
+import Moderation from "./pages/Moderation/Moderation";
 
 function App() {
   axios.interceptors.response.use(
@@ -32,11 +32,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/moderation" element={<Moderation />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profil/:id" element={<AnyProfil />} />
-        <Route path="/trendings" element={<Trendings />} />
         <Route path="/cgu" element={<Cgu />} />
       </Routes>
     </BrowserRouter>

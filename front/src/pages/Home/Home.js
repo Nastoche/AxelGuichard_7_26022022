@@ -55,7 +55,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar localUserId={userId} />
+      <Navbar localUserId={userId} isAdmin={isAdmin} />
       <div className="container-bloc">
         <UploadPost
           fetchAllPosts={fetchAllPosts}

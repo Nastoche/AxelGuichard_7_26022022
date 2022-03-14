@@ -1,39 +1,43 @@
 nav {
+  align-items: center;
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1000px;
   min-width: 325px;
-  padding-bottom: 1rem;
+  padding-bottom: 0.3rem;
   ul {
+    // border: 1px solid red;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 
     li {
-      .disconnect-input {
-        padding: 0;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        color: $color-5;
-        cursor: pointer;
-      }
+      width: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .active {
         // position: relative;
         &::after {
-          transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0) !important;
         }
       }
-      a,
-      .disconnect-btn,
-      .disconnect-input {
-        display: block;
+      .nav-links {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 100%;
+        height: 4rem;
         position: relative;
         overflow: hidden;
-        font-size: 1.2em;
+        font-size: 1.6em;
         font-weight: bold;
+        align-items: center;
+        transition: background-color 0.2s ease-in-out;
         @media screen and(max-width:768px) {
-          font-size: 1em;
+          font-size: 1.4em;
         }
         &::after {
           content: "";
@@ -49,6 +53,94 @@ nav {
         &:hover::after,
         :focus::after {
           transform: translate3d(0, 0, 0);
+        }
+        &:hover {
+          background-color: rgb(202, 138, 134);
+        }
+      }
+    }
+    @media screen and(min-width:970px) {
+      .home {
+        &::before {
+          content: "Accueil";
+          position: absolute;
+          bottom: -40px;
+          width: 10%;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .moderation {
+        &::before {
+          content: "Modération";
+          position: absolute;
+          z-index: 99999;
+          bottom: -40px;
+          width: 10%;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .profil {
+        &::before {
+          content: "Profil";
+          position: absolute;
+          z-index: 99999;
+          bottom: -40px;
+          width: 10%;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .signout {
+        &::before {
+          content: "Déconnexion";
+          position: absolute;
+          z-index: 99999;
+          bottom: -40px;
+          width: 10%;
+          border-radius: 10px;
+          background-color: rgba(202, 138, 134, 0.767);
+          padding: 0.3rem 0.5rem;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 8px 12px;
+          opacity: 0;
+          transition: 0.2s ease;
+          transform: translateY(-130%);
+        }
+        &:hover::before {
+          transform: translateY(0);
+          opacity: 1;
         }
       }
     }
