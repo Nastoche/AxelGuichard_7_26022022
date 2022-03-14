@@ -203,7 +203,21 @@ exports.reportPost = (req, res) => {
   });
 };
 
+exports.deleteReportedPost = (req, res, next) => {
+  const { postId } = req.body;
+  const sqlDelete = `DELETE FROM reports WHERE reports.post_id = ${postId};`;
+  db.query(sqlDelete, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(404).json(err);
+      throw err;
+    }
+    res.status(200).json(result);
+  });
+};
+
 exports.getReportedPosts = (req, res, next) => {
+  const { userId } = req.params;
   const sql = "SELECT * FROM reports;";
   db.query(sql, (err, result) => {
     if (err) {

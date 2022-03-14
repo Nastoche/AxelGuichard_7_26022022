@@ -7,7 +7,7 @@ const Reports = ({ userId, isAdmin }) => {
 
   const fetchReportedPosts = () => {
     axios({
-      method: "GET",
+      method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/post/reportedPost`,
       withCredentials: true,
       params: {
@@ -21,11 +21,11 @@ const Reports = ({ userId, isAdmin }) => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     fetchReportedPosts();
   }, []);
   return reports.map((post) => {
-    console.log(post);
     return <ReportedPosts post={post} isAdmin={isAdmin} userId={userId} />;
   });
 };

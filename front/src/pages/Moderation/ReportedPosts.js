@@ -26,26 +26,48 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
     navigate(`/profil/${postUserId}`);
   };
 
-  const fetchLikes = () => {
+  const removeReport = () => {
     axios({
-      method: "POST",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
+      method: "DELETE",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/deleteReportedPost`,
       withCredentials: true,
       data: {
         postId: postId,
-        userId: userId,
       },
     })
       .then((res) => {
-        if (res.data[0]) {
-          setIsLiked(true);
-        } else {
-          setIsLiked(false);
-        }
+        console.log("Retiré des signalements");
+        fetchReportedPosts();
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const fetchLikes = () => {
+    if (!postId === "") {
+      axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
+        withCredentials: true,
+        data: {
+          postId: postId,
+          userId: userId,
+        },
+      })
+        .then((res) => {
+          if (res.data[0]) {
+            setIsLiked(true);
+          } else {
+            setIsLiked(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return;
+    }
   };
 
   const handleLikeCount = () => {
@@ -55,12 +77,11 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       withCredentials: true,
       data: {
         postId: postId,
-        userId: postUserId,
+        userId: userId,
       },
     })
       .then((res) => {
         setCountLikes(res.data[0].total);
-        // console.log(res.data[0].total);
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +95,7 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       withCredentials: true,
       data: {
         postId: postId,
-        userId: postUserId,
+        userId: userId,
       },
     })
       .then((res) => {
@@ -96,7 +117,7 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       },
     })
       .then((res) => {
-        // console.log("Post supprimé !");
+        console.log("Post supprimé !");
         fetchReportedPosts();
       })
       .catch((err) => {
@@ -111,15 +132,17 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
       withCredentials: true,
       data: {
-        user_id: postUserId,
+        user_id: userId,
       },
     })
       .then((res) => {
-        setFirstName(res.data[0].user_firstname);
-        setLastName(res.data[0].user_lastname);
-        setMessage(res.data[0].message);
-        setDateCreation(res.data[0].date_creation);
-        setPostUserId(res.data[0].post_user_id);
+        if (res.data[0]) {
+          setFirstName(res.data[0].user_firstname);
+          setLastName(res.data[0].user_lastname);
+          setMessage(res.data[0].message);
+          setDateCreation(res.data[0].date_creation);
+          setPostUserId(res.data[0].post_user_id);
+        }
         // console.log(res.data[0]);
       })
       .catch((err) => {
@@ -134,7 +157,6 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       withCredentials: true,
       params: {
         id: postId,
-        user_id: postUserId,
       },
     })
       .then((res) => {
@@ -149,6 +171,10 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
     setPostId(post.post_id);
     fetchReportedPosts();
   });
+
+  useEffect(() => {
+    fetchReportedPosts();
+  }, [removeReport]);
 
   useEffect(() => {
     handleLikeCount();
@@ -221,6 +247,7 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
           )}
+          <p onClick={removeReport}>Remove</p>
         </div>
       </div>
       <div className="post-container-comments">
