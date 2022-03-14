@@ -5,12 +5,11 @@ import OnePost from "../../components/Home/OnePost";
 import Navbar from "../../components/Navigation/Navbar";
 
 const Post = () => {
-  document.title = `Groupomania - Sujet`;
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState("");
   const [post, setPost] = useState([]);
   const { id } = useParams();
+  document.title = `Groupomania - Sujet de ${post.user_firstname} ${post.user_lastname}`;
 
   const navigate = useNavigate();
 

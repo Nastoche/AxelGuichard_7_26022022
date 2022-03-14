@@ -53,7 +53,6 @@
     display: flex;
     align-items: center;
     margin-left: 1rem;
-    width: 100px;
     &-icon {
       font-size: 0.7em;
       color: #fff;
@@ -80,7 +79,20 @@
       font-size: 1.4em;
       transition: 0.15s ease-in-out;
       &:hover {
+        transform: scale(1.2) rotate(-20deg);
         color: $color-1;
+      }
+    }
+    &__liked {
+      margin: auto 1rem;
+      color: $color-1;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      font-size: 1.4em;
+      transition: 0.15s ease-in-out;
+      &:hover {
+        transform: scale(1.2) rotate(-20deg);
       }
     }
     &__comment {

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,11 +16,34 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
   const [allComments, setAllComments] = useState([]);
   const postId = useParams().id;
   const [countLikes, setCountLikes] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post.post_user_id}`);
+  };
+
+  const fetchLikes = () => {
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
+      withCredentials: true,
+      data: {
+        userId: userId,
+        postId,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleLikeCount = () => {
@@ -100,18 +123,19 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
   };
 
   useEffect(() => {
-    // fetchOnePost(postId);
     if (post.post_user_id === userId || isAdmin) {
       setIsPostUser(true);
     } else {
       setIsPostUser(false);
     }
-    // console.log(post);
   }, [post]);
 
   useEffect(() => {
     handleLikeCount();
-  }, []);
+    if (userId > 0) {
+      fetchLikes();
+    }
+  }, [handleLike]);
   return (
     <>
       <div className="post-container">
@@ -146,13 +170,22 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         </div>
         <hr />
         <div className="post-container-end">
-          <button className="post-container-end__like">
-            <FontAwesomeIcon
-              onClick={handleLike}
-              icon={faThumbsUp}
-              className="post-container-end__like-i"
-            />
-          </button>
+          {isLiked && (
+            <button onClick={handleLike} className="post-container-end__liked">
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className="post-container-end__like-i"
+              />
+            </button>
+          )}
+          {!isLiked && (
+            <button onClick={handleLike} className="post-container-end__like">
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className="post-container-end__like-i"
+              />
+            </button>
+          )}
           <button className="post-container-end__comment">
             <FontAwesomeIcon icon={faMessage} />
           </button>

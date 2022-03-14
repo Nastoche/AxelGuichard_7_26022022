@@ -48,7 +48,11 @@ const Description = ({
       })
         .then((res) => {
           //   fetchProfilById(id);
-          refreshPage();
+          // refreshPage();
+          setIsModifying(false);
+          setPublishBtnValue("Modifier ✏️");
+          fetchProfilById(id);
+          // setDescriptionValue()
         })
         .catch((err) => {
           console.log(err);
@@ -68,6 +72,9 @@ const Description = ({
     }
   }, [descriptionValue]);
 
+  useEffect(() => {
+    fetchProfilById(id);
+  }, [handleDescription]);
   return (
     <>
       <form action="" onSubmit={handleUpdateDescription}>

@@ -14,7 +14,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  document.title = `Groupomania - Accueil`;
+  document.title = `Groupomania - Tendances`;
 
   const fetchAllPosts = () => {
     axios({

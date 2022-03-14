@@ -13,6 +13,7 @@ const AnyProfil = () => {
   const [isUserProfil, setIsUserProfil] = useState(false);
   const [localUserId, setLocalUserId] = useState("");
   const [description, setDescription] = useState("");
+  document.title = `Groupomania - ${userFirstName} ${userLastName}`;
 
   const navigate = useNavigate();
 

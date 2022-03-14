@@ -17,11 +17,34 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [longCommentError, setLongCommentError] = useState("");
   const [comment, setComment] = useState("");
   const [countLikes, setCountLikes] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post_user_id}`);
+  };
+
+  const fetchLikes = () => {
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/postLikedByUser`,
+      withCredentials: true,
+      data: {
+        postId: post_id,
+        userId,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleLikeCount = () => {
@@ -114,7 +137,8 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
 
   useEffect(() => {
     handleLikeCount();
-  }, []);
+    fetchLikes();
+  }, [handleLike]);
   return (
     <>
       <div className="post-container">
@@ -154,12 +178,22 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         </div>
         <hr />
         <div className="post-container-end">
-          <button onClick={handleLike} className="post-container-end__like">
-            <FontAwesomeIcon
-              icon={faThumbsUp}
-              className="post-container-end__like-i"
-            />
-          </button>
+          {isLiked && (
+            <button onClick={handleLike} className="post-container-end__liked">
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className="post-container-end__like-i"
+              />
+            </button>
+          )}
+          {!isLiked && (
+            <button onClick={handleLike} className="post-container-end__like">
+              <FontAwesomeIcon
+                icon={faThumbsUp}
+                className="post-container-end__like-i"
+              />
+            </button>
+          )}
           <button className="post-container-end__comment">
             <FontAwesomeIcon icon={faMessage} />
           </button>
