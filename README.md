@@ -42,4 +42,4 @@ Démarrer `npm run start` pour avoir accès au serveur de développement. L'appl
 
 ## Droits Admin
 
-Pour tester les droits d'admin, changez la valeur sur le champ account dans le tableau users, de user pour admin.
+Pour tester les droits d'admin, changez la valeur sur le champ admin dans le tableau users, de 0 à 1.
