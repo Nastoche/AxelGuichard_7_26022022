@@ -34,6 +34,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       data: {
         postId: post_id,
         userId,
+        isAdmin,
       },
     })
       .then((res) => {
@@ -42,6 +43,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       .catch((err) => {
         console.log(err);
       });
+    console.log(post_id);
   };
 
   const fetchLikes = () => {
