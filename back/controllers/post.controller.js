@@ -37,7 +37,7 @@ exports.createPost = (req, res, next) => {
 
 exports.getAllPosts = (req, res, next) => {
   const sql =
-    "SELECT message, post_user_id, post_id, date_creation, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id ORDER BY date_creation DESC;";
+    "SELECT message, post_user_id, post_id, date_creation, reported, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id ORDER BY date_creation DESC;";
   // "SELECT * FROM posts ORDER BY date_creation DESC;";
   db.query(sql, (err, result) => {
     if (err) {

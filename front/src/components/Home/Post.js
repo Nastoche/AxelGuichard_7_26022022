@@ -13,12 +13,16 @@ import PostComment from "./PostComment";
 
 const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [isPostUser, setIsPostUser] = useState(false);
-  const { post_id, post_user_id } = post;
+  const { post_id, post_user_id, reported } = post;
   const [allComments, setAllComments] = useState([]);
   const [longCommentError, setLongCommentError] = useState("");
   const [comment, setComment] = useState("");
   const [countLikes, setCountLikes] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [reportMessage, setReportMessage] = useState(
+    "Ce post a déjà été signalé."
+  );
+  const [reportedByUser, setReportedByUser] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,12 +42,15 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       },
     })
       .then((res) => {
+        setReportedByUser(true);
         console.log(`${post_id} reporté avec succès !`);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log(post_id);
+    if (reported == 1) {
+      setReportedByUser(true);
+    }
   };
 
   const fetchLikes = () => {
@@ -154,6 +161,11 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     } else {
       setLongCommentError("");
     }
+    if (reported == 1) {
+      setReportMessage("Ce post a déjà été signalé.");
+    } else {
+      setReportMessage("Votre signalement a bien été enregistré.");
+    }
   }, [post, comment]);
 
   useEffect(() => {
@@ -230,12 +242,19 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             </button>
           )}
           {!isPostUser && (
-            <button
-              onClick={handleReport}
-              className="post-container-end__report"
-            >
-              <FontAwesomeIcon icon={faExclamationTriangle} />
-            </button>
+            <>
+              <button
+                onClick={handleReport}
+                className="post-container-end__report"
+              >
+                <FontAwesomeIcon icon={faExclamationTriangle} />
+              </button>
+            </>
+          )}
+          {reportedByUser && (
+            <div className="reportMessage">
+              <p>{reportMessage}</p>
+            </div>
           )}
         </div>
       </div>
