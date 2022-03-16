@@ -1,16 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Comments from "../../components/Home/Comments";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/fr";
 
-const ReportedPosts = ({ post, isAdmin, userId }) => {
+const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [message, setMessage] = useState("");
@@ -28,16 +26,17 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
 
   const removeReport = () => {
     axios({
-      method: "DELETE",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/deleteReportedPost`,
+      method: "PATCH",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/report`,
       withCredentials: true,
       data: {
         postId: postId,
+        isAdmin,
       },
     })
       .then((res) => {
         console.log("Retiré des signalements");
-        fetchReportedPosts();
+        // fetchReportedPosts();
       })
       .catch((err) => {
         console.log(err);
@@ -45,29 +44,30 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
   };
 
   const fetchLikes = () => {
-    if (!postId === "") {
-      axios({
-        method: "POST",
-        url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
-        withCredentials: true,
-        data: {
-          postId: postId,
-          userId: userId,
-        },
+    // if (!postId === "") {
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
+      withCredentials: true,
+      data: {
+        postId: postId,
+        userId: userId,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+        }
       })
-        .then((res) => {
-          if (res.data[0]) {
-            setIsLiked(true);
-          } else {
-            setIsLiked(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      return;
-    }
+      .catch((err) => {
+        console.log(err);
+      });
+    // } else {
+    //   console.log("problème fetch like");
+    //   return;
+    // }
   };
 
   const handleLikeCount = () => {
@@ -118,36 +118,12 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
     })
       .then((res) => {
         console.log("Post supprimé !");
-        fetchReportedPosts();
+        // fetchReportedPosts();
       })
       .catch((err) => {
         // console.log(`Echec suppression de post : ${err}`);
       });
     // refreshPage();
-  };
-
-  const fetchReportedPosts = () => {
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      withCredentials: true,
-      data: {
-        user_id: userId,
-      },
-    })
-      .then((res) => {
-        if (res.data[0]) {
-          setFirstName(res.data[0].user_firstname);
-          setLastName(res.data[0].user_lastname);
-          setMessage(res.data[0].message);
-          setDateCreation(res.data[0].date_creation);
-          setPostUserId(res.data[0].post_user_id);
-        }
-        // console.log(res.data[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const fetchAllComments = (postId) => {
@@ -167,20 +143,23 @@ const ReportedPosts = ({ post, isAdmin, userId }) => {
       });
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    fetchReportedPosts();
+    setFirstName(post.user_firstname);
+    setLastName(post.user_lastname);
+    setDateCreation(post.date_creation);
+    setMessage(post.message);
     setPostId(post.post_id);
-    fetchReportedPosts();
-  });
+    setPostUserId(post.post_user_id);
+    console.log(post.post_id);
+  }, []);
 
   useEffect(() => {
-    fetchReportedPosts();
-  }, [removeReport]);
-
-  useEffect(() => {
-    handleLikeCount();
-    fetchLikes();
+    if (!postId == "") {
+      handleLikeCount();
+      fetchLikes();
+    }
   }, [handleLike]);
-
   return (
     <>
       <div className="post-container">

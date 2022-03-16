@@ -3,19 +3,19 @@ import React, { useEffect, useState } from "react";
 import ReportedPosts from "./ReportedPosts";
 
 const Reports = ({ userId, isAdmin }) => {
-  const [reports, setReports] = useState([]);
+  const [allReportedPosts, setAllReportedPosts] = useState([]);
 
   const fetchReportedPosts = () => {
     axios({
       method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/post/reportedPost`,
       withCredentials: true,
-      params: {
-        userId,
+      data: {
+        user_id: userId,
       },
     })
       .then((res) => {
-        setReports(res.data);
+        setAllReportedPosts(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -25,8 +25,15 @@ const Reports = ({ userId, isAdmin }) => {
   useEffect(() => {
     fetchReportedPosts();
   }, []);
-  return reports.map((post) => {
-    return <ReportedPosts post={post} isAdmin={isAdmin} userId={userId} />;
+  return allReportedPosts.map((post) => {
+    return (
+      <ReportedPosts
+        fetchReportedPosts={fetchReportedPosts}
+        post={post}
+        isAdmin={isAdmin}
+        userId={userId}
+      />
+    );
   });
 };
 

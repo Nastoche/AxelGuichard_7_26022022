@@ -113,6 +113,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
       },
     })
       .then((res) => {
+        handleDeleteFromReports();
         console.log("Post supprimé !");
       })
       .catch((err) => {
@@ -120,6 +121,42 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
       });
 
     navigate("/");
+  };
+
+  const reportPost = () => {
+    axios({
+      method: "PATCH",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/report`,
+      withCredentials: true,
+      data: {
+        postId,
+        userId,
+      },
+    })
+      .then((res) => {
+        console.log(`${postId} reporté avec succès !`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteFromReports = () => {
+    axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/deleteOneReportedPost`,
+      withCredentials: true,
+      data: {
+        post_id: postId,
+        user_id: userId,
+      },
+    })
+      .then((res) => {
+        console.log("Supprimé de la table Reports");
+      })
+      .catch((err) => {
+        console.log(`Echec suppression de Report : ${err}`);
+      });
   };
 
   useEffect(() => {

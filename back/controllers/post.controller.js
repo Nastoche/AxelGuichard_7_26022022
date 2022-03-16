@@ -115,6 +115,27 @@ exports.deleteOnePost = (req, res, next) => {
   });
 };
 
+exports.deleteOneReportedPost = (req, res, next) => {
+  const { jwt: token } = req.cookies;
+  const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
+  const { user_id, admin } = decodedToken;
+  const { id: post_id } = req.params;
+
+  const sql = `DELETE r FROM reports AS r
+  INNER JOIN users AS u
+  ON (u.user_id = r.user_id)
+  WHERE r.post_id = ${post_id} AND (${admin} = 1 OR u.user_id = ${user_id});`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log("erreur");
+      res.status(404).json({ err });
+      throw err;
+    }
+    console.log(result);
+    res.status(200).json(result);
+  });
+};
+
 // Like & unlike a post
 
 exports.likeUnlikePost = (req, res) => {
@@ -177,9 +198,11 @@ exports.countLikes = (req, res) => {
   });
 };
 
+// Manage reports
+
 exports.reportPost = (req, res) => {
-  const { postId, userId } = req.body;
-  const sqlSelect = `SELECT * FROM reports WHERE reports.user_id = ${userId} AND reports.post_id = ${postId};`;
+  const { postId, userId, isAdmin } = req.body;
+  const sqlSelect = `SELECT * FROM posts WHERE posts.post_id = ${postId};`;
   db.query(sqlSelect, (err, result) => {
     if (err) {
       console.log(err);
@@ -187,8 +210,10 @@ exports.reportPost = (req, res) => {
       throw err;
     }
 
-    if (result.length === 0) {
-      const sqlInsert = `INSERT INTO reports (post_id, user_id) VALUES (${postId}, ${userId});`;
+    if (result[0].reported === 0) {
+      const sqlInsert = `UPDATE posts
+      SET reported = 1
+      WHERE posts.post_id = ${postId};`;
       db.query(sqlInsert, (err, result) => {
         if (err) {
           console.log(err);
@@ -197,28 +222,29 @@ exports.reportPost = (req, res) => {
         }
         res.status(200).json(result);
       });
+    } else if (result[0].reported === 1 && isAdmin == 1) {
+      const sqlInsert = `UPDATE posts
+      SET reported = 0
+      WHERE posts.post_id = ${postId};`;
+      db.query(sqlInsert, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(404).json({ err });
+          throw err;
+        }
+        console.log("réussi");
+        res.status(200).json(result);
+      });
     } else {
       return;
     }
   });
 };
 
-exports.deleteReportedPost = (req, res, next) => {
-  const { postId } = req.body;
-  const sqlDelete = `DELETE FROM reports WHERE reports.post_id = ${postId};`;
-  db.query(sqlDelete, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(404).json(err);
-      throw err;
-    }
-    res.status(200).json(result);
-  });
-};
-
 exports.getReportedPosts = (req, res, next) => {
   const { userId } = req.params;
-  const sql = "SELECT * FROM reports;";
+  const sql =
+    "SELECT message, post_user_id, post_id, date_creation, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id WHERE posts.reported = 1;";
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });

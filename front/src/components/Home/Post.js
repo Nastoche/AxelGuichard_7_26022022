@@ -28,7 +28,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
 
   const handleReport = () => {
     axios({
-      method: "POST",
+      method: "PATCH",
       url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/report`,
       withCredentials: true,
       data: {
