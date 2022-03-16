@@ -20,7 +20,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [countLikes, setCountLikes] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [reportMessage, setReportMessage] = useState(
-    "Ce post a déjà été signalé."
+    "Votre signalement a bien été enregistré."
   );
   const [reportedByUser, setReportedByUser] = useState(false);
 
@@ -31,24 +31,27 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   };
 
   const handleReport = () => {
-    axios({
-      method: "PATCH",
-      url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/report`,
-      withCredentials: true,
-      data: {
-        postId: post_id,
-        userId,
-        isAdmin,
-      },
-    })
-      .then((res) => {
-        setReportedByUser(true);
-        console.log(`${post_id} reporté avec succès !`);
+    if (reported == 0) {
+      axios({
+        method: "PATCH",
+        url: `${process.env.REACT_APP_API_URL}api/post/${post_id}/report`,
+        withCredentials: true,
+        data: {
+          postId: post_id,
+          userId,
+          isAdmin,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    if (reported == 1) {
+        .then((res) => {
+          console.log(`${post_id} reporté avec succès !`);
+          setReportedByUser(true);
+          fetchAllPosts();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setReportMessage("Ce post a déjà été signalé.");
       setReportedByUser(true);
     }
   };
@@ -161,11 +164,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     } else {
       setLongCommentError("");
     }
-    if (reported == 1) {
-      setReportMessage("Ce post a déjà été signalé.");
-    } else {
-      setReportMessage("Votre signalement a bien été enregistré.");
-    }
   }, [post, comment]);
 
   useEffect(() => {
@@ -253,7 +251,16 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
           )}
           {reportedByUser && (
             <div className="reportMessage">
-              <p>{reportMessage}</p>
+              <div className="reportMessageBox">
+                <p>{reportMessage}</p>
+                <button
+                  onClick={() => {
+                    setReportedByUser(false);
+                  }}
+                >
+                  OK
+                </button>
+              </div>
             </div>
           )}
         </div>
