@@ -131,6 +131,22 @@
         color: rgb(161, 10, 10);
       }
     }
+    &__authorize {
+      margin-left: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: $color-1;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      color: #fff;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        background-color: #fff;
+        color: $color-2;
+        font-weight: bold;
+        border: 1px solid $color-5;
+      }
+    }
     .reportMessage {
       position: fixed;
       z-index: 888888;

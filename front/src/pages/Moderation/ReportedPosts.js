@@ -213,7 +213,9 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
           )}
-          <p onClick={removeReport}>Remove</p>
+          <p className="post-container-end__authorize" onClick={removeReport}>
+            Autoriser ce post
+          </p>
         </div>
       </div>
       <div className="post-container-comments">
