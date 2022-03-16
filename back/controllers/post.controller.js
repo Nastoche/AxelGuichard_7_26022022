@@ -210,7 +210,7 @@ exports.reportPost = (req, res) => {
       throw err;
     }
 
-    if (result[0].reported === 0) {
+    if (result[0].reported === 0 && isAdmin == 0) {
       const sqlInsert = `UPDATE posts
       SET reported = 1
       WHERE posts.post_id = ${postId};`;
@@ -232,7 +232,6 @@ exports.reportPost = (req, res) => {
           res.status(404).json({ err });
           throw err;
         }
-        console.log("réussi");
         res.status(200).json(result);
       });
     } else {

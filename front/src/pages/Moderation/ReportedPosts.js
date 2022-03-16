@@ -27,16 +27,15 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
   const removeReport = () => {
     axios({
       method: "PATCH",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/report`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}/report`,
       withCredentials: true,
       data: {
-        postId: postId,
+        postId: post.post_id,
         isAdmin,
       },
     })
       .then((res) => {
-        console.log("Retiré des signalements");
-        // fetchReportedPosts();
+        fetchReportedPosts();
       })
       .catch((err) => {
         console.log(err);
@@ -44,13 +43,12 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
   };
 
   const fetchLikes = () => {
-    // if (!postId === "") {
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}/postLikedByUser`,
       withCredentials: true,
       data: {
-        postId: postId,
+        postId: post.post_id,
         userId: userId,
       },
     })
@@ -64,19 +62,15 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
       .catch((err) => {
         console.log(err);
       });
-    // } else {
-    //   console.log("problème fetch like");
-    //   return;
-    // }
   };
 
   const handleLikeCount = () => {
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/likeunlike`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}/likeunlike`,
       withCredentials: true,
       data: {
-        postId: postId,
+        postId: post.post_id,
         userId: userId,
       },
     })
@@ -91,10 +85,10 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
   const handleLike = () => {
     axios({
       method: "PATCH",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/likeunlike`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}/likeunlike`,
       withCredentials: true,
       data: {
-        postId: postId,
+        postId: post.post_id,
         userId: userId,
       },
     })
@@ -109,30 +103,30 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
   const handleDelete = () => {
     axios({
       method: "DELETE",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}`,
       withCredentials: true,
       data: {
-        post_id: postId,
+        post_id: post.post_id,
         post_user_id: postUserId,
       },
     })
       .then((res) => {
         console.log("Post supprimé !");
-        // fetchReportedPosts();
+        fetchReportedPosts();
       })
       .catch((err) => {
-        // console.log(`Echec suppression de post : ${err}`);
+        console.log(`Echec suppression de post : ${err}`);
       });
     // refreshPage();
   };
 
-  const fetchAllComments = (postId) => {
+  const fetchAllComments = () => {
     axios({
       method: "GET",
-      url: `${process.env.REACT_APP_API_URL}api/comment/${postId}/allcomments`,
+      url: `${process.env.REACT_APP_API_URL}api/comment/${post.post_id}/allcomments`,
       withCredentials: true,
       params: {
-        id: postId,
+        id: post.post_id,
       },
     })
       .then((res) => {
@@ -145,17 +139,10 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
 
   useEffect(() => {
     fetchReportedPosts();
-    setFirstName(post.user_firstname);
-    setLastName(post.user_lastname);
-    setDateCreation(post.date_creation);
-    setMessage(post.message);
-    setPostId(post.post_id);
-    setPostUserId(post.post_user_id);
-    console.log(post.post_id);
   }, []);
 
   useEffect(() => {
-    if (!postId == "") {
+    if (!post.post_id == "") {
       handleLikeCount();
       fetchLikes();
     }
@@ -172,23 +159,23 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
 
           <div className="post-container-top-infos">
             <p
-              key={`${userId}${dateCreation}`}
+              key={`${userId}${post.date_creation}`}
               className="post-container-top-name"
               onClick={handleProfilPage}
             >
-              {firstName} {lastName}
+              {post.user_firstname} {post.user_lastname}
             </p>
             <span
-              key={`${postUserId}`}
+              key={`${post.post_user_id}`}
               className="post-container-top-date"
-              onClick={() => navigate(`/post/${postId}`)}
+              onClick={() => navigate(`/post/${post.post_id}`)}
             >
-              {moment(dateCreation).startOf("second").fromNow()}
+              {moment(post.date_creation).startOf("second").fromNow()}
             </span>
           </div>
         </div>
-        <div className="post-container-message" key={`${postUserId}`}>
-          {message}
+        <div className="post-container-message" key={`${post.post_user_id}`}>
+          {post.message}
         </div>
         <div className="post-container-countlikes">
           <FontAwesomeIcon
@@ -220,7 +207,7 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
             <button
               className="post-container-end__delete"
               onClick={() => {
-                handleDelete(postId);
+                handleDelete(post.post_id);
               }}
             >
               <FontAwesomeIcon icon={faTrashCan} />
