@@ -141,7 +141,14 @@ export default function SignUpForm() {
 
             <div className="terms error">{errors.terms}</div>
             <br />
-            <input type="submit" value="Valider inscription" />
+            <input
+              type="submit"
+              value="Valider inscription"
+              className="signup-btn"
+            />
+            <NavLink end to={"/login"} className="alreadyUser">
+              J'ai déjà un compte
+            </NavLink>
           </form>
         )}
       </div>

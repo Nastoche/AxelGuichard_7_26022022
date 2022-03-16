@@ -12,3 +12,10 @@
     cursor: pointer;
   }
 }
+.alreadyUser {
+  margin-top: 1rem;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -15,6 +15,7 @@ body {
     align-items: center;
     flex-direction: column;
     .login-form {
+      margin-bottom: 5rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -44,6 +45,23 @@ body {
           color: #fff;
           background-color: $color-1;
           width: 180px;
+          height: 60px;
+          border-radius: 15px;
+          border: 1px solid $color-2;
+          font-size: 1.2em;
+          border: 1px solid transparent;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            cursor: pointer;
+            border: 1px solid $color-5;
+            background-color: #c38f8b;
+            color: $color-5;
+          }
+        }
+        .signup-btn {
+          color: #fff;
+          background-color: $color-1;
+          width: 200px;
           height: 60px;
           border-radius: 15px;
           border: 1px solid $color-2;
