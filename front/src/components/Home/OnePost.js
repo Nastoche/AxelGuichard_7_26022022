@@ -156,7 +156,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
   };
 
   const handleDelete = () => {
-    // console.log("user : " + userId + " " + "post : " + post_id);
     axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
@@ -311,6 +310,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
           userId={userId}
           allComments={allComments}
           fetchCommentsFromOnePost={fetchCommentsFromOnePost}
+          isAdmin={isAdmin}
         />
         <div className="post-container-comments-users">
           <PostCommentOnePost

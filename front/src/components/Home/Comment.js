@@ -33,7 +33,6 @@ const Comment = ({
   };
 
   useEffect(() => {
-    console.log(isAdmin);
     if (userId == singleComment.user_id || isAdmin) {
       setIsUserComment(true);
     } else {
