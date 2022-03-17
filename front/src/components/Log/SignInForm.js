@@ -6,6 +6,7 @@ const SignInForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [deactivatedUser, setDeactivatedUser] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,11 +22,15 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
+        // console.log(res.data);
         if (res.data.error) {
           setErrors({
             ...errors,
-            message: "Mauvaise combinaison Email / Mot de passe",
+            message: res.data.errorMessage,
           });
+          if (res.data.errorMessage === "Votre compte a été désactivé") {
+            setDeactivatedUser(true);
+          }
         } else {
           localStorage.setItem("user_info", JSON.stringify(res.data));
           navigate("/");

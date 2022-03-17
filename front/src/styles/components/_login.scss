@@ -75,6 +75,13 @@ body {
             color: $color-5;
           }
         }
+        .reactivate {
+          margin-top: 0.4rem;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }

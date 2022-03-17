@@ -10,7 +10,6 @@ const AnyProfile = () => {
   const [userLastName, setUserLastName] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isProfilAdmin, setIsProfilAdmin] = useState(false);
-  const [userId, setUserId] = useState("");
   const [isUserProfil, setIsUserProfil] = useState(false);
   const [localUserId, setLocalUserId] = useState("");
   const [description, setDescription] = useState("");
@@ -61,7 +60,7 @@ const AnyProfile = () => {
       setIsAdmin(true);
     }
     setLocalUserId(checkUserId);
-  }, []);
+  }, [navigate]);
 
   return (
     <>
@@ -71,7 +70,6 @@ const AnyProfile = () => {
         userLastName={userLastName}
         isProfilAdmin={isProfilAdmin}
         fetchProfilById={fetchProfilById}
-        userId={userId}
         id={id}
         isUserProfil={isUserProfil}
         description={description}

@@ -41,7 +41,7 @@ const ProfileComponents = ({
         </div>
         {isUserProfil && (
           <div className="delete-user">
-            <DeleteProfile />
+            <DeleteProfile id={id} />
           </div>
         )}
       </div>
