@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import CommentsFromOnePost from "../Post/CommentsFromOnePost";
 import PostCommentOnePost from "../Post/PostCommentOnePost";
 import moment from "moment";
@@ -12,16 +13,69 @@ import "moment/locale/fr";
 
 const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
   const [comment, setComment] = useState("");
+  const [longCommentError, setLongCommentError] = useState("");
   const [isPostUser, setIsPostUser] = useState(false);
   const [allComments, setAllComments] = useState([]);
   const postId = useParams().id;
   const [countLikes, setCountLikes] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [reportMessage, setReportMessage] = useState(
+    "Votre signalement a bien été enregistré."
+  );
+  const [reportedByUser, setReportedByUser] = useState(false);
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post.post_user_id}`);
+  };
+
+  const handleReport = () => {
+    if (post.reported == 0) {
+      axios({
+        method: "PATCH",
+        url: `${process.env.REACT_APP_API_URL}api/post/${post.post_id}/report`,
+        withCredentials: true,
+        data: {
+          postId: post.post_id,
+          userId,
+          isAdmin,
+        },
+      })
+        .then((res) => {
+          // console.log(`${post.post_id} reporté avec succès !`);
+          setReportedByUser(true);
+          fetchOnePost(post.post_id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setReportMessage("Ce post a déjà été signalé.");
+      setReportedByUser(true);
+    }
+  };
+
+  const handlePostComment = (e) => {
+    e.preventDefault();
+    console.log(`commentaire sur le post ${postId}`);
+
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_API_URL}api/comment/${postId}`,
+      withCredentials: true,
+      data: {
+        post_id: post.post_id,
+        author_id: userId,
+        message: comment,
+      },
+    })
+      .then((res) => {
+        fetchCommentsFromOnePost(postId);
+      })
+      .catch((err) => {
+        console.log(`Echec post commentaire : ${err}`);
+      });
   };
 
   const fetchLikes = () => {
@@ -30,7 +84,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}/postLikedByUser`,
       withCredentials: true,
       data: {
-        userId: userId,
+        userId,
         postId,
       },
     })
@@ -123,24 +177,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     navigate("/");
   };
 
-  const reportPost = () => {
-    axios({
-      method: "PATCH",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}/report`,
-      withCredentials: true,
-      data: {
-        postId,
-        userId,
-      },
-    })
-      .then((res) => {
-        console.log(`${postId} reporté avec succès !`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleDeleteFromReports = () => {
     axios({
       method: "DELETE",
@@ -165,7 +201,12 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     } else {
       setIsPostUser(false);
     }
-  }, [post]);
+    if (comment.length >= 200) {
+      setLongCommentError("Votre commentaire est trop long.");
+    } else {
+      setLongCommentError("");
+    }
+  }, [post, comment]);
 
   useEffect(() => {
     handleLikeCount();
@@ -237,6 +278,30 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
           )}
+          {!isPostUser && (
+            <>
+              <button
+                onClick={handleReport}
+                className="post-container-end__report"
+              >
+                <FontAwesomeIcon icon={faExclamationTriangle} />
+              </button>
+            </>
+          )}
+          {reportedByUser && (
+            <div className="reportMessage">
+              <div className="reportMessageBox">
+                <p>{reportMessage}</p>
+                <button
+                  onClick={() => {
+                    setReportedByUser(false);
+                  }}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* <Comment /> */}
@@ -249,11 +314,14 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         />
         <div className="post-container-comments-users">
           <PostCommentOnePost
-            postId={postId}
-            userId={userId}
-            fetchCommentsFromOnePost={fetchCommentsFromOnePost}
+            handlePostComment={handlePostComment}
+            setComment={setComment}
           />
         </div>
+        <p className="comment-error">{longCommentError}</p>
+        {comment.length > 0 && (
+          <p className="charCount">{comment.length}/200 caractères</p>
+        )}
       </div>
     </>
   );

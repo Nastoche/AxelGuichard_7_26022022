@@ -50,7 +50,7 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.getOnePost = (req, res, next) => {
   const { id: postId } = req.params;
-  const sqlGetOnePost = `SELECT date_creation, likes, message, post_id, post_user_id, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id WHERE post_id = ${postId};`;
+  const sqlGetOnePost = `SELECT date_creation, likes, message, post_id, post_user_id, reported, user_firstname, user_lastname FROM posts INNER JOIN users ON posts.post_user_id = users.user_id WHERE post_id = ${postId};`;
   db.query(sqlGetOnePost, (err, result) => {
     if (err) {
       res.status(404).json({ err });
