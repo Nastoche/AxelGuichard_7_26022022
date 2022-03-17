@@ -15,11 +15,6 @@ const ReportedPosts = ({
   userId,
   getNumberOfReports,
 }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [message, setMessage] = useState("");
-  const [dateCreation, setDateCreation] = useState("");
-  const [postId, setPostId] = useState("");
   const [postUserId, setPostUserId] = useState("");
   const [allComments, setAllComments] = useState([]);
   const [countLikes, setCountLikes] = useState(null);
@@ -27,7 +22,7 @@ const ReportedPosts = ({
 
   const navigate = useNavigate();
   const handleProfilPage = () => {
-    navigate(`/profil/${postUserId}`);
+    navigate(`/profil/${post.post_user_id}`);
   };
 
   const removeReport = () => {
