@@ -11,7 +11,7 @@ const ProfilePicture = ({ isUserProfil }) => {
       />
       {isUserProfil && (
         <button className="user-infos-btn" onClick={handleUploadPic}>
-          Modifier ✏️
+          Modifier 📷
         </button>
       )}
     </>
