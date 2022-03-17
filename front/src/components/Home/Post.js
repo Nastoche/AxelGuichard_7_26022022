@@ -271,6 +271,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
           userId={userId}
           fetchAllComments={fetchAllComments}
           allComments={allComments}
+          isAdmin={isAdmin}
         />
         <div className="post-container-comments-users">
           <PostComment

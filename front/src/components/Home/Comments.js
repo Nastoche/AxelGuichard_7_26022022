@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 
-const Comments = ({ post, userId, fetchAllComments, allComments }) => {
+const Comments = ({ post, userId, fetchAllComments, allComments, isAdmin }) => {
   useEffect(() => {
     if (post !== undefined) {
       const { post_id } = post;
@@ -12,9 +12,13 @@ const Comments = ({ post, userId, fetchAllComments, allComments }) => {
   return (allComments || []).map((comment) => {
     return (
       <>
-        <div className="post-container-comments-comment">
-          <Comment singleComment={comment} />
-        </div>
+        <Comment
+          singleComment={comment}
+          userId={userId}
+          fetchAllComments={fetchAllComments}
+          post={post}
+          isAdmin={isAdmin}
+        />
       </>
     );
   });

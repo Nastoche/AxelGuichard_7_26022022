@@ -106,7 +106,6 @@ exports.deleteOnePost = (req, res, next) => {
   WHERE p.post_id = ${post_id} AND (${admin} = 1 OR u.user_id = ${user_id});`;
   db.query(sql, (err, result) => {
     if (err) {
-      console.log("erreur");
       res.status(404).json({ err });
       throw err;
     }

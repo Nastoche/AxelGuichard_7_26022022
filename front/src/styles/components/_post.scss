@@ -203,6 +203,7 @@
     }
 
     &-comment {
+      position: relative;
       background-color: rgba(142, 165, 207, 0.8);
       border-radius: 12px;
       display: flex;
@@ -218,13 +219,23 @@
       .comment-content {
         text-align: left;
       }
+      .comment-delete {
+        margin-left: 0.7rem;
+        font-size: 1.1em;
+        color: black;
+        cursor: pointer;
+        transition: 0.15s ease-in-out;
+        &:hover {
+          color: rgb(161, 10, 10);
+        }
+      }
 
       @media screen and(max-width:768px) {
         font-size: 0.9em;
         margin: 0.5rem;
       }
       @media screen and(min-width:768px) {
-        margin: 0.5rem 0 0.5rem 1rem;
+        margin: 0.5rem 0.5rem 1rem;
         width: fit-content;
       }
     }
