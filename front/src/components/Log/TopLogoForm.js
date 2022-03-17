@@ -2,7 +2,7 @@ import React from "react";
 
 const TopLogoForm = () => {
   return (
-    <div className="logo-signup">
+    <div className="logo-signup-form">
       <img
         src="./img/logo/icon-left-font-monochrome-white.svg"
         alt="logo de groupomania"
