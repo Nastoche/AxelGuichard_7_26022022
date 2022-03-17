@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,10 +8,33 @@ import { faWrench } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = ({ localUserId, isAdmin }) => {
+  const [adminNotification, setAdminNotification] = useState("");
   const navigate = useNavigate();
 
   const backHome = () => {
     navigate("/");
+  };
+
+  const getNumberOfReports = () => {
+    if (isAdmin === true) {
+      axios({
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}api/post/getNumberOfReports`,
+        withCredentials: true,
+        data: {
+          isAdmin,
+        },
+      })
+        .then((res) => {
+          // console.log(res.data[0].total);
+          setAdminNotification(res.data[0].total);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return;
+    }
   };
 
   const handleDisconnect = () => {
@@ -28,6 +51,13 @@ const Navbar = ({ localUserId, isAdmin }) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (isAdmin === true) {
+      console.log("yo");
+      getNumberOfReports();
+    }
+  });
 
   return (
     <>
@@ -49,6 +79,9 @@ const Navbar = ({ localUserId, isAdmin }) => {
                 <NavLink className="nav-links" end to="/moderation">
                   <FontAwesomeIcon icon={faWrench} />
                 </NavLink>
+                <span className="moderation-notification">
+                  {adminNotification}
+                </span>
               </li>
             )}
 

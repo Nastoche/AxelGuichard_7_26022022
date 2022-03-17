@@ -252,3 +252,19 @@ exports.getReportedPosts = (req, res, next) => {
     res.status(200).json(result);
   });
 };
+
+exports.getNumberOfReports = (req, res, next) => {
+  const { isAdmin } = req.body;
+  const sql = `SELECT COUNT(*) AS total FROM posts WHERE posts.reported = 1;`;
+  if (isAdmin === true) {
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+        throw err;
+      }
+      res.status(200).json(result);
+    });
+  } else {
+    return;
+  }
+};

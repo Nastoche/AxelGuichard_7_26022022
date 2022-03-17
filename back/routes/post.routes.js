@@ -15,6 +15,7 @@ router.put("/:id", auth, postCtrl.updatePost);
 
 router.patch("/:id/report", auth, postCtrl.reportPost);
 router.post("/reportedPost", auth, postCtrl.getReportedPosts);
+router.post("/getNumberOfReports", auth, postCtrl.getNumberOfReports);
 
 // Images
 router.get("/image/:id", auth, postCtrl.getOneImage);
