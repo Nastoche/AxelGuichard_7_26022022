@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReportedPosts from "./ReportedPosts";
 
-const Reports = ({ userId, isAdmin }) => {
+const Reports = ({ userId, isAdmin, getNumberOfReports }) => {
   const [allReportedPosts, setAllReportedPosts] = useState([]);
 
   const fetchReportedPosts = () => {
@@ -32,6 +32,7 @@ const Reports = ({ userId, isAdmin }) => {
         post={post}
         isAdmin={isAdmin}
         userId={userId}
+        getNumberOfReports={getNumberOfReports}
       />
     );
   });

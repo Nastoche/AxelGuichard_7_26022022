@@ -79,9 +79,11 @@ const Navbar = ({ localUserId, isAdmin }) => {
                 <NavLink className="nav-links" end to="/moderation">
                   <FontAwesomeIcon icon={faWrench} />
                 </NavLink>
-                <span className="moderation-notification">
-                  {adminNotification}
-                </span>
+                {adminNotification > 0 && (
+                  <span className="moderation-notification">
+                    {adminNotification}
+                  </span>
+                )}
               </li>
             )}
 

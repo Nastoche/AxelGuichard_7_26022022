@@ -59,6 +59,28 @@ nav {
         }
       }
     }
+    .moderation {
+      position: relative;
+      .moderation-notification {
+        position: absolute;
+        z-index: 1;
+        right: 8%;
+        top: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background-color: #e41e3f;
+        height: 19px;
+        min-width: 19px;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 0.81rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
     @media screen and(min-width:970px) {
       .home {
         &::before {
@@ -81,12 +103,13 @@ nav {
         }
       }
       .moderation {
+        position: relative;
         &::before {
           content: "Modération";
           position: absolute;
           z-index: 99999;
           bottom: -40px;
-          width: 10%;
+          width: 80%;
           border-radius: 10px;
           background-color: rgba(202, 138, 134, 0.767);
           padding: 0.3rem 0.5rem;

@@ -8,7 +8,13 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
 
-const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
+const ReportedPosts = ({
+  fetchReportedPosts,
+  post,
+  isAdmin,
+  userId,
+  getNumberOfReports,
+}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [message, setMessage] = useState("");
@@ -36,6 +42,7 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
     })
       .then((res) => {
         fetchReportedPosts();
+        getNumberOfReports();
       })
       .catch((err) => {
         console.log(err);
@@ -113,6 +120,7 @@ const ReportedPosts = ({ fetchReportedPosts, post, isAdmin, userId }) => {
       .then((res) => {
         console.log("Post supprimé !");
         fetchReportedPosts();
+        getNumberOfReports();
       })
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
