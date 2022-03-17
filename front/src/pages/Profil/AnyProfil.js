@@ -9,6 +9,7 @@ const AnyProfil = () => {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isProfilAdmin, setIsProfilAdmin] = useState(false);
   const [userId, setUserId] = useState("");
   const [isUserProfil, setIsUserProfil] = useState(false);
   const [localUserId, setLocalUserId] = useState("");
@@ -31,7 +32,7 @@ const AnyProfil = () => {
         setUserLastName(res.data[0].user_lastname);
         setDescription(res.data[0].user_description);
         if (res.data[0].admin === 1) {
-          setIsAdmin(true);
+          setIsProfilAdmin(true);
         }
         if (id == localUserId) {
           setIsUserProfil(true);
@@ -51,6 +52,14 @@ const AnyProfil = () => {
     }
     const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
       .user_id;
+    const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
+    setUserFirstName(
+      JSON.parse(localStorage.getItem("user_info")).user.user_firstname
+    );
+
+    if (admin === 1) {
+      setIsAdmin(true);
+    }
     setLocalUserId(checkUserId);
   }, []);
 
@@ -60,7 +69,7 @@ const AnyProfil = () => {
       <ProfilComponents
         userFirstName={userFirstName}
         userLastName={userLastName}
-        isAdmin={isAdmin}
+        isProfilAdmin={isProfilAdmin}
         fetchProfilById={fetchProfilById}
         userId={userId}
         id={id}

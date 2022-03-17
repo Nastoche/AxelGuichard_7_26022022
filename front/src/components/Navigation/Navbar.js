@@ -26,7 +26,6 @@ const Navbar = ({ localUserId, isAdmin }) => {
         },
       })
         .then((res) => {
-          // console.log(res.data[0].total);
           setAdminNotification(res.data[0].total);
         })
         .catch((err) => {
@@ -54,7 +53,6 @@ const Navbar = ({ localUserId, isAdmin }) => {
 
   useEffect(() => {
     if (isAdmin === true) {
-      console.log("yo");
       getNumberOfReports();
     }
   });
@@ -76,14 +74,19 @@ const Navbar = ({ localUserId, isAdmin }) => {
             </li>
             {isAdmin && (
               <li className="moderation">
-                <NavLink className="nav-links" end to="/moderation">
-                  <FontAwesomeIcon icon={faWrench} />
-                </NavLink>
                 {adminNotification > 0 && (
                   <span className="moderation-notification">
                     {adminNotification}
                   </span>
                 )}
+                <NavLink
+                  className="nav-links"
+                  id="moderation"
+                  end
+                  to="/moderation"
+                >
+                  <FontAwesomeIcon icon={faWrench} />
+                </NavLink>
               </li>
             )}
 

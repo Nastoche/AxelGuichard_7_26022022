@@ -79,6 +79,9 @@ nav {
         &:hover {
           cursor: pointer;
         }
+        &:hover + #moderation {
+          background-color: rgb(202, 138, 134) !important;
+        }
       }
     }
     @media screen and(min-width:970px) {

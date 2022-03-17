@@ -1,12 +1,13 @@
 import React, { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import DeleteProfil from "./DeleteProfil";
 import Description from "./Description";
 import ProfilePicture from "./ProfilePicture";
 
 const ProfilComponents = ({
   userFirstName,
   userLastName,
-  isAdmin,
+  isProfilAdmin,
   fetchProfilById,
   id,
   isUserProfil,
@@ -25,8 +26,8 @@ const ProfilComponents = ({
           <h4 className="user-infos-name">
             {userFirstName} {userLastName}
           </h4>
-          {isAdmin && <p>Administrateur</p>}
-          {!isAdmin && <p>{`Employé(e)`}</p>}
+          {isProfilAdmin && <p>Administrateur</p>}
+          {!isProfilAdmin && <p>{`Employé(e)`}</p>}
 
           <hr />
           <Description
@@ -37,6 +38,9 @@ const ProfilComponents = ({
             userLastName={userLastName}
             fetchProfilById={fetchProfilById}
           />
+        </div>
+        <div className="delete-user">
+          <DeleteProfil />
         </div>
       </div>
     </>

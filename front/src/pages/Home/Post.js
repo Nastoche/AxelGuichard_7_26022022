@@ -47,7 +47,7 @@ const Post = () => {
   }, []);
   return (
     <>
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       <div className="container-bloc">
         <OnePost
           post={post}
