@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
-import AnyProfil from "./pages/Profil/AnyProfil";
+import AnyProfile from "./pages/Profil/AnyProfile";
 import React from "react";
 import Cgu from "./pages/CGU/Cgu";
 import Post from "./pages/Home/Post";
@@ -36,7 +36,7 @@ function App() {
         <Route path="/post/:id" element={<Post />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profil/:id" element={<AnyProfil />} />
+        <Route path="/profil/:id" element={<AnyProfile />} />
         <Route path="/cgu" element={<Cgu />} />
       </Routes>
     </BrowserRouter>

@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteProfil from "./DeleteProfil";
+import DeleteProfile from "./DeleteProfile";
 import Description from "./Description";
 import ProfilePicture from "./ProfilePicture";
 
-const ProfilComponents = ({
+const ProfileComponents = ({
   userFirstName,
   userLastName,
   isProfilAdmin,
@@ -39,12 +39,14 @@ const ProfilComponents = ({
             fetchProfilById={fetchProfilById}
           />
         </div>
-        <div className="delete-user">
-          <DeleteProfil />
-        </div>
+        {isUserProfil && (
+          <div className="delete-user">
+            <DeleteProfile />
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default ProfilComponents;
+export default ProfileComponents;

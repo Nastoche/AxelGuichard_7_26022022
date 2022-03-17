@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../components/Navigation/Navbar";
-import ProfilComponents from "../../components/Profil/ProfilComponents";
+import ProfileComponents from "../../components/Profil/ProfileComponents";
 
-const AnyProfil = () => {
+const AnyProfile = () => {
   const { id } = useParams();
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
@@ -66,7 +66,7 @@ const AnyProfil = () => {
   return (
     <>
       <Navbar localUserId={localUserId} isAdmin={isAdmin} />
-      <ProfilComponents
+      <ProfileComponents
         userFirstName={userFirstName}
         userLastName={userLastName}
         isProfilAdmin={isProfilAdmin}
@@ -80,4 +80,4 @@ const AnyProfil = () => {
   );
 };
 
-export default AnyProfil;
+export default AnyProfile;

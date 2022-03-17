@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteProfil = () => {
+const DeleteProfile = () => {
   return (
     <>
       <h3>Paramètre du profil</h3>
@@ -31,4 +31,4 @@ const DeleteProfil = () => {
   );
 };
 
-export default DeleteProfil;
+export default DeleteProfile;
