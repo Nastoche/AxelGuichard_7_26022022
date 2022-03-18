@@ -24,7 +24,7 @@ Le backend a été crée avec **Node.js**, **Express.js** et **MySQL** comme bas
 -   Démarrer `npm install` pour installer toutes les dépendances du backend.
     <br />
 -   Exécuter le script dans back/config/groupomania.sql
--   <br />
+    <br />
 
 ### Development server
 
