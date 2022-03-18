@@ -15,6 +15,10 @@ const Navbar = ({ localUserId, isAdmin }) => {
     navigate("/");
   };
 
+  const moderationTab = () => {
+    navigate("/moderation");
+  };
+
   const getNumberOfReports = () => {
     if (isAdmin === true) {
       axios({
@@ -76,7 +80,10 @@ const Navbar = ({ localUserId, isAdmin }) => {
             {isAdmin && (
               <li className="moderation">
                 {adminNotification > 0 && (
-                  <span className="moderation-notification">
+                  <span
+                    className="moderation-notification"
+                    onClick={moderationTab}
+                  >
                     {adminNotification}
                   </span>
                 )}

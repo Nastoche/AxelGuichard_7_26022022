@@ -83,6 +83,9 @@ nav {
         &:hover + #moderation {
           background-color: rgb(202, 138, 134) !important;
         }
+        &:hover ~ .nav-links::after {
+          transform: translate3d(0, 0, 0);
+        }
       }
     }
     @media screen and(min-width:970px) {
@@ -134,7 +137,7 @@ nav {
           position: absolute;
           z-index: 99999;
           bottom: -40px;
-          width: 10%;
+          width: 6%;
           border-radius: 10px;
           background-color: rgba(202, 138, 134, 0.767);
           padding: 0.3rem 0.5rem;
@@ -155,7 +158,7 @@ nav {
           position: absolute;
           z-index: 99999;
           bottom: -40px;
-          width: 10%;
+          width: 12%;
           border-radius: 10px;
           background-color: rgba(202, 138, 134, 0.767);
           padding: 0.3rem 0.5rem;
