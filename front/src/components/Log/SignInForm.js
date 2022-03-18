@@ -23,21 +23,16 @@ const SignInForm = () => {
     })
       .then((res) => {
         // console.log(res.data);
-        if (res.data.error) {
-          setErrors({
-            ...errors,
-            message: res.data.errorMessage,
-          });
-          if (res.data.errorMessage === "Votre compte a été désactivé") {
-            setDeactivatedUser(true);
-          }
-        } else {
-          localStorage.setItem("user_info", JSON.stringify(res.data));
-          navigate("/");
-        }
+
+        localStorage.setItem("user_info", JSON.stringify(res.data));
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        setErrors({
+          ...errors,
+          message: err.response.data.errorMessage,
+        });
+        setDeactivatedUser(true);
       });
   };
 

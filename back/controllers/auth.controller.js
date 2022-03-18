@@ -86,13 +86,13 @@ exports.login = (req, res) => {
         return res.status(400).json({ err: "Mot de passe incorrect" });
       }
     } else if (results[0] && results[0].active === 0) {
-      res.status(200).json({
+      res.status(400).json({
         // A modifier pour que l'utilisateur puisse réactiver le compte
         error: true,
         errorMessage: "Votre compte a été désactivé",
       });
     } else if (!results[0]) {
-      res.status(200).json({
+      res.status(400).json({
         error: true,
         errorMessage: "Mauvaise combinaison email / mot de passe",
       });

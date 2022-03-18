@@ -30,14 +30,8 @@ const AnyProfile = () => {
         setUserFirstName(res.data[0].user_firstname);
         setUserLastName(res.data[0].user_lastname);
         setDescription(res.data[0].user_description);
-        if (res.data[0].admin === 1) {
-          setIsProfilAdmin(true);
-        }
-        if (id == localUserId) {
-          setIsUserProfil(true);
-        } else {
-          setIsUserProfil(false);
-        }
+        setIsProfilAdmin(res.data[0].admin === 1);
+        setIsUserProfil(id === localUserId.toString());
       })
       .catch((err) => {
         console.log(err);
@@ -58,9 +52,11 @@ const AnyProfile = () => {
 
     if (admin === 1) {
       setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
     }
     setLocalUserId(checkUserId);
-  }, [navigate]);
+  }, [navigate, id]);
 
   return (
     <>

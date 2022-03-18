@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   const [postMessage, setPostMessage] = useState("");
   const [isLong, setIsLong] = useState(false);
+  const formRef = useRef();
 
   const handleUploadPost = (e) => {
     e.preventDefault();
@@ -18,6 +19,8 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
         },
       })
         .then((res) => {
+          formRef.current.reset();
+          setPostMessage("");
           fetchAllPosts();
           console.log("post créé avec succès !");
         })
@@ -40,7 +43,7 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   return (
     <div className="upload-post">
       <img src="./img/default-contact-img.png" alt="" />
-      <form action="" onSubmit={handleUploadPost}>
+      <form action="" onSubmit={handleUploadPost} ref={formRef}>
         <input
           type="text"
           name="uploadpost"
