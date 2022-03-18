@@ -1,7 +1,11 @@
 .container-bloc {
-  @media screen and(min-width:768px) {
-    margin-top: 15rem !important;
-  }
+  // margin-top: 8rem !important;
+  margin: 8rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   .user-infos {
     max-width: 1000px;
     min-width: 325px;

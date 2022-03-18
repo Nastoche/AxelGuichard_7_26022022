@@ -1,4 +1,5 @@
 nav {
+  margin: auto;
   align-items: center;
   position: relative;
   width: 100%;
@@ -123,7 +124,7 @@ nav {
           transform: translateY(-130%);
         }
         &:hover::before {
-          transform: translateY(0);
+          transform: translateY(5px);
           opacity: 1;
         }
       }

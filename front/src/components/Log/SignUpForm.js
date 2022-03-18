@@ -58,7 +58,7 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="container-bloc">
+    <div className="container-bloc-form">
       <div className="login-form">
         {formSubmit ? (
           <>

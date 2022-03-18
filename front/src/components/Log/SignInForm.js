@@ -42,7 +42,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="container-bloc">
+    <div className="container-bloc-form">
       <div className="login-form">
         <form action="" onSubmit={handleLogin} id="sign-up-form">
           <label htmlFor="email">Email</label>

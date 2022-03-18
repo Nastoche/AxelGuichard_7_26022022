@@ -1,25 +1,40 @@
 .logo-signup {
-  position: relative;
-  background-color: $color-1;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-1;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
   z-index: 9999;
   box-shadow: 0 3px 50px #2529349d;
-  img {
-    position: absolute;
-    width: 300px;
+  .img {
+    margin: auto;
+    max-width: 300px;
+    height: 80%;
+    max-height: 5rem;
     left: 1rem;
-    top: 1rem;
-    @media screen and(max-width:768px) {
-      width: 200px;
-      padding: 1rem 0;
+    @media screen and(max-width: 465px) {
+      margin-left: 0.5rem;
     }
+    @media screen and(max-width:768px) {
+      height: 60%;
+    }
+
     &:hover {
       cursor: pointer;
+    }
+  }
+  @media screen and(min-width: 1600px) {
+    .large {
+      content: url("../../../public/img/logo/icon-left-font-monochrome-white.svg");
+    }
+  }
+  @media screen and(max-width: 1600px) {
+    .small {
+      content: url("../../../public/img/logo/icon.svg");
+      border-radius: 50%;
     }
   }
 }

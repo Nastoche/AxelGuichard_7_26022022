@@ -61,9 +61,10 @@ const Navbar = ({ localUserId, isAdmin }) => {
     <>
       <div className="logo-signup">
         <img
-          src="../img/logo/icon-left-font-monochrome-white.svg"
+          // src="./img/logo/icon-left-font-monochrome-white.svg"
           alt="logo de groupomania"
           onClick={backHome}
+          className="img large small"
         />
         <nav>
           <ul>
@@ -102,6 +103,7 @@ const Navbar = ({ localUserId, isAdmin }) => {
             </li>
           </ul>
         </nav>
+        <div></div>
         {/* <div className="round-svg">
           <svg
             className="arrondis-theme black-arrondis"
