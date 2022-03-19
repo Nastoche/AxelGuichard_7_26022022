@@ -74,7 +74,7 @@ const Description = ({
         {!isModifying && <p className="user-infos-desc">{description}</p>}
         {isModifying && (
           <textarea
-            rows="10"
+            // rows="10"
             className="user-infos-textarea"
             defaultValue={description}
             onChange={(e) => setDescriptionValue(e.target.value)}
