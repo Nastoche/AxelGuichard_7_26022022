@@ -117,3 +117,16 @@ exports.deactivateAccount = (req, res) => {
     res.status(200).json("DEACTIVATED");
   });
 };
+
+exports.deleteAccount = (req, res) => {
+  const userId = req.params.id;
+  const sql = `DELETE FROM users WHERE user_id = ${userId}`;
+  const db = dbc.getDB();
+  db.query(sql, userId, (err, results) => {
+    if (err) {
+      return res.status(404).json({ err });
+    }
+    res.clearCookie("jwt");
+    res.status(200).json("DELETED");
+  });
+};

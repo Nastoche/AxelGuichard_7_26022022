@@ -1,8 +1,29 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DeleteProfile = ({ id }) => {
-  const deactivateProfile = () => {
+  const [handleDelete, setHandleDelete] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDeleteAccount = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/auth/deleteAccount/${id}`,
+      withCredentials: true,
+      data: {
+        userId: id,
+      },
+    })
+      .then((res) => {
+        navigate(`/login`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeactivateProfile = () => {
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/auth/deactivateAccount/${id}`,
@@ -19,6 +40,10 @@ const DeleteProfile = ({ id }) => {
       });
   };
 
+  const handleDeleteProfile = () => {
+    setHandleDelete(true);
+  };
+
   return (
     <>
       <h3>Paramètre du profil</h3>
@@ -26,7 +51,7 @@ const DeleteProfile = ({ id }) => {
         <div className="delete-user-profil__container">
           <button
             className="delete-user-profil__btn"
-            onClick={deactivateProfile}
+            onClick={handleDeactivateProfile}
           >
             Désactiver le compte
           </button>
@@ -41,7 +66,10 @@ const DeleteProfile = ({ id }) => {
           </p>
         </div>
         <div className="delete-user-profil__container">
-          <button className="delete-user-profil__btn">
+          <button
+            className="delete-user-profil__btn"
+            onClick={handleDeleteProfile}
+          >
             Supprimer votre compte
           </button>
           <h4>Cette action est définitive.</h4>
@@ -51,6 +79,17 @@ const DeleteProfile = ({ id }) => {
           </p>
         </div>
       </div>
+      {handleDelete && (
+        <div className="deleteMessage">
+          <div className="deleteMessageBox">
+            <p>Voulez-vous vraiment supprimer définitivement votre compte ?</p>
+            <div className="deleteBtn">
+              <button onClick={handleDeleteAccount}>Oui</button>
+              <button onClick={() => setHandleDelete(false)}>Non</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
