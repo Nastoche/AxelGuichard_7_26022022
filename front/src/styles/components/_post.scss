@@ -206,14 +206,19 @@
       position: relative;
       background-color: rgba(142, 165, 207, 0.8);
       border-radius: 12px;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
       padding: 0.2rem 1rem;
-      .comment-name {
-        font-weight: bold;
+      .comment-container {
+        display: flex;
+        flex-direction: row;
+        &-name {
+          cursor: pointer;
+          font-weight: bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
         .commentDate {
-          font-weight: 100;
+          margin-left: 0.3rem;
         }
       }
       .comment-content {

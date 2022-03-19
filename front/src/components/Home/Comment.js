@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Comment = ({
   singleComment,
@@ -13,6 +14,11 @@ const Comment = ({
   isAdmin,
 }) => {
   const [isUserComment, setIsUserComment] = useState(false);
+  const navigate = useNavigate();
+
+  const handleProfilePage = () => {
+    navigate(`/profil/${singleComment.user_id}`);
+  };
 
   const handleDeleteComment = () => {
     axios({
@@ -42,8 +48,14 @@ const Comment = ({
   return (
     <>
       <div className="post-container-comments-comment">
-        <p className="comment-name" key={singleComment.user_id}>
-          {singleComment.user_firstname} {singleComment.user_lastname},{" "}
+        <div className="comment-container">
+          <p
+            className="comment-container-name"
+            key={singleComment.user_id}
+            onClick={handleProfilePage}
+          >
+            {singleComment.user_firstname} {singleComment.user_lastname},{" "}
+          </p>
           <span className="commentDate">
             {moment(singleComment.created_at).startOf("second").fromNow()}
           </span>
@@ -52,9 +64,8 @@ const Comment = ({
               <FontAwesomeIcon icon={faTrashCan} />
             </span>
           )}
-        </p>
+        </div>
         <p className="comment-content">{singleComment.message}</p>
-        <hr />
       </div>
     </>
   );

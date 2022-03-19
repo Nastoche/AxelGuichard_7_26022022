@@ -68,7 +68,6 @@ const Home = () => {
           fetchAllPosts={fetchAllPosts}
           isAdmin={isAdmin}
         />
-        <Comments />
       </div>
     </>
   );
