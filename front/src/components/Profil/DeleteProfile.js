@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const DeleteProfile = ({ id }) => {
   const [handleDelete, setHandleDelete] = useState(false);
+  const [handleDeactivate, setHandleDeactivate] = useState(false);
   const navigate = useNavigate();
 
   const handleDeleteAccount = () => {
@@ -23,7 +24,7 @@ const DeleteProfile = ({ id }) => {
       });
   };
 
-  const handleDeactivateProfile = () => {
+  const handleDeactivateAccount = () => {
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/auth/deactivateAccount/${id}`,
@@ -33,7 +34,7 @@ const DeleteProfile = ({ id }) => {
       },
     })
       .then((res) => {
-        console.log("Compte désactivé");
+        navigate(`/login`);
       })
       .catch((err) => {
         console.log(err);
@@ -42,6 +43,10 @@ const DeleteProfile = ({ id }) => {
 
   const handleDeleteProfile = () => {
     setHandleDelete(true);
+  };
+
+  const handleDeactivateProfile = () => {
+    setHandleDeactivate(true);
   };
 
   return (
@@ -86,6 +91,17 @@ const DeleteProfile = ({ id }) => {
             <div className="deleteBtn">
               <button onClick={handleDeleteAccount}>Oui</button>
               <button onClick={() => setHandleDelete(false)}>Non</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {handleDeactivate && (
+        <div className="deleteMessage">
+          <div className="deleteMessageBox">
+            <p>Voulez-vous vraiment désactiver votre compte ?</p>
+            <div className="deleteBtn">
+              <button onClick={handleDeactivateAccount}>Oui</button>
+              <button onClick={() => setHandleDeactivate(false)}>Non</button>
             </div>
           </div>
         </div>

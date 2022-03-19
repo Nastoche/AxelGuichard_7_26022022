@@ -187,7 +187,7 @@ exports.countLikes = (req, res) => {
   // Sert à compter le nombre d'utilisateurs ayant liké ce post
   // Select count = compter le nombre de rows dans une table
   const { postId } = req.body;
-  const sqlInsert = `SELECT COUNT(*) AS total FROM likes WHERE likes.post_id = ${postId};`;
+  const sqlInsert = `SELECT COUNT(*) AS total FROM likes INNER JOIN users AS u ON (u.user_id = likes.user_id) WHERE likes.post_id = ${postId};`;
   db.query(sqlInsert, (err, result) => {
     if (err) {
       res.status(404).json({ err });

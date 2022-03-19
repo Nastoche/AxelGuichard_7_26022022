@@ -85,6 +85,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       withCredentials: true,
       data: {
         postId: post_id,
+        userId,
       },
     })
       .then((res) => {
