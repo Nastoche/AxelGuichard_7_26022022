@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-const PostCommentOnePost = ({ setComment, handlePostComment }) => {
+const PostCommentOnePost = ({ setComment, handlePostComment, formRef }) => {
   return (
     <>
       <img
@@ -9,7 +9,7 @@ const PostCommentOnePost = ({ setComment, handlePostComment }) => {
         src="../img/default-contact-img.png"
         alt=""
       />
-      <form action="" onSubmit={handlePostComment}>
+      <form ref={formRef} action="" onSubmit={handlePostComment}>
         <input
           type="text"
           placeholder="Écrivez un commentaire..."

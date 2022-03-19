@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const PostComment = ({
   post,
@@ -9,6 +9,7 @@ const PostComment = ({
   setComment,
 }) => {
   const [isLong, setIsLong] = useState(true);
+  const formRef = useRef();
 
   const handlePostComment = (e) => {
     e.preventDefault();
@@ -26,6 +27,8 @@ const PostComment = ({
         },
       })
         .then((res) => {
+          formRef.current.reset();
+          setComment("");
           console.log("commentaire créé !");
           fetchAllComments(post.post_id);
         })
@@ -49,7 +52,7 @@ const PostComment = ({
         src="./img/default-contact-img.png"
         alt=""
       />
-      <form action="" onSubmit={handlePostComment}>
+      <form ref={formRef} action="" onSubmit={handlePostComment}>
         <input
           type="text"
           placeholder="Écrivez un commentaire..."

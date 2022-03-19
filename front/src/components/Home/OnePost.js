@@ -1,4 +1,4 @@
-import { React, useEffect, useLayoutEffect, useState } from "react";
+import { React, useEffect, useLayoutEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,6 +23,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     "Votre signalement a bien été enregistré."
   );
   const [reportedByUser, setReportedByUser] = useState(false);
+  const formRef = useRef();
 
   const navigate = useNavigate();
 
@@ -71,6 +72,8 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
       },
     })
       .then((res) => {
+        formRef.current.reset();
+        setComment("");
         fetchCommentsFromOnePost(postId);
       })
       .catch((err) => {
@@ -316,6 +319,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
           <PostCommentOnePost
             handlePostComment={handlePostComment}
             setComment={setComment}
+            formRef={formRef}
           />
         </div>
         <p className="comment-error">{longCommentError}</p>
