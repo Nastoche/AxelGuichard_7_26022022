@@ -115,11 +115,51 @@
         margin: 1rem auto 0;
         padding: 1rem;
         max-width: 400px;
+        width: 100%;
         @media screen and(max-width:768px) {
           width: 100%;
         }
         h4 {
           font-weight: bold;
+        }
+        .form-container {
+          form {
+            margin: auto;
+            width: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            #password,
+            #newPassword,
+            #newPasswordConfirm {
+              outline: none;
+              width: 100%;
+              height: 45px;
+              padding: 0 8px;
+              border-radius: 15px;
+              border: 1px solid $color-1;
+            }
+            label {
+              font-size: 1.2em;
+            }
+            .form-btn {
+              margin-top: 1rem;
+              padding: 0.8rem 1rem;
+              background-color: $color-1;
+              border-radius: 15px;
+              border: 1px solid transparent;
+              transition: border 0.2s ease-in-out;
+              font-size: 1em;
+              &:hover {
+                cursor: pointer;
+                border: 1px solid black;
+              }
+            }
+          }
+          &-error {
+            color: red;
+          }
         }
       }
       &__btn {

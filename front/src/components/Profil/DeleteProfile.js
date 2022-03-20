@@ -5,7 +5,24 @@ import { useNavigate } from "react-router-dom";
 const DeleteProfile = ({ id }) => {
   const [handleDelete, setHandleDelete] = useState(false);
   const [handleDeactivate, setHandleDeactivate] = useState(false);
+  const [isChangingPass, setIsChangingPass] = useState(false);
+  const [password, setPassword] = useState("");
+  const [controlPassword, setControlPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
+
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+    if (password !== controlPassword) {
+      setErrors({
+        ...errors,
+        passwordConfirm: "Les mots de passe ne sont pas identiques",
+      });
+    } else {
+      setErrors({});
+    }
+  };
 
   const handleDeleteAccount = () => {
     axios({
@@ -53,6 +70,62 @@ const DeleteProfile = ({ id }) => {
     <>
       <h3>Paramètre du profil</h3>
       <div className="delete-user-profil">
+        <div className="delete-user-profil__container">
+          <button
+            className="delete-user-profil__btn"
+            onClick={() => setIsChangingPass(true)}
+          >
+            Changer de mot de passe
+          </button>
+          {!isChangingPass ? (
+            <p>
+              Nous vous conseillons d’utiliser un mot de passe sûr que vous
+              n’utilisez nulle part ailleurs
+            </p>
+          ) : (
+            <div className="form-container">
+              <form action="" onSubmit={handleChangePassword}>
+                <label htmlFor="currentPassword">Mot de passe actuel</label>
+                <input type="password" name="password" id="password" />
+
+                <br />
+
+                <label htmlFor="newPassword">Nouveau mot de passe</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="newPassword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <br />
+
+                <label htmlFor="newPasswordConfirm">Confirmation</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="newPasswordConfirm"
+                  value={controlPassword}
+                  onChange={(e) => setControlPassword(e.target.value)}
+                />
+                <br />
+                <p className="form-container-error">{errors.passwordConfirm}</p>
+                <input
+                  type="submit"
+                  value="Enregistrer les modifications"
+                  className="form-btn"
+                />
+                <button
+                  className="form-btn"
+                  onClick={() => setIsChangingPass(false)}
+                >
+                  Annuler
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
         <div className="delete-user-profil__container">
           <button
             className="delete-user-profil__btn"

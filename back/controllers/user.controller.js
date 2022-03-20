@@ -1,11 +1,21 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const dbc = require("../config/db");
 const db = dbc.getDB();
 
 // RUD users
 
 exports.getOneUser = (req, res, next) => {
-  const { id: userId } = req.params;
-  const sqlGetUser = `SELECT * FROM users WHERE users.user_id = ${userId};`;
+  const { id } = req.params;
+
+  // `SELECT IFNULL( (SELECT * FROM users WHERE users.user_id = ${userId}) , users.user_id = ${localUserId} );`;
+
+  const sqlGetUser = `SELECT * FROM users WHERE users.user_id = ${id};`;
+
+  // const sqlGetUser = `SELECT IF( EXISTS(SELECT * FROM users WHERE user_id = ${id}), user_id = ${id}, 'Non, ça existe pas') ;`;
+
+  // const sqlGetUser = `SELECT * FROM users IFNULL( (users.user_id = ${id}) , (users.user_id = ${clientId}));`;
+
   db.query(sqlGetUser, (err, result) => {
     if (err) {
       res.status(404).json({ err });
@@ -31,9 +41,10 @@ exports.updateOneUser = (req, res, next) => {
     });
   }
 
-  const { user_firstname, user_lastname, user_description } = req.body;
+  const { user_firstname, user_lastname, user_description, user_password } =
+    req.body;
   const { id: userId } = req.params;
-  const sqlUpdateUser = `UPDATE users SET user_firstname = "${user_firstname}", user_lastname = "${user_lastname}", user_description= "${user_description}" WHERE users.user_id = ${userId};`;
+  const sqlUpdateUser = `UPDATE users SET user_firstname = "${user_firstname}", user_lastname = "${user_lastname}", user_password=${user_password}, user_description= "${user_description}" WHERE users.user_id = ${userId};`;
   db.query(sqlUpdateUser, (err, result) => {
     if (err) {
       res.status(404).json({ err });
