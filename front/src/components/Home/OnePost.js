@@ -244,7 +244,10 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     <>
       <div className="post-container">
         <div className="post-container-top">
-          <div className="post-container-top-img-container">
+          <div
+            className="post-container-top-img-container"
+            onClick={(e) => navigate(`/profil/${post.post_user_id}`)}
+          >
             <img className="post-users-img" src={imageUrl} alt="" />
           </div>
           <div className="post-container-top-infos">

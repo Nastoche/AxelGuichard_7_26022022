@@ -18,13 +18,22 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [terms, setTerms] = useState(false);
   const [controlPassword, setControlPassword] = useState("");
+  const [isLetterOk, setIsLetterOk] = useState(false);
+  const [isNumberOk, setIsNumberOk] = useState(false);
+  const [isSpecialOk, setIsSpecialOk] = useState(false);
+  const [isMinMaxOk, setIsMinMaxOk] = useState(false);
 
   const regexEmail =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   const regexName =
     /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
   const regexPassword =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,32}$/; // Minimum 8 caractères, au moins une lettre, un chiffre et un caractère spécial
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&éè])[A-Za-z\d@$!%*#?&éè]{8,32}$/; // Minimum 8 caractères, au moins une lettre, un chiffre et un caractère spécial
+
+  const regexLetter = /[a-zA-Z]/g; // Check si le string contient au moins une lettre
+  const regexNum = /\d/; // Check s'il y a un chiffre
+  const regexSpecial = /[@$!%*#?&éè]/;
+  const regexMinMax = /^.{8,32}$/; // Check si le mdp contient minimum 8 caractères et maximum 32
 
   const handleEmailInput = (e) => {
     setEmail(e.target.value);
@@ -61,17 +70,26 @@ export default function SignUpForm() {
 
   const handlePasswordInput = (e) => {
     setPassword(e.target.value);
-    if (
-      regexPassword.test(e.target.value) === true ||
-      e.target.value.length === 0
-    ) {
-      setErrors({ ...errors, password: "" });
+
+    if (regexLetter.test(e.target.value)) {
+      setIsLetterOk(true);
     } else {
-      setErrors({
-        ...errors,
-        password:
-          "Doit contenir au moins une lettre, un chiffre et un caractère spécial",
-      });
+      setIsLetterOk(false);
+    }
+    if (regexNum.test(e.target.value)) {
+      setIsNumberOk(true);
+    } else {
+      setIsNumberOk(false);
+    }
+    if (regexSpecial.test(e.target.value)) {
+      setIsSpecialOk(true);
+    } else {
+      setIsSpecialOk(false);
+    }
+    if (regexMinMax.test(e.target.value)) {
+      setIsMinMaxOk(true);
+    } else {
+      setIsMinMaxOk(false);
     }
   };
 
@@ -89,23 +107,24 @@ export default function SignUpForm() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(errors);
 
     if (!terms) {
       setErrors({
         ...errors,
         terms: "Veuillez accepter les conditions d'utilisation",
       });
+    } else {
+      setErrors({ ...errors, terms: "" });
     }
 
     if (
       password !== controlPassword ||
+      !regexPassword.test(password) ||
       !terms ||
-      !firstName.length > 2 ||
-      !lastName.length > 2 ||
-      !regexEmail.test(email) == true
+      !regexName.test(firstName) ||
+      !regexName.test(lastName) ||
+      !regexEmail.test(email)
     ) {
-      console.log("pas bon");
     } else {
       axios({
         method: "post",
@@ -207,6 +226,24 @@ export default function SignUpForm() {
                   value={password}
                 />
                 <div className="password error">{errors.password}</div>
+                <div className="password-container">
+                  <ul>
+                    <li className={isLetterOk ? "password-ok" : "password-not"}>
+                      Une lettre
+                    </li>
+                    <li className={isNumberOk ? "password-ok" : "password-not"}>
+                      Un chiffre
+                    </li>
+                    <li
+                      className={isSpecialOk ? "password-ok" : "password-not"}
+                    >
+                      Un caractère spécial
+                    </li>
+                    <li className={isMinMaxOk ? "password-ok" : "password-not"}>
+                      8-32 caractères
+                    </li>
+                  </ul>
+                </div>
                 <br />
 
                 <label htmlFor="password-conf">Confirmer le mot de passe</label>
