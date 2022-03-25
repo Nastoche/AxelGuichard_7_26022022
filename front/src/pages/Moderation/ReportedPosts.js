@@ -7,6 +7,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
+import NoReportedPost from "../../components/Reports/NoReportedPost";
 
 const ReportedPosts = ({
   fetchReportedPosts,
@@ -14,8 +15,8 @@ const ReportedPosts = ({
   isAdmin,
   userId,
   getNumberOfReports,
+  isReportedPosts,
 }) => {
-  const [postUserId, setPostUserId] = useState("");
   const [allComments, setAllComments] = useState([]);
   const [countLikes, setCountLikes] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
@@ -47,9 +48,6 @@ const ReportedPosts = ({
         }
       })
       .catch((err) => {
-        // setImageUrl(
-        //   `${process.env.REACT_APP_API_URL}images/profils/default.png`
-        // );
         console.log(err);
       });
   };
@@ -138,7 +136,6 @@ const ReportedPosts = ({
       withCredentials: true,
       data: {
         post_id: post.post_id,
-        post_user_id: postUserId,
       },
     })
       .then((res) => {
@@ -149,7 +146,6 @@ const ReportedPosts = ({
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
       });
-    // refreshPage();
   };
 
   const fetchAllComments = () => {

@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import NoReportedPost from "../../components/Reports/NoReportedPost";
 import ReportedPosts from "./ReportedPosts";
 
-const Reports = ({ userId, isAdmin, getNumberOfReports }) => {
+const Reports = ({ userId, isAdmin, getNumberOfReports, isReportedPosts }) => {
   const [allReportedPosts, setAllReportedPosts] = useState([]);
 
   const fetchReportedPosts = () => {
@@ -27,13 +28,15 @@ const Reports = ({ userId, isAdmin, getNumberOfReports }) => {
   }, []);
   return allReportedPosts.map((post) => {
     return (
-      <ReportedPosts
-        fetchReportedPosts={fetchReportedPosts}
-        post={post}
-        isAdmin={isAdmin}
-        userId={userId}
-        getNumberOfReports={getNumberOfReports}
-      />
+      <>
+        <ReportedPosts
+          fetchReportedPosts={fetchReportedPosts}
+          post={post}
+          isAdmin={isAdmin}
+          userId={userId}
+          getNumberOfReports={getNumberOfReports}
+        />
+      </>
     );
   });
 };
