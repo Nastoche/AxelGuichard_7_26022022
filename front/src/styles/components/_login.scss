@@ -9,18 +9,24 @@ body {
   }
   .container-bloc-form {
     width: 100%;
-    margin-top: 11rem;
+    margin-top: 12rem;
+    margin-bottom: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     .login-form {
-      margin-bottom: 5rem;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 0;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      width: 100%;
+      background-color: #9fb1d1c7;
+      border: 1px solid $color-1;
+      border-radius: 15px;
       #sign-up-form {
         display: flex;
         justify-content: center;
@@ -29,50 +35,34 @@ body {
         label {
           font-size: 1.2em;
         }
-        input {
+        #email,
+        #password,
+        #firstName,
+        #lastName,
+        #password-conf {
           width: 300px;
           height: 45px;
           padding: 0 8px;
           border-radius: 15px;
-          border: 1px solid $color-2;
+          border: 1px solid $color-1;
           outline: none;
         }
         .error {
+          margin-inline: 2rem;
           color: red;
           font-weight: blod;
         }
-        .login-btn {
-          color: #fff;
-          background-color: $color-1;
-          width: 180px;
-          height: 60px;
-          border-radius: 15px;
-          border: 1px solid $color-2;
-          font-size: 1.2em;
-          border: 1px solid transparent;
-          transition: 0.2s ease-in-out;
-          &:hover {
-            cursor: pointer;
-            border: 1px solid $color-5;
-            background-color: #c38f8b;
-            color: $color-5;
-          }
-        }
+        .login-btn,
         .signup-btn {
-          color: #fff;
+          padding: 0.8rem 1rem;
           background-color: $color-1;
-          width: 200px;
-          height: 60px;
           border-radius: 15px;
-          border: 1px solid $color-2;
-          font-size: 1.2em;
           border: 1px solid transparent;
           transition: 0.2s ease-in-out;
+          font-size: 1.1em;
           &:hover {
             cursor: pointer;
-            border: 1px solid $color-5;
-            background-color: #c38f8b;
-            color: $color-5;
+            border: 1px solid black;
           }
         }
         .reactivate {
@@ -81,6 +71,16 @@ body {
           &:hover {
             text-decoration: underline;
           }
+        }
+      }
+      .signup-form-end,
+      .login-form-end {
+        margin-top: 1rem;
+        font-size: 1em;
+        text-decoration: underline;
+        transition: color 0.1s ease-in-out;
+        &:hover {
+          color: $color-1;
         }
       }
     }

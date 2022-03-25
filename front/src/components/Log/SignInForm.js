@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const [errors, setErrors] = useState({});
@@ -61,6 +61,9 @@ const SignInForm = () => {
           <div className="error">{errors.message}</div>
           <br />
           <input type="submit" value="Se connecter" className="login-btn" />
+          <NavLink to="/signup" className="login-form-end">
+            Pas encore de compte ? Inscrivez-vous
+          </NavLink>
         </form>
       </div>
       <br />

@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
 import { NavLink } from "react-router-dom";
 
 export default function SignUpForm() {
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    // email: "",
+    // firstname: "",
+    // lastname: "",
+    // passwordConfirm: "",
+    // terms: "",
+  });
   const [formSubmit, setFormSubmit] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -13,24 +19,95 @@ export default function SignUpForm() {
   const [terms, setTerms] = useState(false);
   const [controlPassword, setControlPassword] = useState("");
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const regexEmail =
+    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const regexName =
+    /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+  const regexPassword =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,32}$/; // Minimum 8 caractères, au moins une lettre, un chiffre et un caractère spécial
 
-    if (password !== controlPassword || terms === false) {
-      if (password !== controlPassword) {
-        setErrors({
-          ...errors,
-          passwordConfirm: "Les mots de passe ne correspondent pas",
-        });
-      }
-      if (terms === false) {
-        setErrors({
-          ...errors,
-          terms: "Veuillez accepter les conditions générales d'utilisation",
-        });
-      }
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value);
+    if (regexEmail.test(e.target.value) || e.target.value.length === 0) {
+      setErrors({ email: "" });
     } else {
-      await axios({
+      setErrors({ ...errors, email: "Veuillez entrer une adresse valide" });
+    }
+  };
+
+  const handleFirstNameInput = (e) => {
+    setFirstName(e.target.value);
+    if (
+      regexName.test(e.target.value) === true ||
+      e.target.value.length === 0
+    ) {
+      setErrors({ ...errors, firstname: "" });
+    } else {
+      setErrors({ ...errors, firstname: "Entrez votre prénom" });
+    }
+  };
+
+  const handleLastNameInput = (e) => {
+    setLastName(e.target.value);
+    if (
+      regexName.test(e.target.value) === true ||
+      e.target.value.length === 0
+    ) {
+      setErrors({ ...errors, lastname: "" });
+    } else {
+      setErrors({ ...errors, lastname: "Entrez votre nom" });
+    }
+  };
+
+  const handlePasswordInput = (e) => {
+    setPassword(e.target.value);
+    if (
+      regexPassword.test(e.target.value) === true ||
+      e.target.value.length === 0
+    ) {
+      setErrors({ ...errors, password: "" });
+    } else {
+      setErrors({
+        ...errors,
+        password:
+          "Doit contenir au moins une lettre, un chiffre et un caractère spécial",
+      });
+    }
+  };
+
+  const handleControlPasswordInput = (e) => {
+    setControlPassword(e.target.value);
+    if (password === e.target.value) {
+      setErrors({ ...errors, passwordConfirm: "" });
+    } else {
+      setErrors({
+        ...errors,
+        passwordConfirm: "Les mots de passe ne correspondent pas",
+      });
+    }
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log(errors);
+
+    if (!terms) {
+      setErrors({
+        ...errors,
+        terms: "Veuillez accepter les conditions d'utilisation",
+      });
+    }
+
+    if (
+      password !== controlPassword ||
+      !terms ||
+      !firstName.length > 2 ||
+      !lastName.length > 2 ||
+      !regexEmail.test(email) == true
+    ) {
+      console.log("pas bon");
+    } else {
+      axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
         data: {
@@ -42,14 +119,7 @@ export default function SignUpForm() {
       })
         .then((res) => {
           console.log(res);
-          if (res.data.errors) {
-            setErrors({
-              ...errors,
-              email: res.data.errors,
-              // pseudo: res.data.errors.pseudo,
-              // password: res.data.errors.password,
-            });
-          } else {
+          if (!res.data.errors) {
             setFormSubmit(true);
           }
         })
@@ -58,100 +128,129 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="container-bloc-form">
-      <div className="login-form">
-        {formSubmit ? (
-          <>
-            <SignInForm />
-            <h4 className="success">
-              Inscription réussie, veuillez vous connecter
-            </h4>
-          </>
-        ) : (
-          <form action="" onSubmit={handleRegister} id="sign-up-form">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-            <div className="email error">{errors.email}</div>
-            <br />
+    <>
+      {formSubmit ? (
+        <>
+          <SignInForm />
+          <h4 className="success">
+            Inscription réussie, veuillez vous connecter
+          </h4>
+        </>
+      ) : (
+        <>
+          <div className="container-bloc-form">
+            <div className="login-form">
+              <form action="" onSubmit={handleRegister} id="sign-up-form">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="exemple@groupomania.fr"
+                  onChange={handleEmailInput}
+                  value={email}
+                />
+                <div className="email error">{errors.email}</div>
+                <br />
 
-            <label htmlFor="firstName">Prénom</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              onChange={(e) => setFirstName(e.target.value)}
-              value={firstName}
-            />
-            <div className="pseudo error">{errors.pseudo}</div>
-            <br />
+                <label htmlFor="firstName">Prénom</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  placeholder="Prénom"
+                  onChange={
+                    handleFirstNameInput
+                    // if (
+                    //   e.target.value.length <= 2 &&
+                    //   e.target.value.length > 0
+                    // ) {
+                    //   setErrors({ ...errors, firstname: "Entrez votre nom" });
+                    // } else {
+                    //   setErrors({ ...errors, firstname: "" });
+                    // }
+                  }
+                  value={firstName}
+                />
+                <div className="error">{errors.firstname}</div>
+                <br />
 
-            <label htmlFor="flastName">Nom</label>
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              onChange={(e) => setLastName(e.target.value)}
-              value={lastName}
-            />
-            <div className="pseudo error">{errors.pseudo}</div>
-            <br />
+                <label htmlFor="flastName">Nom</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  placeholder="Nom"
+                  onChange={
+                    handleLastNameInput
+                    // if (
+                    //   e.target.value.length < 2 &&
+                    //   e.target.value.length > 0
+                    // ) {
+                    //   setErrors({ ...errors, lastname: "Entrez votre nom" });
+                    // } else {
+                    //   setErrors({ ...errors, lastname: "" });
+                    // }
+                  }
+                  value={lastName}
+                />
+                <div className="error">{errors.lastname}</div>
+                <br />
 
-            <label htmlFor="password">Mot de passe</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-            <div className="password error">{errors.password}</div>
-            <br />
+                <label htmlFor="password">Mot de passe</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Entrez un mot de passe"
+                  onChange={handlePasswordInput}
+                  value={password}
+                />
+                <div className="password error">{errors.password}</div>
+                <br />
 
-            <label htmlFor="password-conf">Confirmer le mot de passe</label>
-            <input
-              type="password"
-              name="password"
-              id="password-conf"
-              onChange={(e) => setControlPassword(e.target.value)}
-              value={controlPassword}
-            />
-            <div className="password-confirm error">
-              {errors.passwordConfirm}
-            </div>
-            <br />
-            <div className="cgu-container">
-              <input
-                type="checkbox"
-                id="terms"
-                onChange={(e) => setTerms(e.target.checked)}
-              />
-              <label htmlFor="terms">
-                J'ai lu et j'accepte les{" "}
-                <NavLink to="/cgu" className="cgu-box">
-                  conditions générales
+                <label htmlFor="password-conf">Confirmer le mot de passe</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password-conf"
+                  placeholder="Confirmez votre mot de passe"
+                  onChange={handleControlPasswordInput}
+                  value={controlPassword}
+                />
+                <div className="password-confirm error">
+                  {errors.passwordConfirm}
+                </div>
+                <br />
+                <div className="cgu-container">
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    onChange={(e) => setTerms(e.target.checked)}
+                  />
+                  <label htmlFor="terms" className="terms">
+                    J'ai lu et j'accepte les{" "}
+                    <NavLink target="_blank" to="/cgu" className="cgu-box">
+                      conditions générales
+                    </NavLink>
+                  </label>
+                </div>
+
+                <div className="terms error">{errors.terms}</div>
+                <br />
+                <input
+                  type="submit"
+                  value="Valider inscription"
+                  className="signup-btn"
+                />
+                <NavLink end to={"/login"} className="signup-form-end">
+                  J'ai déjà un compte
                 </NavLink>
-              </label>
+              </form>
             </div>
-
-            <div className="terms error">{errors.terms}</div>
-            <br />
-            <input
-              type="submit"
-              value="Valider inscription"
-              className="signup-btn"
-            />
-            <NavLink end to={"/login"} className="alreadyUser">
-              J'ai déjà un compte
-            </NavLink>
-          </form>
-        )}
-      </div>
-    </div>
+          </div>
+        </>
+      )}
+    </>
   );
 }
