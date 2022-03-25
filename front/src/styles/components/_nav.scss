@@ -93,6 +93,7 @@ nav {
         &::before {
           content: "Accueil";
           position: absolute;
+          z-index: -1;
           bottom: -40px;
           width: 10%;
           border-radius: 10px;
@@ -114,7 +115,7 @@ nav {
         &::before {
           content: "Modération";
           position: absolute;
-          z-index: 99999;
+          z-index: -1;
           bottom: -40px;
           width: 80%;
           border-radius: 10px;
@@ -135,7 +136,7 @@ nav {
         &::before {
           content: "Profil";
           position: absolute;
-          z-index: 99999;
+          z-index: -1;
           bottom: -40px;
           width: 6%;
           border-radius: 10px;
@@ -156,7 +157,7 @@ nav {
         &::before {
           content: "Déconnexion";
           position: absolute;
-          z-index: 99999;
+          z-index: -1;
           bottom: -40px;
           width: 12%;
           border-radius: 10px;

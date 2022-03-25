@@ -21,7 +21,14 @@ const ProfileComponents = ({
     <>
       <div className="container-bloc">
         <div className="user-infos">
-          <ProfilePicture isUserProfil={isUserProfil} />
+          <ProfilePicture
+            isUserProfil={isUserProfil}
+            id={id}
+            userFirstName={userFirstName}
+            userLastName={userLastName}
+            description={description}
+            fetchProfilById={fetchProfilById}
+          />
 
           <h4 className="user-infos-name">
             {userFirstName} {userLastName}

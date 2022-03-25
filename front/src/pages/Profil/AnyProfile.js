@@ -29,7 +29,6 @@ const AnyProfile = () => {
         setDescription(res.data[0].user_description);
         setIsProfilAdmin(res.data[0].admin === 1);
         setIsUserProfil(id === localUserId.toString());
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

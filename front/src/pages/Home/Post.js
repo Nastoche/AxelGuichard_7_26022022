@@ -8,6 +8,7 @@ const Post = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState("");
   const [post, setPost] = useState([]);
+  const [localUserId, setLocalUserId] = useState("");
   const { id } = useParams();
   document.title = `Groupomania - Sujet de ${post.user_firstname} ${post.user_lastname}`;
 
@@ -43,11 +44,12 @@ const Post = () => {
       setIsAdmin(true);
     }
     setUserId(checkUserId);
+    setLocalUserId(checkUserId);
     fetchOnePost(id);
   }, []);
   return (
     <>
-      <Navbar isAdmin={isAdmin} />
+      <Navbar isAdmin={isAdmin} localUserId={localUserId} />
       <div className="container-bloc">
         <OnePost
           post={post}

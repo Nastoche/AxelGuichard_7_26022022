@@ -23,11 +23,40 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     "Votre signalement a bien été enregistré."
   );
   const [reportedByUser, setReportedByUser] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
 
   const handleProfilPage = () => {
     navigate(`/profil/${post_user_id}`);
+  };
+
+  const getProfilePicture = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/user/image/${post_user_id}`,
+      withCredentials: true,
+      params: {
+        id: post_user_id,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/${res.data[0].image_url}`
+          );
+        } else {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/default.png`
+          );
+        }
+      })
+      .catch((err) => {
+        // setImageUrl(
+        //   `${process.env.REACT_APP_API_URL}images/profils/default.png`
+        // );
+        console.log(err);
+      });
   };
 
   const handleReport = () => {
@@ -155,6 +184,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   };
 
   useEffect(() => {
+    getProfilePicture();
     if (post.post_user_id === userId || isAdmin) {
       setIsPostUser(true);
     } else {
@@ -175,11 +205,13 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     <>
       <div className="post-container">
         <div className="post-container-top">
-          <img
-            className="post-users-img"
-            src="./img/default-contact-img.png"
-            alt=""
-          />
+          <div className="post-container-top-img-container">
+            <img
+              className="post-users-img"
+              src={imageUrl}
+              alt="photo de profil"
+            />
+          </div>
 
           <div className="post-container-top-infos">
             <p

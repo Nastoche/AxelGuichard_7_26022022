@@ -19,10 +19,39 @@ const ReportedPosts = ({
   const [allComments, setAllComments] = useState([]);
   const [countLikes, setCountLikes] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
   const handleProfilPage = () => {
     navigate(`/profil/${post.post_user_id}`);
+  };
+
+  const getProfilePicture = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/user/image/${post.post_user_id}`,
+      withCredentials: true,
+      params: {
+        id: post.post_user_id,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/${res.data[0].image_url}`
+          );
+        } else {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/default.png`
+          );
+        }
+      })
+      .catch((err) => {
+        // setImageUrl(
+        //   `${process.env.REACT_APP_API_URL}images/profils/default.png`
+        // );
+        console.log(err);
+      });
   };
 
   const removeReport = () => {
@@ -116,6 +145,7 @@ const ReportedPosts = ({
         console.log("Post supprimé !");
         fetchReportedPosts();
         getNumberOfReports();
+        getProfilePicture();
       })
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
@@ -145,6 +175,12 @@ const ReportedPosts = ({
   }, []);
 
   useEffect(() => {
+    if (post.post_user_id) {
+      getProfilePicture();
+    }
+  }, [post]);
+
+  useEffect(() => {
     if (!post.post_id == "") {
       handleLikeCount();
       fetchLikes();
@@ -154,12 +190,9 @@ const ReportedPosts = ({
     <>
       <div className="post-container">
         <div className="post-container-top">
-          <img
-            className="post-users-img"
-            src="./img/default-contact-img.png"
-            alt=""
-          />
-
+          <div className="post-container-top-img-container">
+            <img className="post-users-img" src={imageUrl} alt="" />
+          </div>
           <div className="post-container-top-infos">
             <p
               key={`${userId}${post.date_creation}`}
@@ -227,6 +260,7 @@ const ReportedPosts = ({
           userId={userId}
           fetchAllComments={fetchAllComments}
           allComments={allComments}
+          isAdmin={isAdmin}
         />
       </div>
     </>

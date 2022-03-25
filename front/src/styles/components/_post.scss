@@ -18,6 +18,22 @@
     justify-content: flex-start;
     align-items: flex-start;
     height: 3rem;
+    &-img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-right: 0.8rem;
+      img {
+        padding: 0;
+        margin: 0;
+        max-width: 45px;
+        zoom: 2;
+      }
+    }
     &-infos {
       display: flex;
       flex-direction: column;
