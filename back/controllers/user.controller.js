@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const dbc = require("../config/db");
 const db = dbc.getDB();
 const path = require("path");
+const { getUserIdByToken } = require("../services/userToken");
 
 // RUD users
 
@@ -28,12 +29,6 @@ exports.getOneUser = (req, res, next) => {
 };
 
 exports.updateOneUser = (req, res, next) => {
-  // const fileObject = JSON.parse(req.body.file);
-  // console.log(fileObject);
-  // console.log(
-  //   `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-  // );
-
   if (req.file) {
     const { id: user_id } = req.params;
     let { destination, filename } = req.file;
@@ -58,6 +53,40 @@ exports.updateOneUser = (req, res, next) => {
     }
     if (result) {
       res.status(200).json(result);
+    }
+  });
+};
+
+exports.changePassword = (req, res, next) => {
+  const user_id = getUserIdByToken(req.cookies.jwt);
+  const { user_password: clearPassword, newPassword } = req.body;
+
+  const sql = `SELECT user_password FROM users WHERE user_id=${user_id}`;
+  const db = dbc.getDB();
+
+  db.query(sql, async (err, results) => {
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPassword = await bcrypt.hash(newPassword, salt);
+
+    // ===== Verify password with hash in DB ======
+    if (results[0]) {
+      try {
+        const { user_password: hashedPassword } = results[0];
+        const match = await bcrypt.compare(clearPassword, hashedPassword);
+        if (!match)
+          return res.status(400).json({ message: "Mot de passe incorrect" });
+        const sqlUpdatePass = `UPDATE users SET user_password="${encryptedPassword}" WHERE user_id=${user_id}`;
+        db.query(sqlUpdatePass, (err, results) => {
+          if (err) {
+            res.status(404).json({ err });
+            throw err;
+          }
+          res.status(200).json(results);
+        });
+      } catch (err) {
+        console.log(err);
+        return res.status(400).json({ err: "Mot de passe incorrect" });
+      }
     }
   });
 };

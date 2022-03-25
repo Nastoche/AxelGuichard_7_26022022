@@ -9,6 +9,7 @@ const DeleteProfile = ({ id }) => {
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [currentPassword, setCurrentPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,6 +22,24 @@ const DeleteProfile = ({ id }) => {
       });
     } else {
       setErrors({});
+      axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_API_URL}api/user/${id}/password`,
+        withCredentials: true,
+        data: {
+          user_password: currentPassword,
+          newPassword: password,
+        },
+      })
+        .then((res) => {
+          console.log("mot de passe changé");
+        })
+        .catch((err) => {
+          setErrors({
+            ...errors,
+            currentPassword: err.response.data.message,
+          });
+        });
     }
   };
 
@@ -86,8 +105,14 @@ const DeleteProfile = ({ id }) => {
             <div className="form-container">
               <form action="" onSubmit={handleChangePassword}>
                 <label htmlFor="currentPassword">Mot de passe actuel</label>
-                <input type="password" name="password" id="password" />
-
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+                <p>{errors.currentPassword}</p>
                 <br />
 
                 <label htmlFor="newPassword">Nouveau mot de passe</label>

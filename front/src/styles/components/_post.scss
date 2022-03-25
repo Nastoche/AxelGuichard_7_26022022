@@ -288,19 +288,18 @@
         }
         .publish-comment {
           margin-left: 1rem;
-          color: #fff;
+          padding: 0.5rem 1rem;
           background-color: $color-1;
-          width: 5rem;
-          height: 2.1rem;
-          border-radius: 15px;
+          border-radius: 20px;
           font-size: 1em;
           border: 1px solid transparent;
+          color: #fff;
           transition: 0.2s ease-in-out;
           &:hover {
             cursor: pointer;
-            border: 1px solid $color-5;
-            background-color: #c38f8b;
-            color: $color-5;
+            background-color: #fff;
+            color: $color-1;
+            font-weight: bold;
           }
         }
       }

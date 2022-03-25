@@ -52,9 +52,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         }
       })
       .catch((err) => {
-        // setImageUrl(
-        //   `${process.env.REACT_APP_API_URL}images/profils/default.png`
-        // );
         console.log(err);
       });
   };
