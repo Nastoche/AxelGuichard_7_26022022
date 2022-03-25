@@ -27,7 +27,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `likes` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Les données exportées n'étaient pas sélectionnées.
+
+-- Listage de la structure de la table groupomania. images
+CREATE TABLE IF NOT EXISTS `images` (
+  `image_id` int NOT NULL AUTO_INCREMENT,
+  `post_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `image_url` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -39,9 +50,8 @@ CREATE TABLE IF NOT EXISTS `likes` (
   PRIMARY KEY (`id`,`user_id`,`post_id`),
   KEY `foreign user_id` (`user_id`),
   KEY `foreign post_id` (`post_id`),
-  CONSTRAINT `foreign post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
-  CONSTRAINT `foreign user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `foreign post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -54,10 +64,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `likes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `reported` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`post_id`) USING BTREE,
-  KEY `post_user_id` (`post_user_id`),
-  CONSTRAINT `post_user_id` FOREIGN KEY (`post_user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`post_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
@@ -73,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Travaille chez Groupomania',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
