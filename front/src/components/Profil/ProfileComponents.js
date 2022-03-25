@@ -12,9 +12,12 @@ const ProfileComponents = ({
   id,
   isUserProfil,
   description,
+  getProfilePicture,
+  imageUrl,
 }) => {
   useLayoutEffect(() => {
     fetchProfilById(id);
+    getProfilePicture(id);
   });
 
   return (
@@ -28,6 +31,8 @@ const ProfileComponents = ({
             userLastName={userLastName}
             description={description}
             fetchProfilById={fetchProfilById}
+            getProfilePicture={getProfilePicture}
+            imageUrl={imageUrl}
           />
 
           <h4 className="user-infos-name">

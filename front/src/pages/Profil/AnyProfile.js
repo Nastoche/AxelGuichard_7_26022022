@@ -13,9 +13,36 @@ const AnyProfile = () => {
   const [isUserProfil, setIsUserProfil] = useState(false);
   const [localUserId, setLocalUserId] = useState("");
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
   document.title = `Groupomania - ${userFirstName} ${userLastName}`;
 
   const navigate = useNavigate();
+
+  const getProfilePicture = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/user/image/${id}`,
+      withCredentials: true,
+      params: {
+        id,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/${res.data[0].image_url}`
+          );
+        } else {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/default.png`
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const fetchProfilById = (id) => {
     axios({
@@ -66,6 +93,8 @@ const AnyProfile = () => {
         id={id}
         isUserProfil={isUserProfil}
         description={description}
+        getProfilePicture={getProfilePicture}
+        imageUrl={imageUrl}
       />
     </>
   );
