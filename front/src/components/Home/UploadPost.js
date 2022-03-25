@@ -7,30 +7,30 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   const [imageUrl, setImageUrl] = useState("");
   const formRef = useRef();
 
-  // const getProfilePicture = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: `${process.env.REACT_APP_API_URL}api/user/image/${userId}`,
-  //     withCredentials: true,
-  //     params: {
-  //       id: userId,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.data[0]) {
-  //         setImageUrl(
-  //           `${process.env.REACT_APP_API_URL}images/profils/${res.data[0].image_url}`
-  //         );
-  //       } else {
-  //         setImageUrl(
-  //           `${process.env.REACT_APP_API_URL}images/profils/default.png`
-  //         );
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const getProfilePicture = () => {
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/user/image/${userId}`,
+      withCredentials: true,
+      params: {
+        id: userId,
+      },
+    })
+      .then((res) => {
+        if (res.data[0]) {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/${res.data[0].image_url}`
+          );
+        } else {
+          setImageUrl(
+            `${process.env.REACT_APP_API_URL}images/profils/default.png`
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleUploadPost = (e) => {
     e.preventDefault();
@@ -66,7 +66,9 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
   }, [postMessage]);
 
   useEffect(() => {
-    // getProfilePicture();
+    if (userId) {
+      getProfilePicture();
+    }
   });
 
   return (
