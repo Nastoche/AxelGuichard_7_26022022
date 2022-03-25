@@ -177,6 +177,9 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
 
   useEffect(() => {
     getProfilePicture();
+  }, [post]);
+
+  useEffect(() => {
     if (post.post_user_id === userId || isAdmin) {
       setIsPostUser(true);
     } else {

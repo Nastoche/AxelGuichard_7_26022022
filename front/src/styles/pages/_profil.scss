@@ -31,6 +31,7 @@
       width: 250px;
       height: 250px;
       border: 2px solid $color-1;
+      background-color: black;
       @media screen and(max-width: 768px) {
         max-width: 150px;
         max-height: 150px;

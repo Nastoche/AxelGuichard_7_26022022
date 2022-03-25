@@ -60,6 +60,7 @@ const Home = () => {
           fetchAllPosts={fetchAllPosts}
           userId={userId}
           userFirstName={userFirstName}
+          navigate={navigate}
         />
         <Posts
           allPosts={allPosts}

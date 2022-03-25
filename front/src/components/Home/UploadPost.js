@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 
-const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
+const UploadPost = ({ fetchAllPosts, userId, userFirstName, navigate }) => {
   const [postMessage, setPostMessage] = useState("");
   const [isLong, setIsLong] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -73,7 +73,10 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
 
   return (
     <div className="upload-post">
-      <div className="post-container-top-img-container">
+      <div
+        className="post-container-top-img-container"
+        onClick={(e) => navigate(`/profil/${userId}`)}
+      >
         <img className="post-users-img" src={imageUrl} alt="" />
       </div>
       <form action="" onSubmit={handleUploadPost} ref={formRef}>
