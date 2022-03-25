@@ -47,11 +47,6 @@ const PostComment = ({
   }, [comment]);
   return (
     <>
-      <img
-        className="post-users-img"
-        src="./img/default-contact-img.png"
-        alt=""
-      />
       <form ref={formRef} action="" onSubmit={handlePostComment}>
         <input
           type="text"
