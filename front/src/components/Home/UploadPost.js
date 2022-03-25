@@ -22,7 +22,6 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName }) => {
           formRef.current.reset();
           setPostMessage("");
           fetchAllPosts();
-          console.log("post créé avec succès !");
         })
         .catch((err) => {
           console.log(err);

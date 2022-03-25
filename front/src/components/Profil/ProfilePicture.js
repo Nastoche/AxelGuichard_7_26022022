@@ -53,18 +53,11 @@ const ProfilePicture = ({
   };
   const uploadPicture = (e) => {
     e.preventDefault();
-    console.log(file);
 
     let formdata = new FormData();
 
     formdata.append("image", file);
     formdata.append("filename", "testimage");
-
-    // console.log(data);
-    // axios
-    //   .put(`${process.env.REACT_APP_API_URL}api/user/${id}`, data)
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
 
     axios({
       method: "POST",
@@ -85,7 +78,6 @@ const ProfilePicture = ({
 
   useEffect(() => {
     if (file) {
-      console.log(file);
       setIsFile(true);
     } else {
       setIsFile(false);

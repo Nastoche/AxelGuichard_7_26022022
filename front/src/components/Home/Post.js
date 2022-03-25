@@ -72,7 +72,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
         },
       })
         .then((res) => {
-          console.log(`${post_id} reporté avec succès !`);
           setReportedByUser(true);
           fetchAllPosts();
         })
@@ -119,7 +118,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
     })
       .then((res) => {
         setCountLikes(res.data[0].total);
-        // console.log(res.data[0].total);
       })
       .catch((err) => {
         console.log(err);
@@ -137,7 +135,6 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       },
     })
       .then((res) => {
-        // console.log(`Post ${post_id} liké !`);
         handleLikeCount();
       })
       .catch((err) => {
@@ -156,13 +153,11 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
       },
     })
       .then((res) => {
-        // console.log("Post supprimé !");
         fetchAllPosts();
       })
       .catch((err) => {
-        // console.log(`Echec suppression de post : ${err}`);
+        console.log(`Echec suppression de post : ${err}`);
       });
-    // refreshPage();
   };
 
   const fetchAllComments = (post_id) => {

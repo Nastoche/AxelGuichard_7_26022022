@@ -26,7 +26,6 @@ const Home = () => {
       },
     })
       .then((res) => {
-        // console.log(res.data);
         setAllPosts(res.data);
       })
       .catch((err) => {

@@ -22,8 +22,6 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        // console.log(res.data);
-
         localStorage.setItem("user_info", JSON.stringify(res.data));
         navigate("/");
       })

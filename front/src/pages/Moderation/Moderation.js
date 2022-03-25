@@ -10,6 +10,8 @@ const Moderation = () => {
   const [adminNotification, setAdminNotification] = useState("");
   const navigate = useNavigate();
 
+  document.title = `Groupomania - Modération`;
+
   const getNumberOfReports = () => {
     if (isAdmin === true) {
       axios({
@@ -21,7 +23,6 @@ const Moderation = () => {
         },
       })
         .then((res) => {
-          // console.log(res.data[0].total);
           setAdminNotification(res.data[0].total);
         })
         .catch((err) => {

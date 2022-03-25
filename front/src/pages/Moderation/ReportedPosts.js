@@ -142,7 +142,6 @@ const ReportedPosts = ({
       },
     })
       .then((res) => {
-        console.log("Post supprimé !");
         fetchReportedPosts();
         getNumberOfReports();
         getProfilePicture();

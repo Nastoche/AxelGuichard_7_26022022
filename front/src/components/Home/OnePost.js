@@ -73,7 +73,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         },
       })
         .then((res) => {
-          // console.log(`${post.post_id} reporté avec succès !`);
           setReportedByUser(true);
           fetchOnePost(post.post_id);
         })
@@ -88,7 +87,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
 
   const handlePostComment = (e) => {
     e.preventDefault();
-    console.log(`commentaire sur le post ${postId}`);
 
     axios({
       method: "POST",
@@ -160,10 +158,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
       },
     })
       .then((res) => {
-        // console.log(`Post ${postId} liké !`);
-
         handleLikeCount();
-        // fetch all likes
       })
       .catch((err) => {
         console.log(`Echec like post : ${err}`);
@@ -199,7 +194,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
     })
       .then((res) => {
         handleDeleteFromReports();
-        console.log("Post supprimé !");
       })
       .catch((err) => {
         console.log(`Echec suppression de post : ${err}`);
@@ -218,9 +212,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         user_id: userId,
       },
     })
-      .then((res) => {
-        console.log("Supprimé de la table Reports");
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(`Echec suppression de Report : ${err}`);
       });

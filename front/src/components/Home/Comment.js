@@ -30,7 +30,6 @@ const Comment = ({
       },
     })
       .then((res) => {
-        console.log("Commentaire supprimé !");
         fetchAllComments(post.post_id);
       })
       .catch((err) => {

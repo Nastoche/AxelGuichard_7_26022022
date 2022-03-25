@@ -14,8 +14,6 @@ const PostComment = ({
   const handlePostComment = (e) => {
     e.preventDefault();
     if (isLong) {
-      console.log(`commentaire sur le post ${post.post_id}`);
-
       axios({
         method: "POST",
         url: `${process.env.REACT_APP_API_URL}api/comment/${post.post_id}`,
@@ -29,7 +27,6 @@ const PostComment = ({
         .then((res) => {
           formRef.current.reset();
           setComment("");
-          console.log("commentaire créé !");
           fetchAllComments(post.post_id);
         })
         .catch((err) => {

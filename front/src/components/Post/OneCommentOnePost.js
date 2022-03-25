@@ -30,7 +30,6 @@ const OneCommentOnePost = ({
       },
     })
       .then((res) => {
-        console.log("Commentaire supprimé !");
         fetchCommentsFromOnePost(postId);
       })
       .catch((err) => {
