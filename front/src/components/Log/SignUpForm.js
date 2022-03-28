@@ -125,6 +125,7 @@ export default function SignUpForm() {
       !regexName.test(lastName) ||
       !regexEmail.test(email)
     ) {
+      return;
     } else {
       axios({
         method: "post",
