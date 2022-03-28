@@ -23,7 +23,7 @@ const DeleteMyProfile = ({ id, navigate }) => {
       },
     })
       .then((res) => {
-        navigate(`/login`);
+        navigate(`/signup`);
       })
       .catch((err) => {
         console.log(err);

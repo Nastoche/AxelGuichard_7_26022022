@@ -53,16 +53,20 @@ const DeleteProfile = ({ id }) => {
 
   const handleChangePassword = (e) => {
     e.preventDefault();
-    if (password !== controlPassword || !regexPassword.test(password)) {
+    if (
+      password !== controlPassword ||
+      !regexPassword.test(password) ||
+      (!isLetterOk && !isNumberOk && !isSpecialOk && !isMinMaxOk)
+    ) {
       if (password !== controlPassword) {
         setErrors({
           ...errors,
           passwordConfirm: "Les mots de passe ne sont pas identiques",
         });
+      } else {
+        setErrors({ ...errors, passwordConfirm: "" });
       }
-      if (!regexPassword.test(password)) {
-        if (password) return;
-      }
+      if (currentPassword) return;
     } else {
       setErrors({});
       axios({
@@ -173,11 +177,9 @@ const DeleteProfile = ({ id }) => {
           <div className="deleteMessage">
             <div className="deleteMessageBox">
               <p>Votre mot de passe a été modifié.</p>
-              {/* <div className="deleteBtn"> */}
               <button onClick={() => navigate("/")}>
                 Retourner à l'accueil
               </button>
-              {/* </div> */}
             </div>
           </div>
         )}
