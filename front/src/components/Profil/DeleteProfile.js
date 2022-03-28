@@ -112,7 +112,7 @@ const DeleteProfile = ({ id }) => {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                 />
-                <p>{errors.currentPassword}</p>
+                <p className="form-container-error">{errors.currentPassword}</p>
                 <br />
 
                 <label htmlFor="newPassword">Nouveau mot de passe</label>
@@ -134,7 +134,6 @@ const DeleteProfile = ({ id }) => {
                   value={controlPassword}
                   onChange={(e) => setControlPassword(e.target.value)}
                 />
-                <br />
                 <p className="form-container-error">{errors.passwordConfirm}</p>
                 <input
                   type="submit"
