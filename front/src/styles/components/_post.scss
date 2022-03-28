@@ -1,11 +1,24 @@
 .post-container {
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(20px);
+  }
   position: relative;
+  border-top: #9fb1d165 1px solid;
+  border-left: #9fb1d165 1px solid;
+  border-right: #9fb1d165 1px solid;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px -2px 29px 0px;
   max-width: 750px;
   width: 90%;
-  background-color: #9fb1d1cc;
-  border: 1px solid $color-1;
   border-radius: 15px;
-
+  // border: 1px solid $color-1;
+  // background-color: #9fb1d1cc;
   hr {
     width: 85%;
     margin: auto;
@@ -225,21 +238,38 @@
     }
   }
   &-comments {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      // background-color: red;
+      backdrop-filter: blur(20px);
+    }
+    border-left: #9fb1d165 1px solid;
+    border-right: #9fb1d165 1px solid;
+    border-bottom: #9fb1d165 1px solid;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     // margin-bottom: 1.8rem;
     max-width: 700px;
     width: 80%;
     border-radius: 0 0 12px 12px;
-    border-bottom: 1px solid $color-1;
-    border-left: 1px solid $color-1;
-    border-right: 1px solid $color-1;
-    background-color: #9fb1d1cc;
+    // border-bottom: 1px solid $color-1;
+    // border-left: 1px solid $color-1;
+    // border-right: 1px solid $color-1;
+    // background-color: #9fb1d1cc;
     &:nth-last-child(n + 1) {
       margin-bottom: 1.8rem;
     }
 
     &-comment {
       position: relative;
-      background-color: rgba(142, 165, 207, 0.8);
+      // background-color: rgba(142, 165, 207, 0.8);
+      border: 1px solid #9fb1d165;
       border-radius: 12px;
       padding: 0.2rem 1rem;
       .comment-container {
@@ -369,3 +399,18 @@
     }
   }
 }
+// .upload-post,
+// .post-container,
+// .post-container-comments {
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     z-index: -1;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     // background-color: red;
+//     backdrop-filter: blur(12px);
+//   }
+// }

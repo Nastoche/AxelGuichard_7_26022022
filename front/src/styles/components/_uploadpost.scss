@@ -1,9 +1,21 @@
 .upload-post {
-  background-color: #9fb1d1cc;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(15px);
+  }
+  // background-color: #9fb1d1cc;
   max-width: 750px;
   width: 90%;
   height: 100px;
-  border: 1px solid $color-1;
+  // border: 1px solid $color-1;
+  border: #9fb1d165 1px solid;
   border-radius: 15px;
   margin-bottom: 2rem;
   display: flex;
@@ -12,6 +24,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   padding: 0.8rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   img {
     width: 50px;
     border-radius: 50%;
