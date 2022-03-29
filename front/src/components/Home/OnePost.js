@@ -335,7 +335,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
           )}
         </div>
       </div>
-      {/* <Comment /> */}
       <div className="post-container-comments">
         <CommentsFromOnePost
           postId={postId}

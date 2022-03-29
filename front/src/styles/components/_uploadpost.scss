@@ -50,6 +50,9 @@
       &:focus {
         outline: 1px solid $color-1;
       }
+      @media screen and(max-width:768px) {
+        font-size: 0.9em;
+      }
     }
     .upload-post-btn {
       margin-left: 1rem;
@@ -67,6 +70,34 @@
         color: $color-1;
         font-weight: bold;
         border: 1px solid $color-1;
+      }
+      @media screen and(max-width:768px) {
+        font-size: 0.9em;
+      }
+      @media screen and(max-width: 599px) {
+        display: none;
+      }
+      &-phone {
+        max-height: 2.6em;
+        margin-left: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: $color-1;
+        border-radius: 20px;
+        font-size: 1em;
+        border: 1px solid transparent;
+        color: #fff;
+        transition: 0.2s ease-in-out;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        @media screen and(min-width: 600px) {
+          display: none;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: #fff;
+          color: $color-1;
+          font-weight: bold;
+          border: 1px solid $color-1;
+        }
       }
     }
   }

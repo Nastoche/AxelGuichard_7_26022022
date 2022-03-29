@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const UploadPost = ({
   fetchAllPosts,
@@ -95,6 +97,9 @@ const UploadPost = ({
           ref={floatingPost}
         />
         <br />
+        <button type="submit" className="upload-post-btn-phone">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </button>
         <input type="submit" value="Publier" className="upload-post-btn" />
       </form>
     </div>
