@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const TopLogoForm = () => {
+  const navigate = useNavigate();
   return (
-    <div className="logo-signup-form">
+    <div className="logo-signup-form" onClick={() => navigate("/")}>
       <img
         src="./img/logo/icon-left-font-monochrome-white.svg"
         alt="logo de groupomania"

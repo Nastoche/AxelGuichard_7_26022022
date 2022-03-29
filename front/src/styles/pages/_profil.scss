@@ -194,11 +194,15 @@
               background-color: $color-1;
               border-radius: 15px;
               border: 1px solid transparent;
-              transition: border 0.2s ease-in-out;
+              transition: 0.2s ease-in-out;
               font-size: 1em;
+              color: #fff;
               &:hover {
                 cursor: pointer;
-                border: 1px solid black;
+                background-color: #fff;
+                color: $color-1;
+                font-weight: bold;
+                border: 1px solid $color-1;
               }
             }
           }
