@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 
-const UploadPost = ({ fetchAllPosts, userId, userFirstName, navigate }) => {
+const UploadPost = ({
+  fetchAllPosts,
+  userId,
+  userFirstName,
+  navigate,
+  floatingPost,
+}) => {
   const [postMessage, setPostMessage] = useState("");
   const [isLong, setIsLong] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -86,6 +92,7 @@ const UploadPost = ({ fetchAllPosts, userId, userFirstName, navigate }) => {
           className="upload-post-input"
           placeholder={`Quoi de neuf, ${userFirstName} ?`}
           onChange={(e) => setPostMessage(e.target.value)}
+          ref={floatingPost}
         />
         <br />
         <input type="submit" value="Publier" className="upload-post-btn" />

@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
 import { NavLink } from "react-router-dom";
 
 export default function SignUpForm() {
-  const [errors, setErrors] = useState({
-    // email: "",
-    // firstname: "",
-    // lastname: "",
-    // passwordConfirm: "",
-    // terms: "",
-  });
+  const [errors, setErrors] = useState({});
   const [formSubmit, setFormSubmit] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -179,17 +173,7 @@ export default function SignUpForm() {
                   name="firstName"
                   id="firstName"
                   placeholder="Prénom"
-                  onChange={
-                    handleFirstNameInput
-                    // if (
-                    //   e.target.value.length <= 2 &&
-                    //   e.target.value.length > 0
-                    // ) {
-                    //   setErrors({ ...errors, firstname: "Entrez votre nom" });
-                    // } else {
-                    //   setErrors({ ...errors, firstname: "" });
-                    // }
-                  }
+                  onChange={handleFirstNameInput}
                   value={firstName}
                 />
                 <div className="error">{errors.firstname}</div>
@@ -201,17 +185,7 @@ export default function SignUpForm() {
                   name="lastName"
                   id="lastName"
                   placeholder="Nom"
-                  onChange={
-                    handleLastNameInput
-                    // if (
-                    //   e.target.value.length < 2 &&
-                    //   e.target.value.length > 0
-                    // ) {
-                    //   setErrors({ ...errors, lastname: "Entrez votre nom" });
-                    // } else {
-                    //   setErrors({ ...errors, lastname: "" });
-                    // }
-                  }
+                  onChange={handleLastNameInput}
                   value={lastName}
                 />
                 <div className="error">{errors.lastname}</div>

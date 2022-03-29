@@ -19,6 +19,11 @@ const Home = () => {
 
   document.title = `Groupomania - Accueil`;
 
+  const createTopPost = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    floatingPost.current.focus();
+  };
+
   const fetchAllPosts = () => {
     axios({
       method: "GET",
@@ -64,6 +69,7 @@ const Home = () => {
           userId={userId}
           userFirstName={userFirstName}
           navigate={navigate}
+          floatingPost={floatingPost}
         />
         <Posts
           allPosts={allPosts}
@@ -71,7 +77,7 @@ const Home = () => {
           fetchAllPosts={fetchAllPosts}
           isAdmin={isAdmin}
         />
-        <div className="float-create-container">
+        <div className="float-create-container" onClick={createTopPost}>
           <button className="float-create-container-btn">
             <FontAwesomeIcon icon={faEdit} />
           </button>
