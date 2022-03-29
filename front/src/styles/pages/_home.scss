@@ -35,11 +35,27 @@
     &:hover {
       //   background-color: #c37b76be;
       background-color: #fff;
-      font-weight: bold;
       border: 1px solid $color-1;
       & > svg {
         color: $color-1;
       }
+    }
+    &::before {
+      content: "Nouveau message";
+      position: absolute;
+      z-index: -1;
+      bottom: 40px;
+      width: 12%;
+      border-radius: 10px;
+      background-color: rgba(202, 138, 134, 0.883);
+      padding: 0.3rem 0.5rem;
+      opacity: 0;
+      transition: 0.2s ease;
+      transform: translateY(0);
+    }
+    &:hover::before {
+      transform: translateY(-130%);
+      opacity: 1;
     }
   }
 }
