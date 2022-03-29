@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Comments from "../../components/Home/Comments";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Posts from "../../components/Home/Posts";
 import UploadPost from "../../components/Home/UploadPost";
 import Navbar from "../../components/Navigation/Navbar";
@@ -11,6 +12,8 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [userId, setUserId] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
+
+  const floatingPost = useRef();
 
   const navigate = useNavigate();
 
@@ -68,6 +71,11 @@ const Home = () => {
           fetchAllPosts={fetchAllPosts}
           isAdmin={isAdmin}
         />
+        <div className="float-create-container">
+          <button className="float-create-container-btn">
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+        </div>
       </div>
     </>
   );
