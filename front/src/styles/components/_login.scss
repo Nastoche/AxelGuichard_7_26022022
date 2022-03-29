@@ -24,9 +24,12 @@ body {
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      background-color: #9fb1d1c7;
-      border: 1px solid $color-1;
+      // background-color: #9fb1d1c7;
+      // border: 1px solid $color-1;
+      border: #9fb1d165 1px solid;
       border-radius: 15px;
+      backdrop-filter: blur(12px);
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
       #sign-up-form {
         display: flex;
         justify-content: center;
@@ -44,8 +47,13 @@ body {
           height: 45px;
           padding: 0 8px;
           border-radius: 15px;
-          border: 1px solid $color-1;
+          border: #9fb1d165 1px solid;
           outline: none;
+          background-color: #fff;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          &:focus {
+            outline: 1px solid $color-1;
+          }
         }
         .error {
           margin-inline: 2rem;
@@ -60,9 +68,13 @@ body {
           border: 1px solid transparent;
           transition: 0.2s ease-in-out;
           font-size: 1.1em;
+          color: #fff;
           &:hover {
             cursor: pointer;
-            border: 1px solid black;
+            background-color: #fff;
+            color: $color-1;
+            font-weight: bold;
+            border: 1px solid $color-1;
           }
         }
         .reactivate {

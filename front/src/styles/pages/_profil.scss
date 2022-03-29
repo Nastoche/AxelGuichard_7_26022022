@@ -16,9 +16,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    // background-color: #9fb1d1c7;
     border: #9fb1d165 1px solid;
-    // border: 1px solid $color-1;
     border-radius: 15px;
     backdrop-filter: blur(12px);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -53,11 +51,16 @@
       background-color: $color-1;
       border-radius: 15px;
       border: 1px solid transparent;
-      transition: border 0.2s ease-in-out;
+      transition: 0.2s ease-in-out;
       font-size: 1em;
+      color: #fff;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
       &:hover {
         cursor: pointer;
-        border: 1px solid black;
+        background-color: #fff;
+        color: $color-1;
+        font-weight: bold;
+        border: 1px solid $color-1;
       }
     }
     #profil_image {
@@ -205,12 +208,16 @@
         background-color: $color-1;
         border-radius: 15px;
         border: 1px solid transparent;
-        transition: border 0.2s ease-in-out;
+        transition: 0.2s ease-in-out;
         font-size: 1em;
-
+        color: #fff;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         &:hover {
           cursor: pointer;
-          border: 1px solid black;
+          border: 1px solid $color-1;
+          background-color: #fff;
+          color: $color-1;
+          font-weight: bold;
         }
       }
     }
@@ -258,6 +265,7 @@
       font-weight: bold;
       background-color: $color-2;
       transition: 0.2s ease-in-out;
+
       &:hover {
         background-color: #fff;
         color: $color-1;

@@ -331,6 +331,10 @@
           background-color: #fff;
           padding: 0.2rem 0.5rem;
           border-radius: 20px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          &:focus {
+            outline: 1px solid $color-1;
+          }
           @media screen and(max-width:768px) {
             width: 80%;
           }
@@ -344,11 +348,13 @@
           border: 1px solid transparent;
           color: #fff;
           transition: 0.2s ease-in-out;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
           &:hover {
             cursor: pointer;
             background-color: #fff;
             color: $color-1;
             font-weight: bold;
+            border: 1px solid $color-1;
           }
         }
       }
