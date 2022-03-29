@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../components/Footer";
 import Navbar from "../../components/Navigation/Navbar";
 import ProfileComponents from "../../components/Profil/ProfileComponents";
 
@@ -96,6 +97,7 @@ const AnyProfile = () => {
         getProfilePicture={getProfilePicture}
         imageUrl={imageUrl}
       />
+      <Footer />
     </>
   );
 };
