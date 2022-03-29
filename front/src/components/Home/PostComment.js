@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const PostComment = ({
   post,
@@ -54,6 +56,9 @@ const PostComment = ({
           }}
         />
         <input type="submit" value="Poster" className="publish-comment" />
+        <button type="submit" className="publish-comment-phone">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </button>
       </form>
     </>
   );
