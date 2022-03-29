@@ -177,7 +177,12 @@
               height: 45px;
               padding: 0 8px;
               border-radius: 15px;
-              border: 1px solid $color-1;
+              border: #9fb1d165 1px solid;
+              background-color: #fff;
+              box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+              &:focus {
+                outline: 1px solid $color-1;
+              }
             }
             label {
               font-size: 1.2em;

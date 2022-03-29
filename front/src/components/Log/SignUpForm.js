@@ -245,7 +245,6 @@ export default function SignUpForm() {
                     </li>
                   </ul>
                 </div>
-                <br />
 
                 <label htmlFor="password-conf">Confirmer le mot de passe</label>
                 <input
