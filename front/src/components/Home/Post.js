@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,6 +24,8 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   );
   const [reportedByUser, setReportedByUser] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+
+  const commentRef = useRef();
 
   const navigate = useNavigate();
 
@@ -256,7 +258,10 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
               />
             </button>
           )}
-          <button className="post-container-end__comment">
+          <button
+            onClick={() => commentRef.current.focus()}
+            className="post-container-end__comment"
+          >
             <FontAwesomeIcon icon={faMessage} />
           </button>
 
@@ -311,6 +316,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             fetchAllComments={fetchAllComments}
             comment={comment}
             setComment={setComment}
+            commentRef={commentRef}
           />
         </div>
         <p className="comment-error">{longCommentError}</p>

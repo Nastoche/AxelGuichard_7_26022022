@@ -9,6 +9,7 @@ const PostComment = ({
   fetchAllComments,
   comment,
   setComment,
+  commentRef,
 }) => {
   const [isLong, setIsLong] = useState(true);
   const formRef = useRef();
@@ -48,6 +49,7 @@ const PostComment = ({
     <>
       <form ref={formRef} action="" onSubmit={handlePostComment}>
         <input
+          ref={commentRef}
           type="text"
           placeholder="Écrivez un commentaire..."
           className="input-comment"

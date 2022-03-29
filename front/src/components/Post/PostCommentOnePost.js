@@ -1,11 +1,19 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-const PostCommentOnePost = ({ setComment, handlePostComment, formRef }) => {
+const PostCommentOnePost = ({
+  setComment,
+  handlePostComment,
+  formRef,
+  commentRef,
+}) => {
   return (
     <>
       <form ref={formRef} action="" onSubmit={handlePostComment}>
         <input
+          ref={commentRef}
           type="text"
           placeholder="Écrivez un commentaire..."
           className="input-comment"
@@ -14,6 +22,9 @@ const PostCommentOnePost = ({ setComment, handlePostComment, formRef }) => {
           }}
         />
         <input type="submit" value="Poster" className="publish-comment" />
+        <button type="submit" className="publish-comment-phone">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </button>
       </form>
     </>
   );
