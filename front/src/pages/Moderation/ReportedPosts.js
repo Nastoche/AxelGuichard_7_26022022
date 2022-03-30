@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+// import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
-import NoReportedPost from "../../components/Reports/NoReportedPost";
 
 const ReportedPosts = ({
   fetchReportedPosts,
@@ -256,6 +256,7 @@ const ReportedPosts = ({
             onClick={removeReport}
           >
             <FontAwesomeIcon icon={faCheckCircle} />
+            {/* <FontAwesomeIcon icon={faClipboardCheck} /> */}
             <span>Autoriser</span>
           </button>
         </div>
