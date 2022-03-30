@@ -248,6 +248,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
           {!isLiked && (
@@ -256,6 +257,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
           <button
@@ -263,6 +265,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
             className="post-container-end__comment"
           >
             <FontAwesomeIcon icon={faMessage} />
+            <span>Commenter</span>
           </button>
 
           {isPostUser && (
@@ -273,6 +276,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
               }}
             >
               <FontAwesomeIcon icon={faTrashCan} />
+              <span>Supprimer</span>
             </button>
           )}
           {!isPostUser && (

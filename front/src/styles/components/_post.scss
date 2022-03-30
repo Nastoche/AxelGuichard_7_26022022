@@ -111,43 +111,77 @@
     }
   }
   &-end {
+    width: 70%;
     padding: 1rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 1rem;
+    gap: 0.2rem;
+    @media screen and(max-width: 600px) {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    &__like,
+    &__liked,
+    &__comment,
+    &__delete,
+    &__report {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      height: 2.4rem;
+      width: 40%;
+      margin: auto;
+      background-color: transparent;
+      transition: 0.2s ease-in-out;
+      span {
+        font-size: 0.8em;
+        padding: 4px;
+        @media screen and (max-width: 600px) {
+          font-size: 0.6em;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+      svg {
+        padding: 4px;
+      }
+      &:hover {
+        background-color: #767e8b2a;
+      }
+    }
     &__like {
-      margin: auto 1rem;
+      margin: auto;
       color: $color-5;
       cursor: pointer;
-      background-color: transparent;
       border: none;
       font-size: 1.4em;
-      transition: 0.15s ease-in-out;
-      &:hover {
-        transform: scale(1.2) rotate(-20deg);
-        color: $color-1;
+      svg {
+        transition: 0.15s ease-in-out;
+      }
+      &:hover > svg {
+        transform: rotate(-20deg);
       }
     }
     &__liked {
-      margin: auto 1rem;
+      margin: auto;
       color: $color-1;
       cursor: pointer;
-      background-color: transparent;
       border: none;
       font-size: 1.4em;
-      transition: 0.15s ease-in-out;
-      &:hover {
-        transform: scale(1.2) rotate(-20deg);
+      svg {
+        transition: 0.15s ease-in-out;
+      }
+      &:hover > svg {
+        transform: rotate(-20deg);
       }
     }
     &__comment {
-      margin-left: 1rem;
-      margin-right: 1rem;
       margin-top: 2px;
       color: $color-5;
       cursor: pointer;
-      background-color: transparent;
       border: none;
       font-size: 1.2em;
       transition: 0.15s ease-in-out;
@@ -156,9 +190,8 @@
       }
     }
     &__delete {
-      margin: auto 1rem;
+      margin: auto;
       border: none;
-      background-color: transparent;
       font-size: 1.2em;
       cursor: pointer;
       transition: 0.15s ease-in-out;
@@ -167,9 +200,8 @@
       }
     }
     &__report {
-      margin: auto 1rem;
+      margin: auto;
       border: none;
-      background-color: transparent;
       font-size: 1.3em;
       cursor: pointer;
       transition: 0.15s ease-in-out;
