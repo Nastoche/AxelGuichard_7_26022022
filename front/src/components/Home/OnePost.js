@@ -282,6 +282,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
           {!isLiked && (
@@ -290,6 +291,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
           <button
@@ -297,6 +299,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
             className="post-container-end__comment"
           >
             <FontAwesomeIcon icon={faMessage} />
+            <span>Commenter</span>
           </button>
 
           {isPostUser && (
@@ -307,6 +310,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
               }}
             >
               <FontAwesomeIcon icon={faTrashCan} />
+              <span>Supprimer</span>
             </button>
           )}
           {!isPostUser && (
@@ -316,6 +320,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
                 className="post-container-end__report"
               >
                 <FontAwesomeIcon icon={faExclamationTriangle} />
+                <span>Signaler</span>
               </button>
             </>
           )}

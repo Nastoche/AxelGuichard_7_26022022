@@ -114,10 +114,10 @@
     width: 70%;
     padding: 1rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 0.2rem;
-    @media screen and(max-width: 600px) {
+    @media screen and(max-width: 768px) {
       width: 100%;
       padding-left: 0;
       padding-right: 0;
@@ -139,7 +139,7 @@
       span {
         font-size: 0.8em;
         padding: 4px;
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
           font-size: 0.6em;
           padding-left: 0;
           padding-right: 0;
@@ -210,14 +210,30 @@
       }
     }
     &__authorize {
+      height: 2.4rem;
+      width: 40%;
+      margin: auto 1rem auto auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2em;
       padding: 0.5rem 1rem;
       background-color: $color-1;
       border-radius: 10px;
       border: 1px solid transparent;
       color: #fff;
       transition: 0.2s ease-in-out;
-      @media screen and(min-width: 600px) {
-        margin-left: 1rem;
+      span {
+        font-size: 0.8em;
+        padding: 4px;
+        @media screen and (max-width: 768px) {
+          font-size: 0.6em;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+      svg {
+        padding: 4px;
       }
       &:hover {
         cursor: pointer;

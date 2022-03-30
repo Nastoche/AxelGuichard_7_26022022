@@ -286,6 +286,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
                 className="post-container-end__report"
               >
                 <FontAwesomeIcon icon={faExclamationTriangle} />
+                <span>Signaler</span>
               </button>
             </>
           )}

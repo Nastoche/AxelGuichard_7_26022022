@@ -5,6 +5,7 @@ import Comments from "../../components/Home/Comments";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
 import NoReportedPost from "../../components/Reports/NoReportedPost";
@@ -226,6 +227,7 @@ const ReportedPosts = ({
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
           {!isLiked && (
@@ -234,6 +236,7 @@ const ReportedPosts = ({
                 icon={faThumbsUp}
                 className="post-container-end__like-i"
               />
+              <span>J'aime</span>
             </button>
           )}
 
@@ -245,11 +248,16 @@ const ReportedPosts = ({
               }}
             >
               <FontAwesomeIcon icon={faTrashCan} />
+              <span>Supprimer</span>
             </button>
           )}
-          <p className="post-container-end__authorize" onClick={removeReport}>
-            Autoriser ce post
-          </p>
+          <button
+            className="post-container-end__authorize"
+            onClick={removeReport}
+          >
+            <FontAwesomeIcon icon={faCheckCircle} />
+            <span>Autoriser</span>
+          </button>
         </div>
       </div>
       <div className="post-container-comments">
