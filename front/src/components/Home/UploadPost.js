@@ -95,6 +95,7 @@ const UploadPost = ({
           placeholder={`Quoi de neuf, ${userFirstName} ?`}
           onChange={(e) => setPostMessage(e.target.value)}
           ref={floatingPost}
+          autoComplete={"off"}
         />
         <br />
         <button type="submit" className="upload-post-btn-phone">
