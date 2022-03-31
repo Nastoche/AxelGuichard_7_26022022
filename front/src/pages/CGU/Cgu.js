@@ -1,7 +1,9 @@
 import React from "react";
 import TopLogoForm from "../../components/Log/TopLogoForm";
+import { useNavigate } from "react-router-dom";
 
 const Cgu = () => {
+  const navigate = useNavigate();
   return (
     <>
       <TopLogoForm />
@@ -81,6 +83,7 @@ const Cgu = () => {
           odio maxime mollitia doloribus sequi sint! Quis, nihil ipsum dolorum
           amet exercitationem ad!
         </p>
+        <button onClick={() => navigate(-1)}>Retour</button>
       </div>
     </>
   );

@@ -1,10 +1,39 @@
 .cgu {
-  margin: 12rem auto 4rem;
-  width: 60%;
+  max-width: 1000px;
+  min-width: 325px;
+  padding: 4rem 3rem;
+  margin: 10rem auto 5rem;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: #9fb1d165 1px solid;
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   h1 {
     text-decoration: underline;
   }
   p {
     line-height: 2em;
+  }
+  button{
+    margin-top: 2rem;
+    padding: 0.8rem 1rem;
+    background-color: $color-1;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    transition: 0.2s ease-in-out;
+    font-size: 1em;
+    color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $color-1;
+      background-color: #fff;
+      color: $color-1;
+      font-weight: bold;
+    }
   }
 }
