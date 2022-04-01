@@ -16,8 +16,6 @@ $color-5: #282c34;
 }
 body {
   margin: 0 auto;
-  // max-width: 1296px;
-  // font-family: $font-1;
   color: $color-5;
   &::after {
     position: fixed;
@@ -36,10 +34,8 @@ li {
 a {
   color: $color-5;
   text-decoration: none;
-  // color: $color-2;
   cursor: pointer;
 }
 a:visited {
-  // color: $color-1;
   text-decoration: none;
 }

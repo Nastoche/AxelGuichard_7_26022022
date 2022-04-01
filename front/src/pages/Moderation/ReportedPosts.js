@@ -255,7 +255,6 @@ const ReportedPosts = ({
             onClick={removeReport}
           >
             <FontAwesomeIcon icon={faCheckCircle} />
-            {/* <FontAwesomeIcon icon={faClipboardCheck} /> */}
             <span>Autoriser</span>
           </button>
         </div>
