@@ -65,7 +65,6 @@ const Navbar = ({ localUserId, isAdmin }) => {
     <>
       <div className="logo-signup">
         <img
-          // src="./img/logo/icon-left-font-monochrome-white.svg"
           alt="logo de groupomania"
           onClick={backHome}
           className="img large small"

@@ -19,9 +19,13 @@ const Home = () => {
 
   document.title = `Groupomania - Accueil`;
 
+  const focusUpload = () => {
+    floatingPost.current.focus();
+  };
+
   const createTopPost = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    floatingPost.current.focus();
+    setTimeout(focusUpload, 500);
   };
 
   const fetchAllPosts = () => {
@@ -62,6 +66,7 @@ const Home = () => {
 
   return (
     <>
+      <div id="top"></div>
       <Navbar localUserId={userId} isAdmin={isAdmin} />
       <div className="container-bloc">
         <UploadPost

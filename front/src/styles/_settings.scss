@@ -15,6 +15,7 @@ $color-5: #282c34;
   font-family: $font-1;
 }
 body {
+  scroll-behavior: smooth;
   margin: 0 auto;
   color: $color-5;
   &::after {
