@@ -54,9 +54,6 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
         }
       })
       .catch((err) => {
-        // setImageUrl(
-        //   `${process.env.REACT_APP_API_URL}images/profils/default.png`
-        // );
         console.log(err);
       });
   };

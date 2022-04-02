@@ -259,8 +259,6 @@
       .reportMessageBox {
         position: absolute;
         z-index: 9999;
-        // left: 50%;
-        // transform: translate(-50%, 0);
         color: #fff;
         background-color: $color-1;
         padding: 3rem 5rem;
@@ -359,7 +357,6 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.8rem 0.8rem 0 0.8rem;
-      // border-top: 1px solid $color-1;
       form {
         width: 100%;
         display: flex;

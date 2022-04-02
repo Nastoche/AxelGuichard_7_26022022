@@ -38,7 +38,6 @@ const ProfilePicture = ({
       data: formdata,
     })
       .then((res) => {
-        // fetchProfilById(id);
         console.log("photo enregistrée !");
         getProfilePicture();
       })
@@ -59,11 +58,6 @@ const ProfilePicture = ({
   useEffect(() => {
     getProfilePicture();
   }, []);
-  // useEffect(() => {
-  //   data.append("user_firstname", userFirstName);
-  //   data.append("user_lastname", userLastName);
-  //   data.append("profil_image", file);
-  // }, [file]);
   return (
     <>
       <div className="img-container">

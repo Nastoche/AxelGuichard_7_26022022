@@ -7,7 +7,6 @@ nav {
   min-width: 325px;
   padding: 0.5rem 0 0.3rem 0;
   ul {
-    // border: 1px solid red;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -18,7 +17,6 @@ nav {
       justify-content: center;
       align-items: center;
       .active {
-        // position: relative;
         &::after {
           transform: translate3d(0, 0, 0) !important;
         }
