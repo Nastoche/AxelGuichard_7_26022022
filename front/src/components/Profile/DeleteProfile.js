@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const DeleteMyProfile = ({ id, navigate }) => {
+const DeleteProfile = ({ id, navigate }) => {
   const [handleDelete, setHandleDelete] = useState(false);
   const [handleDeactivate, setHandleDeactivate] = useState(false);
 
@@ -105,4 +105,4 @@ const DeleteMyProfile = ({ id, navigate }) => {
   );
 };
 
-export default DeleteMyProfile;
+export default DeleteProfile;

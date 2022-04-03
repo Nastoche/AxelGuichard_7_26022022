@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import OnePost from "../../components/Home/OnePost";
+import OnePost from "../../components/Post/OnePost";
 import Navbar from "../../components/Navigation/Navbar";
 
 const Post = () => {

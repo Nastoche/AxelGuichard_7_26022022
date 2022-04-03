@@ -6,8 +6,8 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import CommentsFromOnePost from "../Post/CommentsFromOnePost";
-import PostCommentOnePost from "../Post/PostCommentOnePost";
+import CommentsFromOnePost from "./CommentsFromOnePost";
+import UploadCommentOnePost from "./UploadCommentOnePost";
 import moment from "moment";
 import "moment/locale/fr";
 
@@ -346,7 +346,7 @@ const OnePost = ({ post, isAdmin, userId, fetchOnePost }) => {
           isAdmin={isAdmin}
         />
         <div className="post-container-comments-users">
-          <PostCommentOnePost
+          <UploadCommentOnePost
             handlePostComment={handlePostComment}
             setComment={setComment}
             formRef={formRef}

@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DeleteMyProfile from "./DeleteMyProfile";
+import DeleteProfile from "./DeleteProfile";
 
-const DeleteProfile = ({ id }) => {
+const ProfileSettings = ({ id }) => {
   const [isChangingPass, setIsChangingPass] = useState(false);
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
@@ -172,7 +172,7 @@ const DeleteProfile = ({ id }) => {
             </div>
           )}
         </div>
-        <DeleteMyProfile id={id} navigate={navigate} />
+        <DeleteProfile id={id} navigate={navigate} />
         {passwordChanged && (
           <div className="deleteMessage">
             <div className="deleteMessageBox">
@@ -188,4 +188,4 @@ const DeleteProfile = ({ id }) => {
   );
 };
 
-export default DeleteProfile;
+export default ProfileSettings;

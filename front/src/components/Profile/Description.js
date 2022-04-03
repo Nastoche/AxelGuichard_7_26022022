@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Description = ({
-  isUserProfil,
+  isUserProfile,
   description,
   id,
   userFirstName,
@@ -80,7 +80,7 @@ const Description = ({
           ></textarea>
         )}
 
-        {isUserProfil && (
+        {isUserProfile && (
           <button className="user-infos-btn" onClick={handleDescription}>
             {publishBtnValue}
           </button>

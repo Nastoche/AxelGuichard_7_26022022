@@ -9,7 +9,7 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import "moment/locale/fr";
 import Comments from "./Comments";
-import PostComment from "./PostComment";
+import UploadComment from "./UploadComment";
 
 const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
   const [isPostUser, setIsPostUser] = useState(false);
@@ -315,7 +315,7 @@ const Post = ({ post, fetchAllPosts, userId, isAdmin }) => {
           isAdmin={isAdmin}
         />
         <div className="post-container-comments-users">
-          <PostComment
+          <UploadComment
             post={post}
             userId={userId}
             fetchAllComments={fetchAllComments}

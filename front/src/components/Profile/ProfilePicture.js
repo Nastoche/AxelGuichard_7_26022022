@@ -1,17 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import FromData from "form-data";
 
-const ProfilePicture = ({
-  isUserProfil,
-  id,
-  userFirstName,
-  userLastName,
-  description,
-  fetchProfilById,
-  imageUrl,
-  getProfilePicture,
-}) => {
+const ProfilePicture = ({ isUserProfil, imageUrl, getProfilePicture }) => {
   const [file, setFile] = useState(null);
   const [isFile, setIsFile] = useState(null);
   const inputFile = useRef(null);
@@ -38,11 +28,10 @@ const ProfilePicture = ({
       data: formdata,
     })
       .then((res) => {
-        console.log("photo enregistrée !");
         getProfilePicture();
+        setIsFile(false);
       })
       .catch((err) => {
-        console.log("photo PAS enregistrée");
         console.log(err);
       });
   };
