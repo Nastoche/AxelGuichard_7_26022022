@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 
-const ProfilePicture = ({ isUserProfil, imageUrl, getProfilePicture }) => {
+const ProfilePicture = ({ isUserProfile, imageUrl, getProfilePicture }) => {
   const [file, setFile] = useState(null);
   const [isFile, setIsFile] = useState(null);
   const inputFile = useRef(null);
@@ -28,8 +28,8 @@ const ProfilePicture = ({ isUserProfil, imageUrl, getProfilePicture }) => {
       data: formdata,
     })
       .then((res) => {
+        setFile(null);
         getProfilePicture();
-        setIsFile(false);
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +52,7 @@ const ProfilePicture = ({ isUserProfil, imageUrl, getProfilePicture }) => {
       <div className="img-container">
         <img className="user-infos-img" src={imageUrl} alt="" />
       </div>
-      {isUserProfil && (
+      {isUserProfile && (
         <>
           <button className="user-infos-btn" onClick={handleUploadPic}>
             Modifier 📷
@@ -65,10 +65,12 @@ const ProfilePicture = ({ isUserProfil, imageUrl, getProfilePicture }) => {
             name="profil_image"
             onChange={handleFileChange}
           />
-          {isFile && (
+          {isFile ? (
             <button className="user-infos-btn" onClick={uploadPicture}>
               Enregistrer les modifications
             </button>
+          ) : (
+            <></>
           )}
         </>
       )}
