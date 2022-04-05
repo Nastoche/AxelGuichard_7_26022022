@@ -25,9 +25,9 @@ const Reports = ({ userId, isAdmin, getNumberOfReports, isReportedPosts }) => {
   useEffect(() => {
     fetchReportedPosts();
   }, []);
-  return allReportedPosts.map((post) => {
+  return allReportedPosts.map((post, pos) => {
     return (
-      <>
+      <div className="key-posts" key={pos}>
         <ReportedPosts
           fetchReportedPosts={fetchReportedPosts}
           post={post}
@@ -35,7 +35,7 @@ const Reports = ({ userId, isAdmin, getNumberOfReports, isReportedPosts }) => {
           userId={userId}
           getNumberOfReports={getNumberOfReports}
         />
-      </>
+      </div>
     );
   });
 };
