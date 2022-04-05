@@ -70,7 +70,7 @@ const Profile = () => {
       navigate("/login");
       return;
     }
-    const checkUserId = JSON.parse(localStorage.getItem("user_info")).user
+    const storageUserId = JSON.parse(localStorage.getItem("user_info")).user
       .user_id;
     const admin = JSON.parse(localStorage.getItem("user_info")).user.admin;
     setUserFirstName(
@@ -82,7 +82,7 @@ const Profile = () => {
     } else {
       setIsAdmin(false);
     }
-    setLocalUserId(checkUserId);
+    setLocalUserId(storageUserId);
   }, [navigate, id]);
 
   useLayoutEffect(() => {

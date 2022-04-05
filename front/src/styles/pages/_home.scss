@@ -1,11 +1,13 @@
 .float-create-container {
+  // position: fixed;
+  // width: 100%;
   position: fixed;
-  width: 100%;
+  right: 2rem;
+  bottom: 2rem;
   max-width: calc(1200px + 2rem);
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  bottom: 2rem;
   &-btn {
     margin-right: 2rem;
     cursor: pointer;
@@ -47,7 +49,7 @@
         position: absolute;
         z-index: -1;
         bottom: 40px;
-        width: 12%;
+        width: 140px;
         border-radius: 10px;
         background-color: rgba(202, 138, 134, 0.883);
         padding: 0.3rem 0.5rem;
