@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import NoReportedPost from "../../components/Reports/NoReportedPost";
 import ReportedPosts from "./ReportedPosts";
 
 const Reports = ({ userId, isAdmin, getNumberOfReports, isReportedPosts }) => {

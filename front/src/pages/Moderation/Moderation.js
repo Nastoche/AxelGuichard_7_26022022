@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navigation/Navbar";
 import NoReportedPost from "../../components/Reports/NoReportedPost";
-import Reports from "./Reports";
+import Reports from "../../components/Moderation/Reports";
 import { Helmet } from "react-helmet";
 
 const Moderation = () => {
