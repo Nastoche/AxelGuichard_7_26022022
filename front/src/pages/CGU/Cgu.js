@@ -1,11 +1,15 @@
 import React from "react";
 import TopLogoForm from "../../components/Log/TopLogoForm";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Cgu = () => {
   const navigate = useNavigate();
   return (
     <>
+      <Helmet>
+        <title>Groupomania - Conditions d'utilisation</title>
+      </Helmet>
       <TopLogoForm />
       <div className="cgu">
         <h1>Conditions générales d'utilisation</h1>

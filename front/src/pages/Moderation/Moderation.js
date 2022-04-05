@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navigation/Navbar";
 import NoReportedPost from "../../components/Reports/NoReportedPost";
 import Reports from "./Reports";
+import { Helmet } from "react-helmet";
 
 const Moderation = () => {
   const [userId, setUserId] = useState("");
@@ -12,8 +13,6 @@ const Moderation = () => {
   const [isReportedPosts, setIsReportedPosts] = useState(null);
 
   const navigate = useNavigate();
-
-  document.title = `Groupomania - Modération`;
 
   const getNumberOfReports = () => {
     if (isAdmin === true) {
@@ -62,6 +61,9 @@ const Moderation = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Groupomania - Modération</title>
+      </Helmet>
       <Navbar isAdmin={isAdmin} localUserId={userId} />
       <div className="container-bloc">
         {isReportedPosts && <NoReportedPost navigate={navigate} />}

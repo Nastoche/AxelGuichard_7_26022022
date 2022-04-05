@@ -6,6 +6,7 @@ import Description from "../../components/Profile/Description";
 import ProfilePicture from "../../components/Profile/ProfilePicture";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navigation/Navbar";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const { id } = useParams();
@@ -17,8 +18,6 @@ const Profile = () => {
   const [localUserId, setLocalUserId] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-
-  document.title = `Groupomania - ${userFirstName} ${userLastName}`;
 
   const navigate = useNavigate();
 
@@ -92,6 +91,11 @@ const Profile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          Groupomania - {userFirstName} {userLastName}
+        </title>
+      </Helmet>
       <Navbar localUserId={localUserId} isAdmin={isAdmin} />
       <div className="container-bloc">
         <div className="user-infos">

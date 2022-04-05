@@ -1,14 +1,19 @@
 import React from "react";
 import SignUpForm from "../../components/Log/SignUpForm";
 import TopLogoForm from "../../components/Log/TopLogoForm";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
-  document.title = `Groupomania - Inscription`;
   return (
-    <div className="container-login">
-      <TopLogoForm />
-      <SignUpForm />
-    </div>
+    <>
+      <Helmet>
+        <title>Groupomania - Inscription</title>
+      </Helmet>
+      <div className="container-login">
+        <TopLogoForm />
+        <SignUpForm />
+      </div>
+    </>
   );
 };
 

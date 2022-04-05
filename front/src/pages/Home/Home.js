@@ -6,6 +6,7 @@ import Posts from "../../components/Home/Posts";
 import UploadPost from "../../components/Home/UploadPost";
 import Navbar from "../../components/Navigation/Navbar";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -16,8 +17,6 @@ const Home = () => {
   const floatingPost = useRef();
 
   const navigate = useNavigate();
-
-  document.title = `Groupomania - Accueil`;
 
   const focusUpload = () => {
     floatingPost.current.focus();
@@ -66,6 +65,9 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Groupomania - Accueil</title>
+      </Helmet>
       <div id="top"></div>
       <Navbar localUserId={userId} isAdmin={isAdmin} />
       <div className="container-bloc">

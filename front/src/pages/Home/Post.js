@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import OnePost from "../../components/Post/OnePost";
 import Navbar from "../../components/Navigation/Navbar";
+import { Helmet } from "react-helmet";
 
 const Post = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -10,7 +11,6 @@ const Post = () => {
   const [post, setPost] = useState([]);
   const [localUserId, setLocalUserId] = useState("");
   const { id } = useParams();
-  document.title = `Groupomania - Sujet de ${post.user_firstname} ${post.user_lastname}`;
 
   const navigate = useNavigate();
 
@@ -49,6 +49,9 @@ const Post = () => {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>{`Groupomania - Sujet de ${post.user_firstname} ${post.user_lastname}`}</title>
+      </Helmet>
       <Navbar isAdmin={isAdmin} localUserId={localUserId} />
       <div className="container-bloc">
         <OnePost
