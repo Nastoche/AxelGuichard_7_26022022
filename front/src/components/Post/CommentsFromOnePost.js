@@ -14,9 +14,9 @@ const CommentsFromOnePost = ({
     fetchCommentsFromOnePost(postId);
   }, []);
 
-  return allComments.map((comment) => {
+  return allComments.map((comment, pos) => {
     return (
-      <>
+      <div key={pos}>
         <OneCommentOnePost
           postId={postId}
           userId={userId}
@@ -24,7 +24,7 @@ const CommentsFromOnePost = ({
           fetchCommentsFromOnePost={fetchCommentsFromOnePost}
           isAdmin={isAdmin}
         />
-      </>
+      </div>
     );
   });
 };

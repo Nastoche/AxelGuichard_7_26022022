@@ -68,7 +68,6 @@ const Home = () => {
       <Helmet>
         <title>Groupomania - Accueil</title>
       </Helmet>
-      <div id="top"></div>
       <Navbar localUserId={userId} isAdmin={isAdmin} />
       <div className="container-bloc">
         <UploadPost

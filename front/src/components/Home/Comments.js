@@ -9,9 +9,9 @@ const Comments = ({ post, userId, fetchAllComments, allComments, isAdmin }) => {
     }
   }, [post]);
 
-  return (allComments || []).map((comment) => {
+  return (allComments || []).map((comment, pos) => {
     return (
-      <>
+      <div className="key-comments" key={pos}>
         <Comment
           singleComment={comment}
           userId={userId}
@@ -19,7 +19,7 @@ const Comments = ({ post, userId, fetchAllComments, allComments, isAdmin }) => {
           post={post}
           isAdmin={isAdmin}
         />
-      </>
+      </div>
     );
   });
 };
